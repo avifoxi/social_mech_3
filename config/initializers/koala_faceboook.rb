@@ -1,0 +1,1 @@
+$facebook_graph_api = Koala::Facebook::API.new(ENV["FACEBOOK_GRAPH_API_TOKEN"])
