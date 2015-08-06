@@ -11,3 +11,6 @@
 /log/*
 !/log/.keep
 /tmp
+
+# env variables, for the time being keep all env vars out of database, and do not worry about encryption
+.env
