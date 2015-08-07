@@ -2,14 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>FOo bar</title>
+  <title>SocialMechanismDemo</title>
 
 </head>
 <body>
-  <h1>I live in another server</h1>
-  
-  <script>
-   var GLOBAL = 'yes';
-  </script>
+  <% @pf.most_recent_tweets.each do |t| %>
+    <div>
+      <%= t %>
+    </div>
+  <% end %>
+
+  <% @pf.most_recent_instagrams.each do |insta| %>
+    <div><img src="<%= insta['thumbnail'] %>" alt=""></div>
+  <% end %>
 </body>
 </html>

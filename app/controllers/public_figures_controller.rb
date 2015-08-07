@@ -1,4 +1,5 @@
 class PublicFiguresController < ApplicationController
+  layout 'public_figures'
 
   def new
     @pf = PublicFigure.new
