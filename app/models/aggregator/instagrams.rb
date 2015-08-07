@@ -6,7 +6,10 @@ module Aggregator::Instagrams
       {
         name: i.user.full_name, 
         likes: i.likes.count,
-        thumbnail: i.images.thumbnail.url
+        image: i.images.standard_resolution.url,
+        caption_text: i.caption.text,
+        # passes date string in Unix timestamp
+        created_at: Time.at(i.created_time.to_i).to_date
       }
     end
   end

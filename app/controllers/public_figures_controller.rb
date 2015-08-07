@@ -19,6 +19,9 @@ class PublicFiguresController < ApplicationController
 
   def show
     @pf = PublicFigure.find(params[:id])
+    p '#'*80
+    p 'pf.most_recent_tweets'
+    p "#{@pf.most_recent_tweets[0]}"
   end
 
   private
