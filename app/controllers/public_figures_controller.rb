@@ -1,5 +1,5 @@
 class PublicFiguresController < ApplicationController
-  layout 'public_figures'
+  layout 'public_figures', only: :show
 
   def new
     @pf = PublicFigure.new
@@ -18,10 +18,9 @@ class PublicFiguresController < ApplicationController
   end
 
   def show
-    @pf = PublicFigure.find(params[:id])
-    p '#'*80
-    p 'pf.most_recent_tweets'
-    p "#{@pf.most_recent_tweets[0]}"
+    # default for root_path, show the mech
+    id = params[:id] ? params[:id] : 3
+    @pf = PublicFigure.find(id)
   end
 
   private

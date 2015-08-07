@@ -1,6 +1,6 @@
 <div class="col-sm-4 col-md-4 col-xs-6">
   <div class="thumbnail social tweet">
-    <div class="tweetText">
+    <div class="tweetText thumbTop">
       
       <%= tweet['text'] %>
     </div>
@@ -9,13 +9,13 @@
       <hr>
       <p>
         By <strong><%= tweet['by'] %></strong></br>
-        <i class="fa fa-retweet"></i><%= tweet['retweet_count'] %>
-        <%= Date.parse(tweet['created_at']).strftime("%B %d, %Y") %>
+        <i class="fa fa-retweet"></i> <%= tweet['retweet_count'] %>
+        | <%= Date.parse(tweet['created_at']).strftime("%B %d, %Y") %>
 
       </p>
       <p class='links'>
-        <a href="#" class="btn btn-primary btn-sm" role="button">Visit</a> 
-        <a href="#" class="btn btn-default btn-sm" role="button">Button</a>
+        <a href="#" class="btn btn-primary btn-sm" role="button"><i class="fa fa-twitter"></i></a> 
+        <!-- <a href="#" class="btn btn-default btn-sm" role="button">Button</a> -->
       </p>
     </div>
   </div>

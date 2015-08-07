@@ -5,5 +5,7 @@ class IframesController < ApplicationController
   def new
     headers['X-Frame-Options'] = 'ALLOWALL'
     @pf = PublicFigure.last
+
+    render
   end
 end
