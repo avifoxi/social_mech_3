@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+mech = PublicFigure.create(
+  display_name: 'The Mechanism', 
+  instagram_id: 'themechanism',
+  twitter_handle: 'TheMechanism'
+)

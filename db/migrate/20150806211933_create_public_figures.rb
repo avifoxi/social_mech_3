@@ -10,8 +10,8 @@ class CreatePublicFigures < ActiveRecord::Migration
       t.string :instagram_search_tags, array: true
 
       t.json :most_recent_facebook_timeline
-      t.json :most_recent_tweets
-      t.json :most_recent_instagrams
+      t.json :most_recent_tweets, array: true
+      t.json :most_recent_instagrams, array: true
 
       t.timestamps null: false
     end

@@ -31,7 +31,8 @@ class PublicFiguresController < ApplicationController
     # json requests containing the :updated_at key are requests for an updated aggregate feed.
     # ensure 10 minute intervals between aggregate requests to 3rd parties
     if verify_time(pf_params[:updated_at])
-      @thumbs = aggregate_to_thumbnails_json
+      thumbs = aggregate_to_thumbnails_json
+      render_thumb_html()
     end
     
     respond_to do |format|
@@ -59,16 +60,31 @@ class PublicFiguresController < ApplicationController
   end
 
   def verify_time(iso_string)
+    unless iso_string
+      return false
+    end
     last_updated = Time.new(iso_string)
     now = Time.new
     now - last_updated >= 10.minutes
   end
 
   def aggregate_to_thumbnails_json
-    p '#'*80
-    p 'in aggregate_to_thumbnails_json private method and double checking access to @pf'
-    p "#{@pf.inspect}"
-    # 
-    # agatha = Aggregator.new
+    begin
+      agatha = Aggregator.new(@pf)
+      @pf.update_media(agatha.social_media)
+    rescue => e
+      {errors: e} 
+    end
+  end
+
+# rendered_thumbnails = {}
+      # if sm.tweets
+      #   rendered_thumbnails[:tweets] = render_tweetnails(sm.tweets)
+      # end
+      # if sm.instagrams
+      #   rendered_thumbnails[:instas] = render_instanails(sm.instagrams)
+      # end
+      # return rendered_thumbnails
+  def render_tweetnails(tweets)
   end
 end
