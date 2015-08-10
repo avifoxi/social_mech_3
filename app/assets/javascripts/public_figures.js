@@ -44,7 +44,9 @@ SocialQueryMech.prototype = {
     var url =  this.PATHS.publicFigure,
       callback = this.prependThumbnails,
       data = {
-        updated_at: JSON.stringify(lastQuery) 
+        public_figure: {
+          updated_at: JSON.stringify(lastQuery)
+        } 
       };
     
     $.ajax({
