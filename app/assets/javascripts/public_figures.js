@@ -7,44 +7,28 @@ $(document).ready(function(){
   $(window).resize(function(){
     $grid.masonry();
   });
+
+  // temporarily global for easy debugging
+  var SQM = new SocialQueryMech(PATHS);
+  window.SQM = SQM;
+  SQM.init();
 });
 
 
+// POLLING_PATHS constant, object, instantiated in views/public_figures/show.html.erb
+function SocialQueryMech(PATHS){
+  this.PATHS = PATHS;
+  this.publicFigure = {};
+}
 
-// $(document).ready(function(){
-
-//   var topSegments = $('.thumbTop');
-//   var bottomSegments = $('.thumbnail .caption');
-
-//   var batches = [topSegments, bottomSegments];
-
-//   batchNormalizeHeights(batches);
-
-//   $( window ).resize(function() {
-//     batchNormalizeHeights(batches);
-//   });
-// });
-
-// function maxHeight($collection){
-//   var heights = $collection.map(function(i, el){ 
-//     return $(el).height()
-//   });
-//   return _.max(heights);
-// }
-
-// function resizeHeightTo($collection, height){
-//   $.each($collection, function(i, el){
-//     $(el).height(height);
-//   })
-// }
-
-// function normalizeSegments($collection){
-//   var max = maxHeight($collection);
-//   resizeHeightTo($collection, max);
-// }
-
-// function batchNormalizeHeights($array){
-//   _.each($array, function($collection){
-//     normalizeSegments($collection);
-//   });
-// }
+SocialQueryMech.prototype = {
+  init: function(){
+    $.get(this.PATHS.publicFigure, function(res){
+      this.publicFigure = res;
+      this.checkWhenLastQueried();
+    }.bind(this));
+  },
+  checkWhenLastQueried: function(){
+    
+  }
+}
