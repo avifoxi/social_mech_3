@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
 
   resources :iframes
-  resources :public_figures
+  resources :public_figures do
+    get '/templates' => 'public_figures#templates', as: :templates
+  end
 
   root 'public_figures#show'
 

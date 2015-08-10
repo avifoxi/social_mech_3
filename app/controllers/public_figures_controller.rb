@@ -6,9 +6,6 @@ class PublicFiguresController < ApplicationController
   end
 
   def create
-    p '#'*80
-    p 'params'
-    p "#{params.inspect}"
     @pf = PublicFigure.new(pf_params)
     if @pf.save
       redirect_to public_figure_path(@pf)
@@ -21,6 +18,25 @@ class PublicFiguresController < ApplicationController
     # default for root_path, show the mech
     id = params[:id] ? params[:id] : 3
     @pf = PublicFigure.find(id)
+
+    respond_to do |format|
+      format.html 
+      format.json { render :json => @pf.to_json }
+    end
+  end
+
+  def update
+    p '#'*80
+    p 'params'
+    p "#{params.inspect}"
+  end
+
+  def templates 
+    @pf = PublicFigure.find(params[:public_figure_id])
+    render json: {
+      tweet: (render_to_string partial: '/public_figures/tweet_thumbnail', locals: {pf: @pf}, layout: false)
+      # insta:
+    }
   end
 
   private
