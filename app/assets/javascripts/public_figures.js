@@ -41,16 +41,24 @@ SocialQueryMech.prototype = {
     }
   },
   updateFeed: function(lastQuery){
-    console.log('i guess i should update now?');
-    // var lastUpdated 
+    var url =  this.PATHS.publicFigure,
+      callback = this.prependThumbnails,
+      data = {
+        updated_at: JSON.stringify(lastQuery) 
+      };
+    
     $.ajax({
       type: "PUT",
-      url: this.PATHS.publicFigure,
-      data: lastQuery,
+      url: url,
+      data: data,
       dataType: 'json',
-      success: function(msg) {
-        console.log( 'from server => ' + msg);
+      success: function(thumbs) {
+        callback(thumbs);
       }
     });
+  },
+  prependThumbnails: function(thumbs){
+    console.log('got da thumbs');
+    console.log(thumbs);
   }
 }

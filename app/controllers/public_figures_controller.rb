@@ -26,9 +26,15 @@ class PublicFiguresController < ApplicationController
   end
 
   def update
-    p '#'*80
-    p 'params'
-    p "#{params.inspect}"
+    @pf = PublicFigure.find(params[:id])
+    respond_to do |format|
+      format.json { 
+        render json: {
+          tweet: 'TWEEEEDILLYDEEET',
+          insta: 'INSTAMYGRAMAPHONE!'
+        }
+      }
+    end
   end
 
   def templates 
@@ -42,6 +48,6 @@ class PublicFiguresController < ApplicationController
   private
 
   def pf_params
-    params.require(:public_figure).permit(:display_name, :facebook_id, :twitter_handle, :twitter_search_terms, :instagram_id, :instagram_search_tags)
+    params.require(:public_figure).permit(:display_name, :facebook_id, :twitter_handle, :twitter_search_terms, :instagram_id, :instagram_search_tags, :updated_at)
   end
 end
