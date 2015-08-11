@@ -9,7 +9,9 @@ module Aggregator::Instagrams
         image: i.images.standard_resolution.url,
         caption_text: i.caption.text,
         # passes date string in Unix timestamp
-        created_at: Time.at(i.created_time.to_i).to_date
+        created_at: Time.at(i.created_time.to_i).to_date,
+        id: i.id,
+        link: i.link
       }
     end
   end
