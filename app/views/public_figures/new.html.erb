@@ -1,4 +1,7 @@
 <div class="pad-the-nav"></div>
+<div id="collapsed-form">
+  <div class='btn btn-info' data='unCollapse'>Redo query terms</div>
+</div>
 <%= simple_form_for @pf do |f| %>
 
   <%= f.input :display_name %>
@@ -14,6 +17,7 @@
 
 <% end %>
 
+<i class="fa fa-refresh"></i>
 
 <script>
   $(document).ready(function () {
