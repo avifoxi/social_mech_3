@@ -1,0 +1,22 @@
+<div class="col-sm-4 col-md-4 col-xs-6 masonryThumb">
+  <div class="thumbnail social tweet">
+    <div class="tweetText thumbTop">
+      
+       {{ text }}
+    </div>
+    <div class="caption">
+      <p> {{ hashtags }}</p>
+      <hr>
+      <p>
+        By <strong> {{ by }}</strong></br>
+        <i class="fa fa-retweet"></i>  {{tweet['retweet_count'] }}
+        |  {{ created_at }}
+
+      </p>
+      <p class='links'>
+        <a href="{{ tweeter_url }}" class="btn btn-primary btn-sm" role="button"><i class="fa fa-twitter"></i></a> 
+        <!-- <a href="#" class="btn btn-default btn-sm" role="button">Button</a> -->
+      </p>
+    </div>
+  </div>
+</div>

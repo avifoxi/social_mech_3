@@ -16,8 +16,8 @@ class PublicFiguresController < ApplicationController
 
   def show
     # default for root_path, show the mech
-    id = params[:id] ? params[:id] : 3
-    @pf = PublicFigure.find(id)
+    # id = params[:id] ? params[:id] : 3
+    @pf = PublicFigure.first #ind(id)
 
     respond_to do |format|
       format.html 
@@ -46,10 +46,9 @@ class PublicFiguresController < ApplicationController
   end
 
   def templates 
-    @pf = PublicFigure.find(params[:public_figure_id])
     render json: {
-      tweet: (render_to_string partial: '/public_figures/tweet_thumbnail', locals: {pf: @pf}, layout: false)
-      # insta:
+      insta: (render_to_string '/public_figures/insta_lodash_temp', layout: false),
+      tweet: (render_to_string '/public_figures/tweet_lodash_temp', layout: false)
     }
   end
 
