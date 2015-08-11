@@ -1,12 +1,13 @@
 <div class="pad-the-nav"></div>
 
 <div class="masonryGrid">
-  <%= render 'thumbnails', pf: @pf%>
+  <!-- < %= render 'thumbnails', pf: @pf%> -->
 </div>
 
 <script>
   var PATHS = {
     publicFigure: "<%= public_figure_path(@pf) %>",
     templates: "<%= public_figure_templates_path(@pf) %>"
-  } 
+  }
+  var publicFigure = <%= @pf.to_json.html_safe %>;
 </script>

@@ -8,6 +8,7 @@ class PublicFiguresController < ApplicationController
   def create
     @pf = PublicFigure.new(pf_params)
     if @pf.save
+      aggregate_to_thumbnails_json
       redirect_to public_figure_path(@pf)
     else
       render :new
@@ -15,9 +16,11 @@ class PublicFiguresController < ApplicationController
   end
 
   def show
-    # default for root_path, show the mech
-    # id = params[:id] ? params[:id] : 3
-    @pf = PublicFigure.first #ind(id)
+    if params[:id]
+      @pf = PublicFigure.find(params[:id])
+    else
+      @pf = PublicFigure.find_by(display_name: 'The Mechanism')
+    end
 
     respond_to do |format|
       format.html 
@@ -31,16 +34,13 @@ class PublicFiguresController < ApplicationController
     # json requests containing the :updated_at key are requests for an updated aggregate feed.
     # ensure 10 minute intervals between aggregate requests to 3rd parties
     if verify_time(pf_params[:updated_at])
-      thumbs = aggregate_to_thumbnails_json
-      render_thumb_html()
+      a = Aggregator.new(@pf)
+      @pf.update_media(a.social_media)
     end
     
     respond_to do |format|
       format.json { 
-        render json: {
-          tweets: 'TWEEEEDILLYDEEET',
-          instas: 'INSTAMYGRAMAPHONE!'
-        }
+        render json: @pf.to_json
       }
     end
   end

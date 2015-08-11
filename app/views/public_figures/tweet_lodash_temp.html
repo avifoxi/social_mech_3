@@ -9,8 +9,8 @@
       <hr>
       <p>
         By <strong> {{ by }}</strong></br>
-        <i class="fa fa-retweet"></i>  {{tweet['retweet_count'] }}
-        |  {{ created_at }}
+        <i class="fa fa-retweet"></i>  {{ retweet_count }}
+        |  {{ moment(created_at).format('MMM Do, h:mm a') }}
 
       </p>
       <p class='links'>
