@@ -9,5 +9,9 @@
     publicFigure: "<%= public_figure_path(@pf) %>",
     templates: "<%= public_figure_templates_path(@pf) %>"
   }
-  var publicFigure = <%= @pf.to_json.html_safe %>;
+  $(document).ready(function(){
+    var SQM = new SocialQueryMech(PATHS);
+    // window.SQM = SQM;
+    SQM.init();
+  });
 </script>

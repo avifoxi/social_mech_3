@@ -1,12 +1,4 @@
-$(document).ready(function(){
-  // var $grid = $('.masonryGrid');
- 
-
-  // temporarily global for easy debugging
-  var SQM = new SocialQueryMech(PATHS);
-  window.SQM = SQM;
-  SQM.init();
-});
+// This object is instantiated in public_figures/show.html in a script tag, to coerce loading if rails does not reload full page
 
 
 // PATHS constant, object, instantiated in views/public_figures/show.html.erb
@@ -55,7 +47,6 @@ SocialQueryMech.prototype = {
     diff = Math.floor( (now - lastQuery)  / msMinute );
 
     if ( diff >= 10 ){
-      console.log('longer than 10')
       this.updateFeed(lastQuery);
     }
   },
@@ -73,8 +64,8 @@ SocialQueryMech.prototype = {
       url: url,
       data: data,
       dataType: 'json',
-      success: function(updatedPublicFigure) {
-        callback(updatedPublicFigure);
+      success: function(newMedia) {
+        callback(newMedia);
       }
     });
   },
@@ -117,15 +108,25 @@ SocialQueryMech.prototype = {
     if ( !this.$grid ){
       this.configureGrid($thumbs);
     } else {
-      this.$grid.append($thumbs).masonry( 'appended', $thumbs );
+      this.$grid.append($thumbs)
+        .masonry( 'appended', $thumbs );
     } 
   },
-  determineDomUpdates: function(updatedPublicFigure){
-    console.log(updatedPublicFigure);
+  determineDomUpdates: function(newMedia){
+    var count = _.flatten(_.values(newMedia)).length,
+      htmlStrings = [];
+    if ( count > 0 ) {
+      htmlStrings = this.getHtmlFromTemps(newMedia);
+      this.prependThumbnails(htmlStrings);
+    };
 
   },
   prependThumbnails: function(thumbs){
-    console.log('got da thumbs');
-    console.log(thumbs);
+    var $thumbs = [];
+    _.map(preppedThumbs, function(thumb){
+      $thumbs.push($.trim(thumb))
+    });
+    this.$grid.prepend($thumbs)
+      .masonry('prepended', $thumbs);
   }
 }

@@ -35,12 +35,13 @@ class PublicFiguresController < ApplicationController
     # ensure 10 minute intervals between aggregate requests to 3rd parties
     if verify_time(pf_params[:updated_at])
       a = Aggregator.new(@pf)
-      @pf.update_media(a.social_media)
+      @new_media = @pf.update_media(a.social_media)
     end
     
+
     respond_to do |format|
       format.json { 
-        render json: @pf.to_json
+        render json: @new_media.to_json
       }
     end
   end
