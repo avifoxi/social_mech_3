@@ -9,6 +9,8 @@ class PublicFigure < ActiveRecord::Base
       my_key = media_keys_map[social_network_key]
       posts.each do |p|
         if p[:created_at] >= self.updated_at
+          p 'new_media_to_return'
+          p "#{new_media_to_return.inspect}"
           new_media_to_return[my_key] << p
         end
       end
@@ -24,8 +26,8 @@ class PublicFigure < ActiveRecord::Base
 
   def media_keys_map
     {
-      'most_recent_tweets': 'tweets',
-      'most_recent_instagrams': 'instas'
+      'most_recent_tweets': :tweets,
+      'most_recent_instagrams': :instas
     }
   end
     
