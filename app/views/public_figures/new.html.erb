@@ -8,6 +8,18 @@
   <%= f.input :instagram_id %>
   <%= f.input :instagram_search_tags %>
 
+  <div class='btn btn-info' data='preview'>Preview</div>
+  
   <%= f.button :submit %>
+
 <% end %>
 
+
+<script>
+  $(document).ready(function () {
+    var previewUrl = '<%= public_figure_preview_path  %>';
+    // global for the time being - ease of debugging
+    window.SMR = new SocialMediaResultsPreview(previewUrl);
+  });
+  
+</script>

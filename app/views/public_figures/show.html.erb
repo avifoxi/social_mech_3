@@ -10,8 +10,8 @@
     templates: "<%= public_figure_templates_path(@pf) %>"
   }
   $(document).ready(function(){
-    var SQM = new SocialQueryMech(PATHS);
+    var SMTC = new SocialMediaThumbnailController(PATHS);
     // window.SQM = SQM;
-    SQM.init();
+    SMTC.init();
   });
 </script>

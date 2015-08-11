@@ -2,7 +2,7 @@
 
 
 // PATHS constant, object, instantiated in views/public_figures/show.html.erb
-function SocialQueryMech(PATHS){
+function SocialMediaThumbnailController(PATHS){
   this.PATHS = PATHS;
   this.publicFigure = {};
   this.templates = {
@@ -12,7 +12,7 @@ function SocialQueryMech(PATHS){
   this.$grid = undefined;
 }
 
-SocialQueryMech.prototype = {
+SocialMediaThumbnailController.prototype = {
   init: function(){    
     $.getJSON(this.PATHS.templates, function(res){
       this.prepareTemplates(res);

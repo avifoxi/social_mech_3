@@ -38,12 +38,20 @@ class PublicFiguresController < ApplicationController
       @new_media = @pf.update_media(a.social_media)
     end
     
-
     respond_to do |format|
       format.json { 
         render json: @new_media.to_json
       }
     end
+  end
+
+  def preview
+    @pf = PublicFigure.new(pf_params)
+        p '#'*80
+    p 'pf??'
+    p "#{@pf .inspect}"
+    agatha = Aggregator.new(@pf)
+    render json: agatha.social_media.to_json
   end
 
   def templates 
@@ -77,14 +85,4 @@ class PublicFiguresController < ApplicationController
     end
   end
 
-# rendered_thumbnails = {}
-      # if sm.tweets
-      #   rendered_thumbnails[:tweets] = render_tweetnails(sm.tweets)
-      # end
-      # if sm.instagrams
-      #   rendered_thumbnails[:instas] = render_instanails(sm.instagrams)
-      # end
-      # return rendered_thumbnails
-  def render_tweetnails(tweets)
-  end
 end
