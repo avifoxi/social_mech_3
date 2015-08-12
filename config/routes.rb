@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get '/templates' => 'public_figures#templates', as: :public_figure_templates
   resources :public_figures 
 
+  resources :users
+
   root 'public_figures#new'
 
   # You can have the root of your site routed with "root"

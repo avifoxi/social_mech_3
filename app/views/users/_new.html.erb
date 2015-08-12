@@ -1,2 +1,5 @@
-<h2>I would be the user...</h2>
-<p><%= @user.inspect %></p>
+<%= simple_form_for @user do |f| %>
+	<%= f.input :name %>
+	<%= f.input :email %>
+	<%= f.button :submit %>
+<% end %>

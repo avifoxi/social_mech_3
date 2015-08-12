@@ -2,14 +2,12 @@ var SocialMediaResultsPreview = function(PATHS){
   var $form = $('form'),
     $collapsed = $('#collapsed-form'),
     $waitingIcon = $('.fa-refresh'),
-    _modalTemplate = _.template( $.trim( $('#modal-template').text() ) ),
     _previewModel = undefined,
     _waitingForServer = false,
     _thumbsShowing = true,
     _thumbnailCtrl = new SocialMediaThumbnailController(PATHS, 'preview');
 
   _thumbnailCtrl.init();
-  prepareModal();
 
   $('[data="preview"]').click(function(e){
     var formData = $form.serialize();
@@ -33,13 +31,7 @@ var SocialMediaResultsPreview = function(PATHS){
     return _thumbnailCtrl;
   }
 
-  function prepareModal(){
-    var modalContents = {},
-      renderedHtml = '';
-      
-
-  };
-
+  
   function toggleShowThumbs(){
     _thumbsShowing = !_thumbsShowing;
     if ( _thumbsShowing && _thumbnailCtrl.$grid ){
