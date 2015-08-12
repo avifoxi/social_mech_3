@@ -2,17 +2,14 @@ var SocialMediaResultsPreview = function(PATHS){
   var $form = $('form'),
     $collapsed = $('#collapsed-form'),
     $waitingIcon = $('.fa-refresh'),
-    $thumbsGrid = $('.masonryGrid'),
     _previewModel = undefined,
     _waitingForServer = false,
-    _thumbsShowing = false,
+    _thumbsShowing = true,
     _thumbnailCtrl = new SocialMediaThumbnailController(PATHS, 'preview');
 
   _thumbnailCtrl.init();
 
-  // # TODO -- this kinda sucks fix in morning
-  $thumbsGrid.hide();
-  
+
   $('[data="preview"]').click(function(e){
     var formData = $form.serialize();
 
@@ -20,11 +17,10 @@ var SocialMediaResultsPreview = function(PATHS){
     // if the user has changed their data... not a thorough validation, but a hint in that direction
     if ( _previewModel !== formData ) {
        _previewModel = formData;
+       _waitingForServer = true;
+       toggleWaiting();
        postPreviewGetMedia( _previewModel );
-    } else {
-      toggleShowThumbs();
-    }
-    
+    } 
     animateFormCollapse()
   });
 
@@ -38,12 +34,19 @@ var SocialMediaResultsPreview = function(PATHS){
 
   function toggleShowThumbs(){
     _thumbsShowing = !_thumbsShowing;
-    if ( _thumbsShowing ){
-      $thumbsGrid.show();
+    if ( _thumbsShowing && _thumbnailCtrl.$grid ){
+      _thumbnailCtrl.$grid.show();
     } else {
-      $thumbsGrid.hide();
+      _thumbnailCtrl.$grid.hide();
     }
-  }
+  };
+  function toggleWaiting(){
+    if ( _waitingForServer ){
+      $waitingIcon.parent().show(400);
+    } else {
+      $waitingIcon.parent().hide(400);
+    }
+  };
 
   function postPreviewGetMedia(data){
     var callback = handoffToThumbNailController;
@@ -54,7 +57,8 @@ var SocialMediaResultsPreview = function(PATHS){
       url: PATHS.preview,
       data: data,
       success: function(res){
-        toggleShowThumbs();
+        // toggleShowThumbs();
+        _waitingForServer = false;
         callback(res);
         toggleWaiting(); 
       },
@@ -65,23 +69,14 @@ var SocialMediaResultsPreview = function(PATHS){
     _thumbnailCtrl.setPublicFigure(previewMedia);
   };
   function animateFormCollapse(){
-    // console.log('should be animate?')
     $form.animate({
       opacity: 0.25,
       height: "toggle"
     }, 1000);
     $collapsed.show(500);
-    toggleWaiting();
-  };
-  function toggleWaiting(){
-    var animateClass = 'icon-refresh-animate';
-    _waitingForServer = !_waitingForServer;
-    if ( _waitingForServer ){
-      $waitingIcon.addClass(animateClass);
-      $waitingIcon.parent().show(400);
-    } else {
-      $waitingIcon.removeClass(animateClass);
-      $waitingIcon.parent().hide(400);
+
+    if ( !_thumbsShowing ){
+      toggleShowThumbs();
     }
   };
   function animateFormRedraw(){
@@ -90,5 +85,11 @@ var SocialMediaResultsPreview = function(PATHS){
       opacity: 1,
       height: "toggle"
     }, 1000);
+    if ( _waitingForServer ){
+      toggleWaiting();
+    }
+    toggleShowThumbs();
   };
+  
+  
 }
