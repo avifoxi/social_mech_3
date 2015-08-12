@@ -24,6 +24,7 @@ SocialMediaThumbnailController.prototype = {
   },
   setPublicFigure: function(previewFigure){
     if (this.context === 'preview'){
+      this.clearGrid();
       this.publicFigure = previewFigure;
       this.appendThumbnails();
     }
