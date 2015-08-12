@@ -49,6 +49,9 @@ SocialMediaThumbnailController.prototype = {
       this.checkWhenLastQueried();
     }
   },
+  clearGrid: function(){
+    this.$grid.html('').masonry();
+  },
   checkWhenLastQueried: function(){
     var lastQuery = new Date(this.publicFigure.updated_at),
       now = new Date(),
