@@ -2,13 +2,14 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
+  # currently not in use -- future feature? 
+  # resources :iframes
 
-  resources :iframes
   post 'public_figures/preview' => 'public_figures#preview', as: :public_figure_preview
   get '/templates' => 'public_figures#templates', as: :public_figure_templates
   resources :public_figures 
 
-  root 'public_figures#show'
+  root 'public_figures#new'
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

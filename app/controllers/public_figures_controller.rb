@@ -3,6 +3,7 @@ class PublicFiguresController < ApplicationController
 
   def new
     @pf = PublicFigure.new
+    @user = User.new
   end
 
   def create
