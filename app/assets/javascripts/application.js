@@ -18,3 +18,4 @@
 //= require moment
 //= require turbolinks
 //= require_tree .
+//= ./public_figures require_tree 
