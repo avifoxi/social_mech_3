@@ -5,9 +5,8 @@ Rails.application.routes.draw do
 
   resources :iframes
   post 'public_figures/preview' => 'public_figures#preview', as: :public_figure_preview
-  resources :public_figures do
-    get '/templates' => 'public_figures#templates', as: :templates
-  end
+  get '/templates' => 'public_figures#templates', as: :public_figure_templates
+  resources :public_figures 
 
   root 'public_figures#show'
 

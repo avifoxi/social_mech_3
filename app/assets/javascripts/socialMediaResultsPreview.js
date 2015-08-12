@@ -1,11 +1,12 @@
-var SocialMediaResultsPreview = function(previewUrl){
+var SocialMediaResultsPreview = function(PATHS){
   var $form = $('form'),
     $collapsed = $('#collapsed-form'),
     $waitingIcon = $('.fa-refresh'),
-    _waitingForServer = false;
+    _waitingForServer = false,
+    _thumbnailCtrl = new SocialMediaThumbnailController(PATHS, 'preview');
 
-  $collapsed.hide();
-
+  _thumbnailCtrl.init();
+  
   $('[data="preview"]').click(function(e){
     e.preventDefault();
     // postPreviewGetMedia($form.serialize());
@@ -16,13 +17,17 @@ var SocialMediaResultsPreview = function(previewUrl){
     animateFormRedraw();
   })
   
+  this.showThumb = function (){
+    return _thumbnailCtrl;
+  }
+
   function postPreviewGetMedia(data){
     // var callback = handoffToThumbNailController;
     
     // ajax call works, now work on animating collapse
     // $.ajax({
     //   type: "POST",
-    //   url: previewUrl,
+    //   url: PATHS.preview,
     //   data: data,
     //   success: function(res){
     //     callback(res);
@@ -49,8 +54,10 @@ var SocialMediaResultsPreview = function(previewUrl){
     _waitingForServer = !_waitingForServer;
     if ( _waitingForServer ){
       $waitingIcon.addClass(animateClass);
+      $waitingIcon.parent().show(400);
     } else {
       $waitingIcon.removeClass(animateClass);
+      $waitingIcon.parent().hide(400);
     }
   };
   function animateFormRedraw(){

@@ -17,13 +17,25 @@
 
 <% end %>
 
-<i class="fa fa-refresh"></i>
+<div class="masonryGrid">
+</div>
+
+
+<div class="icon-refresh col-xs-4 col-sm-4 col-md-4 col-lg-4 col-md-offset-4 col-xs-offset-4 col-sm-offset-4 col-lg-offset-4">
+  <i class="fa fa-refresh"></i>
+</div>
+
+
 
 <script>
   $(document).ready(function () {
-    var previewUrl = '<%= public_figure_preview_path  %>';
+    var PATHS = {
+      preview: '<%= public_figure_preview_path  %>',
+      templates: "<%= public_figure_templates_path %>"
+    }
+    
     // global for the time being - ease of debugging
-    window.SMR = new SocialMediaResultsPreview(previewUrl);
+    window.SMR = new SocialMediaResultsPreview(PATHS);
   });
   
 </script>

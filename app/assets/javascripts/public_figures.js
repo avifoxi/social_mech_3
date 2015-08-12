@@ -2,12 +2,13 @@
 
 
 // PATHS constant, object, instantiated in views/public_figures/show.html.erb
-function SocialMediaThumbnailController(PATHS){
+function SocialMediaThumbnailController(PATHS, context){
   this.PATHS = PATHS;
+  this.context = context || undefined;
   this.publicFigure = {};
   this.templates = {
-    insta: null,
-    tweet: null
+    insta: undefined,
+    tweet: undefined
   };
   this.$grid = undefined;
 }
@@ -16,8 +17,16 @@ SocialMediaThumbnailController.prototype = {
   init: function(){    
     $.getJSON(this.PATHS.templates, function(res){
       this.prepareTemplates(res);
-      this.getPublicFigure();
+      if (this.context !== 'preview'){
+        this.getPublicFigure();
+      }
     }.bind(this));
+  },
+  setPublicFigure: function(previewFigure){
+    if (this.context === 'preview'){
+      this.publicFigure = previewFigure;
+      this.appendThumbnails();
+    }
   },
   getPublicFigure: function(){
     $.getJSON(this.PATHS.publicFigure, function(res){
@@ -36,7 +45,9 @@ SocialMediaThumbnailController.prototype = {
     $(window).resize(function(){
       $g.masonry();
     });
-    this.checkWhenLastQueried();
+    if ( this.context !== 'preview'){
+      this.checkWhenLastQueried();
+    }
   },
   checkWhenLastQueried: function(){
     var lastQuery = new Date(this.publicFigure.updated_at),
