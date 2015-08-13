@@ -1,5 +1,5 @@
-<%= simple_form_for @user do |f| %>
+<%= simple_form_for @user, remote: true do |f| %>
 	<%= f.input :name %>
 	<%= f.input :email %>
-	<%= f.button :submit %>
+	<%= f.button :submit, 'Eat your heart out, Warhol' %>
 <% end %>

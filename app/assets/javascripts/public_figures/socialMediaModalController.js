@@ -23,7 +23,9 @@ function SocialMediaModalCtrl(context){
  		$modal.modal();
  	};
 
+
   function preparePreviewModal(){
+    _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
     // set template contents for this context
   	_modalContents.title = 'Like what you see?';
   	_modalContents.content = $('#user-form').html();
@@ -35,6 +37,16 @@ function SocialMediaModalCtrl(context){
   	$mountNode = $('.masonryGrid');
   	$mountNode.append(_renderedHtml);
   	$modal = $('.modal');
+
+    $('.modal input[type="submit"]').click(function(e){
+      e.preventDefault();
+      console.log('i beeen clicked');
+      $(this).hide(100);
+      $('#thankYouForSub').show(200);
+      // setTimeout(function(){
+      //   $modal.modal('hide');
+      // }, 1500); 
+    });
   };
 
   function render(){

@@ -1,42 +1,27 @@
 <script type="text/template" id="user-form">
-  <div>
-
-	  <!-- Nav tabs -->
-	  <ul class="nav nav-tabs" role="tablist">
-	    <li role="presentation" class="active">
-	    	<a href="#pleasedToMeetYa" aria-controls="pleasedToMeetYa" role="tab" data-toggle="tab">
-	    		Thanks for playing~!!
-	    	</a>
-	    </li>
-	    <li role="presentation">
-	    	<a href="#newUserForm" aria-controls="newUserForm" role="tab" data-toggle="tab">
-	    		Fill a form!
-	    	</a>
-	    </li>
-	    <li role="presentation">
-	    	<a href="#thankYouForSub" aria-controls="thankYouForSub" role="tab" data-toggle="tab">
-		    	Much thanks for all that stuff!
-		  	</a>
-		  </li>
-	    <li role="presentation">
-	    	<a href="#beep" aria-controls="beep" role="tab" data-toggle="tab">
-		    	Settings
-		  	</a>
-		  </li>
-	  </ul>
+<!--   // < div id="user-form">
+ -->
 
 	  <!-- Tab panes -->
 	  <div class="tab-content">
 	    <div role="tabpanel" class="tab-pane fade in active" id="pleasedToMeetYa">
-	    	We are so pleased to make your acquaintanceshipment, please click me please.
-	    	<a href="#newUserForm" aria-controls="newUserForm" role="tab" data-toggle="tab">
-	    		Fill a form!
+	    	You're playing with <strong>The Social Mechanism</strong>, a social media aggregator developed by us.
+	    	<a href="http://www.themechanism.com/" target="_blank"><%= image_tag("TheMech_Logo2.png") %></a> 
+	    	<br>
+	    	<a href="#newUserForm" aria-controls="newUserForm" role="tab" data-toggle="tab" class="btn btn-primary">
+	    		We'd love to hear from you!
 	    	</a>
 	
 
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="newUserForm">
+				The Mechanism is a digital design and branding agency based in NYC.
+			 	<br>We want to hear from you!
+			 	
 				<%= render 'users/new', user: @user %> 
+				<a href="#thankYouForSub" aria-controls="thankYouForSub" role="tab" data-toggle="tab">
+		    	<input type="hidden" aria-controls="thankYouForSub" role="tab" data-toggle="tab">
+		  	</a>
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="thankYouForSub">
 	    	thankYouForSubmitting to our will
@@ -44,7 +29,7 @@
 	    <div role="tabpanel" class="tab-pane fade" id="beep">BEEP</div>
 	  </div>
 
-	</div>
-  
+<!-- 	</div>
+ -->  
    
 </script>
