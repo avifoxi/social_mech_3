@@ -24,13 +24,21 @@ function SocialMediaModalCtrl(context){
  	};
 
   function preparePreviewModal(){
+    // set template contents for this context
   	_modalContents.title = 'Like what you see?';
   	_modalContents.content = $('#user-form').html();
   	_modalContents.footer = 'important footer blah blah';
+
+    // set options for modal reactivity in this context
+    _options;
   	_renderedHtml = _modalTemplate(_modalContents);
   	$mountNode = $('.masonryGrid');
   	$mountNode.append(_renderedHtml);
   	$modal = $('.modal');
   };
+
+  function render(){
+
+  }
 
 }

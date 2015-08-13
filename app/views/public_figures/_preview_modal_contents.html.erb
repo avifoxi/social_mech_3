@@ -1,23 +1,50 @@
-<!-- < script type="text/template" id="user-form"> -->
+<script type="text/template" id="user-form">
   <div>
 
 	  <!-- Nav tabs -->
 	  <ul class="nav nav-tabs" role="tablist">
-	    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-	    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-	    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-	    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+	    <li role="presentation" class="active">
+	    	<a href="#pleasedToMeetYa" aria-controls="pleasedToMeetYa" role="tab" data-toggle="tab">
+	    		Thanks for playing~!!
+	    	</a>
+	    </li>
+	    <li role="presentation">
+	    	<a href="#newUserForm" aria-controls="newUserForm" role="tab" data-toggle="tab">
+	    		Fill a form!
+	    	</a>
+	    </li>
+	    <li role="presentation">
+	    	<a href="#thankYouForSub" aria-controls="thankYouForSub" role="tab" data-toggle="tab">
+		    	Much thanks for all that stuff!
+		  	</a>
+		  </li>
+	    <li role="presentation">
+	    	<a href="#beep" aria-controls="beep" role="tab" data-toggle="tab">
+		    	Settings
+		  	</a>
+		  </li>
 	  </ul>
 
 	  <!-- Tab panes -->
 	  <div class="tab-content">
-	    <div role="tabpanel" class="tab-pane active" id="home">...</div>
-	    <div role="tabpanel" class="tab-pane" id="profile">...</div>
-	    <div role="tabpanel" class="tab-pane" id="messages">...</div>
-	    <div role="tabpanel" class="tab-pane" id="settings">...</div>
+	    <div role="tabpanel" class="tab-pane fade in active" id="pleasedToMeetYa">
+	    	We are so pleased to make your acquaintanceshipment, please click me please.
+	    	<a href="#newUserForm" aria-controls="newUserForm" role="tab" data-toggle="tab">
+	    		Fill a form!
+	    	</a>
+	
+
+	    </div>
+	    <div role="tabpanel" class="tab-pane fade" id="newUserForm">
+				<%= render 'users/new', user: @user %> 
+	    </div>
+	    <div role="tabpanel" class="tab-pane fade" id="thankYouForSub">
+	    	thankYouForSubmitting to our will
+	    </div>
+	    <div role="tabpanel" class="tab-pane fade" id="beep">BEEP</div>
 	  </div>
 
 	</div>
   
-  <%= render 'users/new', user: @user %>  
-<!-- < /script> -->
+   
+</script>
