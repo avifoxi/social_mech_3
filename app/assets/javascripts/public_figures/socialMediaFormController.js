@@ -7,17 +7,20 @@ var SocialMediaFormController = function(MASTER){
   
   $('[data="preview"]').click(function(e){
     e.preventDefault();
-    MASTER.previewClicked();
-    
     var formData = $form.serialize();
-    
-    // if the user has changed their data... 
-    // TODO - add a thorough validation
-    if ( _previewModel !== formData ) {
-      _previewModel = formData;
-      postPreviewGetMedia( _previewModel );
-    } 
-    animateFormCollapse()
+
+    if ( isValid(formData) ){
+      MASTER.previewClicked();
+      // if the user has changed their data... 
+      // TODO - add a thorough validation
+      if ( _previewModel !== formData ) {
+        _previewModel = formData;
+        postPreviewGetMedia( _previewModel );
+      } 
+      animateFormCollapse();
+    } else {
+      alert('what the fuck did you do?');
+    }
   });
 
   $('[data="unCollapse"]').click(function(){
@@ -35,6 +38,7 @@ var SocialMediaFormController = function(MASTER){
       data: data,
       success: function(res){
         callback(res);
+        window.previewJson = JSON.stringify(res);
       },
       dataType: 'json'
     });
@@ -54,4 +58,15 @@ var SocialMediaFormController = function(MASTER){
       height: "toggle"
     }, 1000);
   }; 
+  function isValid(formData){
+    var regEx,
+      splat;
+    regEx = new RegExp(/[= &]/);
+    splat = formData.split(regEx);
+    // in other words, if the form data contains no empty strings
+    if ( splat.indexOf('') === -1 ){
+      return true;
+    }
+  }
+
 }

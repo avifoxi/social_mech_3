@@ -35,6 +35,9 @@ var PreviewPageMaster = function(PATHS){
   this.showForm = function(){
     return _FormCtrl;
   };
+  this.showWaiting = function(){
+    return _WaitingCtrl;
+  };
 
   // GETTER FUNCTIONS
   this.getPATHS = function(subpath){
@@ -47,9 +50,7 @@ var PreviewPageMaster = function(PATHS){
   // EVENT REPORTING
   this.previewClicked = function(){
     ++_previewFreebieCount;
-    toggleModal();
-    _thumbsShowing = true;
-    toggleThumbs();
+    handlePreview();
   };
   this.hideThumbs = function(){
     _thumbsShowing = false;
@@ -81,12 +82,13 @@ var PreviewPageMaster = function(PATHS){
     _ModalCtrl = new SocialMediaModalCtrl(_self);
     _FormCtrl = new SocialMediaFormController(_self);
     _WaitingCtrl = new SocialMediaWaitingController();
+    _ThumbnailCtrl.init();
   }
 
   function toggleModal(){
-    if ( _previewFreebieCount > 1 ){
+    // if ( _previewFreebieCount > 1 ){
       _ModalCtrl.show();
-    }
+    // }
   }
 
   function toggleWaiting(){
@@ -105,8 +107,15 @@ var PreviewPageMaster = function(PATHS){
     }
   }
 
-
-
+  function handlePreview(){
+    if ( _previewFreebieCount % 2 === 0){
+      toggleModal();
+      // add listener for modal close
+    } else {
+      _thumbsShowing = true;
+      toggleThumbs();
+    }
+  }
 
   init();
 }

@@ -3,8 +3,8 @@
 
 // PATHS constant, object, instantiated in views/public_figures/show.html.erb
 function SocialMediaThumbnailController(MASTER){
-  this.PATHS = MASTER.PATHS;
-  this.context = MASTER.CONTEXT;
+  this.PATHS = MASTER.getPATHS();
+  this.context = MASTER.getCONTEXT();
   this.publicFigure = {};
   this.templates = {
     insta: undefined,
@@ -59,7 +59,9 @@ SocialMediaThumbnailController.prototype = {
     }
   },
   clearGrid: function(){
-    this.$grid.html('').masonry();
+    if ( this.$grid ) {
+      this.$grid.html('').masonry();
+    }
   },
   checkWhenLastQueried: function(){
     var lastQuery = new Date(this.publicFigure.updated_at),

@@ -1,10 +1,17 @@
 var SocialMediaWaitingController = function () {
-  var $waiting = $('.icon-refresh');
+  var $body = $('body'),
+    _waitingHtml = $.parseHTML( $.trim( $('#waiting-icon' ).html() ) ),
+    _addedToDom = false;
 
   this.hide = function(){
-    $waiting.hide(400);
+    $( _waitingHtml ).fadeOut(400);
   };
   this.show = function(){
-    $waiting.show(400);
+    if ( !_addedToDom ){
+      $body.append(_waitingHtml).fadeIn(400);
+      _addedToDom = true;
+    } else {
+      $(_waitingHtml).fadeIn(400);
+    } 
   };
 }
