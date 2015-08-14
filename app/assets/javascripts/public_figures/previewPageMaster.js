@@ -1,3 +1,36 @@
+var PreviewPageMaster = function(PATHS){
+  // component oriented JS separation of concerns
+  // this is the master controller for Preview page
+
+  // Constants
+  var CONTEXT = 'preview',
+    PATHS = PATHS, // redundant - but passed in and don't want to forget
+
+    // Component Controllers
+    _ThumbnailCtrl = new SocialMediaThumbnailController(PATHS, CONTEXT),
+    _ModalCtrl = new SocialMediaModalCtrl(CONTEXT);
+    _FormCtrl = {},
+
+    // Master State Variables
+    _formShowing = true,
+    _thumbsShowing = true, // even though thumbnails not rendered, the mount node is present in DOM
+    _waitingForServer = false,
+    _modalShowing = false,
+    _previewFreebieCount = 0;
+
+  // Debugging Methods -- for accessing components in Dev Console
+  this.showThumb = function (){
+    return _ThumbnailCtrl;
+  };
+  this.showModal = function (){
+    return _ModalCtrl;
+  };
+  this.showForm = function(){
+    return _FormCtrl;
+  };
+
+}
+
 var SocialMediaResultsPreview = function(PATHS){
   var $form = $('form'),
     $collapsed = $('#collapsed-form'),

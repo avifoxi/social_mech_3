@@ -8,9 +8,7 @@
 	    	You're playing with <strong>The Social Mechanism</strong>, a social media aggregator developed by us.
 	    	<a href="http://www.themechanism.com/" target="_blank"><%= image_tag("TheMech_Logo2.png") %></a> 
 	    	<br>
-	    	<a href="#newUserForm" aria-controls="newUserForm" role="tab" data-toggle="tab" class="btn btn-primary">
-	    		We'd love to hear from you!
-	    	</a>
+	    	<%= render 'users/new', user: @user %> 
 	
 
 	    </div>
@@ -18,7 +16,7 @@
 				The Mechanism is a digital design and branding agency based in NYC.
 			 	<br>We want to hear from you!
 			 	
-				<%= render 'users/new', user: @user %> 
+				
 				<a href="#thankYouForSub" aria-controls="thankYouForSub" role="tab" data-toggle="tab">
 		    	<input type="hidden" aria-controls="thankYouForSub" role="tab" data-toggle="tab">
 		  	</a>

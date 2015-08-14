@@ -1,5 +1,6 @@
 function SocialMediaModalCtrl(context){
-	var _modalContents = {
+	_.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
+  var _modalContents = {
 			title: undefined,
 			content: undefined,
 			footer: undefined
@@ -20,12 +21,11 @@ function SocialMediaModalCtrl(context){
 
 
  	this.show = function(){
- 		$modal.modal();
+ 		$modal.modal(_options);
  	};
 
 
-  function preparePreviewModal(){
-    _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
+  function preparePreviewModal(){ 
     // set template contents for this context
   	_modalContents.title = 'Like what you see?';
   	_modalContents.content = $('#user-form').html();
@@ -43,7 +43,9 @@ function SocialMediaModalCtrl(context){
     $('.modal input[type="submit"]').click(function(e){
       e.preventDefault();
       console.log('i beeen clicked');
-      $('#newUserForm').hide(200);
+      $('#pleasedToMeetYa').animate({
+        height: "toggle"
+      }, 500);
       $modalBody.append($thankYou).fadeIn(300);
       setTimeout(function(){
         $modal.modal('hide');
