@@ -37,15 +37,17 @@ function SocialMediaModalCtrl(context){
   	$mountNode = $('.masonryGrid');
   	$mountNode.append(_renderedHtml);
   	$modal = $('.modal');
+    $thankYou = $('#thankYouForSub').html();
+    $modalBody = $('.modal-body');
 
     $('.modal input[type="submit"]').click(function(e){
       e.preventDefault();
       console.log('i beeen clicked');
-      $(this).hide(100);
-      $('#thankYouForSub').show(200);
-      // setTimeout(function(){
-      //   $modal.modal('hide');
-      // }, 1500); 
+      $('#newUserForm').hide(200);
+      $modalBody.append($thankYou).fadeIn(300);
+      setTimeout(function(){
+        $modal.modal('hide');
+      }, 1500); 
     });
   };
 
