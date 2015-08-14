@@ -2,9 +2,9 @@
 
 
 // PATHS constant, object, instantiated in views/public_figures/show.html.erb
-function SocialMediaThumbnailController(PATHS, context){
-  this.PATHS = PATHS;
-  this.context = context || undefined;
+function SocialMediaThumbnailController(MASTER){
+  this.PATHS = MASTER.PATHS;
+  this.context = MASTER.CONTEXT;
   this.publicFigure = {};
   this.templates = {
     insta: undefined,
@@ -14,6 +14,14 @@ function SocialMediaThumbnailController(PATHS, context){
 }
 
 SocialMediaThumbnailController.prototype = {
+  show: function(){
+    if ( this.$grid ){
+      this.$grid.show().fadeIn(200);
+    }
+  },
+  hide: function(){
+    this.$grid.hide().fadeOut(200);
+  },
   init: function(){    
     $.getJSON(this.PATHS.templates, function(res){
       this.prepareTemplates(res);

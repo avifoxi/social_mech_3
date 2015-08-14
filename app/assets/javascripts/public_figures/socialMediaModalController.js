@@ -1,4 +1,4 @@
-function SocialMediaModalCtrl(context){
+function SocialMediaModalCtrl(MASTER){
 	_.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
   var _modalContents = {
 			title: undefined,
@@ -11,25 +11,22 @@ function SocialMediaModalCtrl(context){
 	  $mountNode = undefined,
 	  $modal = undefined;
 
-
 	// anticipating multiple contexts for modal usage
-	switch (context){
+	switch ( MASTER.getCONTEXT() ){
 		case 'preview':
 			preparePreviewModal();
 			break;
 	}
 
-
  	this.show = function(){
  		$modal.modal(_options);
  	};
-
 
   function preparePreviewModal(){ 
     // set template contents for this context
   	_modalContents.title = 'Like what you see?';
   	_modalContents.content = $('#user-form').html();
-  	_modalContents.footer = 'important footer blah blah';
+  	_modalContents.footer = '';
 
     // set options for modal reactivity in this context
     _options;
@@ -42,7 +39,6 @@ function SocialMediaModalCtrl(context){
 
     $('.modal input[type="submit"]').click(function(e){
       e.preventDefault();
-      console.log('i beeen clicked');
       $('#pleasedToMeetYa').animate({
         height: "toggle"
       }, 500);
@@ -53,8 +49,8 @@ function SocialMediaModalCtrl(context){
     });
   };
 
-  function render(){
+ //  function render(){
 
-  }
+ //  }
 
 }

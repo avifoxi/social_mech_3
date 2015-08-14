@@ -6,18 +6,25 @@ var PreviewPageMaster = function(PATHS){
   var CONTEXT = 'preview',
     PATHS = PATHS, // redundant - but passed in and don't want to forget
 
-    // Component Controllers
-    _ThumbnailCtrl = new SocialMediaThumbnailController(PATHS, CONTEXT),
-    _ModalCtrl = new SocialMediaModalCtrl(CONTEXT);
+    // Component Controllers - initialized in private function
+    _ThumbnailCtrl = {},
+    _ModalCtrl = {},
     _FormCtrl = {},
+    _WaitingCtrl = {}, // this is animated refresh icon overlay
 
     // Master State Variables
     _formShowing = true,
     _thumbsShowing = true, // even though thumbnails not rendered, the mount node is present in DOM
     _waitingForServer = false,
     _modalShowing = false,
-    _previewFreebieCount = 0;
+    _previewFreebieCount = 0,
+    _self = this;
 
+  /*
+  *   PUBLIC METHODS
+  *
+  */ 
+  
   // Debugging Methods -- for accessing components in Dev Console
   this.showThumb = function (){
     return _ThumbnailCtrl;
@@ -29,106 +36,77 @@ var PreviewPageMaster = function(PATHS){
     return _FormCtrl;
   };
 
-}
+  // GETTER FUNCTIONS
+  this.getPATHS = function(subpath){
+    return subpath ? PATHS[subpath] : PATHS;
+  };
+  this.getCONTEXT = function(){
+    return CONTEXT;
+  };
 
-var SocialMediaResultsPreview = function(PATHS){
-  var $form = $('form'),
-    $collapsed = $('#collapsed-form'),
-    $waitingIcon = $('.fa-refresh'),
-    _previewModel = undefined,
-    _waitingForServer = false,
-    _thumbsShowing = true,
-    _thumbnailCtrl = new SocialMediaThumbnailController(PATHS, 'preview'),
-    _modalCtrl = new SocialMediaModalCtrl('preview');
-
-  // CURRENTLY THE THUMBNAIL NEEDS TO HAVE INIT CALLED TO GET TEMPLATES --- 
-  // PERHAPS REFACTOR AS SINGLETON
-  _thumbnailCtrl.init();
-
-  $('[data="preview"]').click(function(e){
-    var formData = $form.serialize();
-
-    e.preventDefault();
-    // if the user has changed their data... not a thorough validation, but a hint in that direction
-    if ( _previewModel !== formData ) {
-       _previewModel = formData;
-       _waitingForServer = true;
-       toggleWaiting();
-       postPreviewGetMedia( _previewModel );
-    } 
-    animateFormCollapse()
-  });
-
-  $('[data="unCollapse"]').click(function(){
-    animateFormRedraw();
-  })
-  
-  this.showThumb = function (){
-    return _thumbnailCtrl;
-  }
-  this.showModal = function (){
-    return _modalCtrl;
-  }
-
-  
-  function toggleShowThumbs(){
-    _thumbsShowing = !_thumbsShowing;
-    if ( _thumbsShowing && _thumbnailCtrl.$grid ){
-      _thumbnailCtrl.$grid.show();
+  // EVENT REPORTING
+  this.previewClicked = function(){
+    ++_previewFreebieCount;
+    toggleModal();
+    _thumbsShowing = true;
+    toggleThumbs();
+  };
+  this.hideThumbs = function(){
+    _thumbsShowing = false;
+    toggleThumbs();
+  };
+  this.callingServer = function(){
+    _waitingForServer = true;
+    toggleWaiting();
+  };
+  this.serverResponse = function(data){
+    _waitingForServer = false;
+    toggleWaiting();
+    if ( data ) {
+      _ThumbnailCtrl.setPublicFigure(data);
+      _thumbsShowing = true;
+      toggleThumbs();
     } else {
-      _thumbnailCtrl.$grid.hide();
+
     }
   };
+
+  /*
+  *   PRIVATE METHODS
+  *
+  */  
+  
+  function init(){
+    _ThumbnailCtrl = new SocialMediaThumbnailController(_self);
+    _ModalCtrl = new SocialMediaModalCtrl(_self);
+    _FormCtrl = new SocialMediaFormController(_self);
+    _WaitingCtrl = new SocialMediaWaitingController();
+  }
+
+  function toggleModal(){
+    if ( _previewFreebieCount > 1 ){
+      _ModalCtrl.show();
+    }
+  }
+
   function toggleWaiting(){
     if ( _waitingForServer ){
-      $waitingIcon.parent().show(400);
+      _WaitingCtrl.show();
     } else {
-      $waitingIcon.parent().hide(400);
+      _WaitingCtrl.hide();
     }
-  };
+  }
 
-  function postPreviewGetMedia(data){
-    var callback = handoffToThumbNailController;
-    
-    // ajax call works, now work on animating collapse
-    $.ajax({
-      type: "POST",
-      url: PATHS.preview,
-      data: data,
-      success: function(res){
-        // toggleShowThumbs();
-        _waitingForServer = false;
-        callback(res);
-        toggleWaiting(); 
-      },
-      dataType: 'json'
-    });
-  };
-  function handoffToThumbNailController(previewMedia){
-    _thumbnailCtrl.setPublicFigure(previewMedia);
-  };
-  function animateFormCollapse(){
-    $form.animate({
-      opacity: 0.25,
-      height: "toggle"
-    }, 1000);
-    $collapsed.show(500);
+  function toggleThumbs(){
+    if ( _thumbsShowing ){
+      _ThumbnailCtrl.show();
+    } else {
+      _ThumbnailCtrl.hide();
+    }
+  }
 
-    if ( !_thumbsShowing ){
-      toggleShowThumbs();
-    }
-  };
-  function animateFormRedraw(){
-    $collapsed.hide(500);
-    $form.animate({
-      opacity: 1,
-      height: "toggle"
-    }, 1000);
-    if ( _waitingForServer ){
-      toggleWaiting();
-    }
-    toggleShowThumbs();
-  };
-  
-  
+
+
+
+  init();
 }

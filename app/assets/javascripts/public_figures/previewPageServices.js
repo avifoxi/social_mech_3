@@ -1,0 +1,3 @@
+var PreviewPageService = function () {
+  // body...
+}
