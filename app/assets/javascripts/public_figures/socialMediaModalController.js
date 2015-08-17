@@ -44,7 +44,7 @@ function SocialMediaModalCtrl(MASTER){
 
     // currently no custom options!
     $modal.modal(_options);
-    showUserErrors('user[name]');
+    showUserErrors();
   };
 
   function prepareNewUserModal(modelAction){ 
