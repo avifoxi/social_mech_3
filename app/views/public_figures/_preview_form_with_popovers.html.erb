@@ -1,0 +1,58 @@
+<%= simple_form_for pf do |f| %>
+
+  <div data-toggle="popover" 
+    title="Enter the Display Name of the entity you want to query."
+    data-placement="bottom" 
+    data-content="And here's some amazing content. It's very engaging. Right?"
+  >
+    <%= f.input :display_name %>
+  </div>
+
+
+  <div data-toggle="popover" 
+    title="Facebook timeline query"
+    data-placement="bottom"
+    data-content="Facebook don't really work too good yet. ho hum."
+  >
+    <%= f.input :facebook_id %>
+  </div>
+
+  <div data-toggle="popover" 
+    title="Twitter handle help"
+    data-placement="bottom" 
+    data-content="Enter the twitter username or handle that you'd like to search."
+  >
+    <%= f.input :twitter_handle %>
+  </div>
+
+  <div data-toggle="popover" 
+    title="Twitter search terms"
+    data-placement="bottom" 
+    data-content="Want to search for specific phrases on Twitter? Enter each search term separated by a comma."
+  >
+    <%= f.input :twitter_search_terms %>
+  </div>
+
+  <div data-toggle="popover" 
+    title="Instagram Username"
+    data-placement="bottom" 
+    data-content="Enter the Instagram username you'd like to query!"
+  >
+    <%= f.input :instagram_id %>
+  </div>
+
+  <div data-toggle="popover" 
+    title="Instagram search terms"
+    data-placement="bottom" 
+    data-content="Want to search for Instagrams tagged with specific hashtags? Enter each tag separated by a comma."
+  >
+    <%= f.input :instagram_search_tags %>
+  </div>
+
+  <div class='btn btn-info' data='preview'>Preview</div>
+  
+
+
+  <%= f.button :submit %>
+
+<% end %>

@@ -93,7 +93,7 @@ function SocialMediaModalCtrl(MASTER){
     $old.animate({
       height: "toggle"
     }, 500, function(){
-      $(this).remove();
+      $(this).remove(); // inefficient--- get it up then refactor
     });
     $body.append(newer).fadeIn(300);
     if ( callback ){
@@ -105,11 +105,12 @@ function SocialMediaModalCtrl(MASTER){
     var fields = $( form ).serializeArray(),
       invalids = [];
     // 0 => utf code, 1 => name, 2 => email
+    // slightly smarter email validation
     _.each(fields, function(field){
       if ( field.value === '' ){
         invalids.push(field.name);
       }
     });
     return invalids;
-  }
+  };
 }

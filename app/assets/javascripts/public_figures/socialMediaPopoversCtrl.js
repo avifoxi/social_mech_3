@@ -3,9 +3,18 @@ var SocialMediaPopoversCtrl = function () {
   // revisit uponcompletion of other pieces
 
   $pops = $('div[data-toggle="popover"]');
-  $pops.mouseover(function(){
-    $(this).popover('show');
+
+  $('input').mouseover(function(){
+    window.$tester = $(this);
+    $(this).parents().popover('show');
   }).mouseout(function(){
-    $(this).popover('hide');
-  })
+    $(this).parents().popover('hide');
+  });
+
+
+  // $pops.mouseover(function(){
+  //   $(this).popover('show');
+  // }).mouseout(function(){
+  //   $(this).popover('hide');
+  // });
 }

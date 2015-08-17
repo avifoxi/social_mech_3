@@ -2,34 +2,8 @@
 <div id="collapsed-form">
   <div class='btn btn-info' data='unCollapse'>Redo query terms</div>
 </div>
-<%= simple_form_for @pf do |f| %>
 
-  <div data-toggle="popover" 
-    title="Popover title" 
-    data-content="And here's some amazing content. It's very engaging. Right?"
-  >
-    <%= f.input :display_name %>
-  </div>
-
-
-  <div data-toggle="popover" 
-    title="second title" 
-    data-content="different content because it different div"
-  >
-    <%= f.input :facebook_id %>
-  </div>
-  <%= f.input :twitter_handle %>
-  <%= f.input :twitter_search_terms %>
-  <%= f.input :instagram_id %>
-  <%= f.input :instagram_search_tags %>
-
-  <div class='btn btn-info' data='preview'>Preview</div>
-  
-
-
-  <%= f.button :submit %>
-
-<% end %>
+<%= render 'preview_form_with_popovers', pf: @pf %>
 
 <div class="masonryGrid">
 </div>
@@ -57,7 +31,6 @@
 </script>
 
 
-<%= render 'shared/bootstrap_modal_with_lodash_templates' %>  
-
+<%= render 'shared/bootstrap_modal' %>  
 
 <%= render 'preview_modal_contents' %>

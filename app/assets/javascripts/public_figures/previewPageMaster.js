@@ -11,6 +11,7 @@ var PreviewPageMaster = function(PATHS){
     _ModalCtrl = {},
     _FormCtrl = {},
     _WaitingCtrl = {}, // this is animated refresh icon overlay
+    _PopoverCtrl = {},
 
     // Master State Variables
     _formShowing = true,
@@ -93,6 +94,7 @@ var PreviewPageMaster = function(PATHS){
     _ModalCtrl = new SocialMediaModalCtrl(_self);
     _FormCtrl = new SocialMediaFormController(_self);
     _WaitingCtrl = new SocialMediaWaitingController();
+    _PopoverCtrl = new SocialMediaPopoversCtrl();
     _ThumbnailCtrl.init();
   }
 
