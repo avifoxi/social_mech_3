@@ -19,9 +19,6 @@ function SocialMediaModalCtrl(MASTER){
     parseContent(modelAction)
  		// $modal.modal(_options);
  	};
-  this.checkViews = function(){
-    return _views;
-  }
 
   function getViewsFromDom(){
     var keys = Object.getOwnPropertyNames( _views );
