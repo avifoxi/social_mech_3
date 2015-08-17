@@ -84,6 +84,10 @@ var PreviewPageMaster = function(PATHS){
       _callbackToBeResumed();
     }
   };
+  this.invalidFormSubmit = function( serializedArray ){
+    _ModalCtrl.show('user#error');
+    // _callbackToBeResumed = handlePreview;
+  };
   /*
   *   PRIVATE METHODS
   *

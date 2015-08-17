@@ -31,8 +31,21 @@ function SocialMediaModalCtrl(MASTER){
       case 'user#new':
         prepareNewUserModal(modelAction);
         break;
+      case 'user#error':
+        prepareErrorModal(modelAction);
+        break;
     }
   }
+
+  function prepareErrorModal(modelAction){
+    $title.html('You fucked everything up!');
+    // $body.html( _views[modelAction] );
+    $footer.html('');
+
+    // currently no custom options!
+    $modal.modal(_options);
+    showUserErrors('user[name]');
+  };
 
   function prepareNewUserModal(modelAction){ 
     // set template contents for this context
