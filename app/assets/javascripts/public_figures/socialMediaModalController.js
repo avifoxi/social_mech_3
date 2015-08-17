@@ -17,7 +17,6 @@ function SocialMediaModalCtrl(MASTER){
 
  	this.show = function(modelAction){
     parseContent(modelAction)
- 		// $modal.modal(_options);
  	};
 
   function getViewsFromDom(){
@@ -40,22 +39,48 @@ function SocialMediaModalCtrl(MASTER){
   	$title.html('Like what you see?');
   	$body.html( _views[modelAction] );
     $footer.html('');
-   
-    $thankYou = _views['thanks-for-submission'];
+
     // currently no custom options!
     $modal.modal(_options);
 
-    $('.modal input[type="submit"]').click(function(e){
+    $('.modal form').submit(function(e){
       e.preventDefault();
-      $('#solicit').animate({
-        height: "toggle"
-      }, 500);
-      $body.append($thankYou).fadeIn(300);
-      setTimeout(function(){
-        $modal.modal('hide');
-        MASTER.resume();
-      }, 1500); 
+      var missingFields = validUser( e.target );
+      if ( _.isEmpty( missingFields ) ){
+        allowSubmit(e); // somehow passing the event wakes it up ... this is confusing        
+      } else {
+        console.log('should not submit');
+      }
     });
   };
 
+  function allowSubmit(e){
+    var data = $(e.target).serialize(),
+      url = e.target.action;
+
+    console.log('adat :::::' + data);
+    console.log('url :::: ' + url);
+    $('#solicit').animate({
+      height: "toggle"
+    }, 500);
+    $thankYou = _views['thanks-for-submission'];
+    $body.append($thankYou).fadeIn(300);
+    setTimeout(function(){
+      $modal.modal('hide');
+      MASTER.resume();
+    }, 1500); 
+    $.post(url, data);
+  };
+
+  function validUser(form){
+    var fields = $( form ).serializeArray(),
+      invalids = [];
+    // 0 => utf code, 1 => name, 2 => email
+    _.each(fields, function(field){
+      if ( field.value === '' ){
+        invalids.push(field.name);
+      }
+    });
+    return invalids;
+  }
 }
