@@ -43,33 +43,62 @@ function SocialMediaModalCtrl(MASTER){
     // currently no custom options!
     $modal.modal(_options);
 
+    attachFormListener();
+  };
+  function attachFormListener(){
     $('.modal form').submit(function(e){
       e.preventDefault();
       var missingFields = validUser( e.target );
       if ( _.isEmpty( missingFields ) ){
         allowSubmit(e); // somehow passing the event wakes it up ... this is confusing        
       } else {
-        console.log('should not submit');
+        showUserErrors(missingFields);
       }
     });
   };
-
   function allowSubmit(e){
     var data = $(e.target).serialize(),
       url = e.target.action;
+    $.post(url, data);
 
-    console.log('adat :::::' + data);
-    console.log('url :::: ' + url);
-    $('#solicit').animate({
-      height: "toggle"
-    }, 500);
-    $thankYou = _views['thanks-for-submission'];
-    $body.append($thankYou).fadeIn(300);
+    fadeBetweenInnerContents($('#solicit'), _views['thanks-for-submission']);
+
     setTimeout(function(){
       $modal.modal('hide');
       MASTER.resume();
-    }, 1500); 
-    $.post(url, data);
+    }, 1500);  
+  };
+
+  function showUserErrors(missingFields){
+    var errorView = _views['user#error'],
+      fieldToEng = {
+        'user[name]': 'name',
+        'user[email]': 'email'
+      },
+      missingFields = _.map(missingFields, function(f){
+        return fieldToEng[f];
+      }),
+      errors = missingFields.join(' and ');
+
+    fadeBetweenInnerContents($('#solicit'), errorView);
+    $('span.form-errors').html(errors);
+    
+    $('.modal a.btn-warning').click(function(e){
+      e.preventDefault();
+      fadeBetweenInnerContents($('#validationErrors'), _views['user#new'], attachFormListener);
+    });
+  };
+
+  function fadeBetweenInnerContents($old, newer, callback){
+    $old.animate({
+      height: "toggle"
+    }, 500, function(){
+      $(this).remove();
+    });
+    $body.append(newer).fadeIn(300);
+    if ( callback ){
+      callback();
+    }
   };
 
   function validUser(form){
