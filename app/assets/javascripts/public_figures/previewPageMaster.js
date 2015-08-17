@@ -18,6 +18,7 @@ var PreviewPageMaster = function(PATHS){
     _waitingForServer = false,
     _modalShowing = false,
     _previewFreebieCount = 0,
+    _callbackToBeResumed = undefined, // master can pass actions to children, and cache callback. when MASTER.resume() is triggered by child, callback is run
     _self = this;
 
   /*
@@ -50,6 +51,12 @@ var PreviewPageMaster = function(PATHS){
   // EVENT REPORTING
   this.previewClicked = function(){
     ++_previewFreebieCount;
+    console.log(_previewFreebieCount);
+    if ( _previewFreebieCount === 2 ){
+      _ModalCtrl.show('user#new');
+      _callbackToBeResumed = handlePreview;
+      return;
+    }
     handlePreview();
   };
   this.hideThumbs = function(){
@@ -71,7 +78,11 @@ var PreviewPageMaster = function(PATHS){
 
     }
   };
-
+  this.resume = function(){
+    if ( _callbackToBeResumed ){
+      _callbackToBeResumed();
+    }
+  };
   /*
   *   PRIVATE METHODS
   *
@@ -85,7 +96,7 @@ var PreviewPageMaster = function(PATHS){
     _ThumbnailCtrl.init();
   }
 
-  function toggleModal(){
+  function toggleModal(type){
     // if ( _previewFreebieCount > 1 ){
       _ModalCtrl.show();
     // }
@@ -107,14 +118,9 @@ var PreviewPageMaster = function(PATHS){
     }
   }
 
-  function handlePreview(){
-    if ( _previewFreebieCount % 2 === 0){
-      toggleModal();
-      // add listener for modal close
-    } else {
-      _thumbsShowing = true;
-      toggleThumbs();
-    }
+  function handlePreview(){   
+    _thumbsShowing = true;
+    toggleThumbs();
   }
 
   init();

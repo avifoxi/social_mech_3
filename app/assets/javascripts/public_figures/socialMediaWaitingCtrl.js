@@ -1,17 +1,16 @@
 var SocialMediaWaitingController = function () {
   var $body = $('body'),
-    _waitingHtml = $.parseHTML( $.trim( $('#waiting-icon' ).html() ) ),
-    _addedToDom = false;
+    _waitingHtml = $.parseHTML( $.trim( $('#waiting-icon' ).html() ) );
+
+    // the html is within script tags, so not active in dom on page load
+    // hence lag on icon display when querying server, and need to add then quickly hide
+  $body.append(_waitingHtml)
+  $(_waitingHtml).hide();
 
   this.hide = function(){
     $( _waitingHtml ).fadeOut(400);
   };
   this.show = function(){
-    if ( !_addedToDom ){
-      $body.append(_waitingHtml).fadeIn(400);
-      _addedToDom = true;
-    } else {
-      $(_waitingHtml).fadeIn(400);
-    } 
+    $(_waitingHtml).fadeIn(400);
   };
 }

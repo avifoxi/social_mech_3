@@ -1,56 +1,64 @@
 function SocialMediaModalCtrl(MASTER){
 	_.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
-  var _modalContents = {
-			title: undefined,
-			content: undefined,
-			footer: undefined
-		},
-		_options = {},
-    _renderedHtml = '',
-	  _modalTemplate = _.template( $.trim( $('#modal-template').text() ) ),
-	  $mountNode = undefined,
-	  $modal = undefined;
+  var $modal = $('.modal'),
+    $title = $('.modal-title'),
+    $body = $('.modal-body'),
+    $footer = $('.modal-footer'),
+    _views = {
+      'user#new': undefined,
+      'thanks-for-submission': undefined,
+      'user#error': undefined
+    },
+		_options = {};
 
 	// anticipating multiple contexts for modal usage
-	switch ( MASTER.getCONTEXT() ){
-		case 'preview':
-			preparePreviewModal();
-			break;
-	}
+	
+  getViewsFromDom();
 
- 	this.show = function(){
- 		$modal.modal(_options);
+ 	this.show = function(modelAction){
+    parseContent(modelAction)
+ 		// $modal.modal(_options);
  	};
+  this.checkViews = function(){
+    return _views;
+  }
 
-  function preparePreviewModal(){ 
+  function getViewsFromDom(){
+    var keys = Object.getOwnPropertyNames( _views );
+    _.each(keys, function(key){
+      _views[key] = $( '[data-modal-contents="' + key + '"]').html();
+    });
+  }
+
+  function parseContent(modelAction){
+    switch ( modelAction ){
+      case 'user#new':
+        prepareNewUserModal(modelAction);
+        break;
+    }
+  }
+
+  function prepareNewUserModal(modelAction){ 
     // set template contents for this context
-  	_modalContents.title = 'Like what you see?';
-  	_modalContents.content = $('#user-form').html();
-  	_modalContents.footer = '';
-
-    // set options for modal reactivity in this context
-    _options;
-  	_renderedHtml = _modalTemplate(_modalContents);
-  	$mountNode = $('.masonryGrid');
-  	$mountNode.append(_renderedHtml);
-  	$modal = $('.modal');
-    $thankYou = $('#thankYouForSub').html();
-    $modalBody = $('.modal-body');
+  	$title.html('Like what you see?');
+  	$body.html( _views[modelAction] );
+    $footer.html('');
+   
+    $thankYou = _views['thanks-for-submission'];
+    // currently no custom options!
+    $modal.modal(_options);
 
     $('.modal input[type="submit"]').click(function(e){
       e.preventDefault();
-      $('#pleasedToMeetYa').animate({
+      $('#solicit').animate({
         height: "toggle"
       }, 500);
-      $modalBody.append($thankYou).fadeIn(300);
+      $body.append($thankYou).fadeIn(300);
       setTimeout(function(){
         $modal.modal('hide');
+        MASTER.resume();
       }, 1500); 
     });
   };
-
- //  function render(){
-
- //  }
 
 }
