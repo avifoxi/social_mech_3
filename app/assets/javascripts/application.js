@@ -15,6 +15,7 @@
 //= require twitter/bootstrap
 //= require lodash
 //= require masonry/jquery.masonry
+//= require imagesloaded
 //= require moment
 //= require turbolinks
 //= require_tree .

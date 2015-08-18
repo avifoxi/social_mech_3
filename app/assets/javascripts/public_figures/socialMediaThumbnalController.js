@@ -46,10 +46,12 @@ SocialMediaThumbnailController.prototype = {
     this.$grid = $('.masonryGrid');
     var $g = this.$grid;
     $g.append($thumbs);
-    $g.masonry({
-      isAnimated: true,
-      itemSelector: '.masonryThumb'
-    });
+    $g.imagesLoaded(function(){
+      $g.masonry({
+        isAnimated: true,
+        itemSelector: '.masonryThumb'
+      });
+    })
     $(window).resize(function(){
       $g.masonry();
     });
@@ -133,8 +135,11 @@ SocialMediaThumbnailController.prototype = {
       this.configureGrid($thumbs);
     } else {
       this.clearGrid();
+      this.$grid.imagesLoaded(function(){
         this.$grid.append( $thumbs )
-        .masonry('appended', $('.masonryThumb'));
+          .masonry('appended', $('.masonryThumb'));
+        this.$grid.masonry();
+      }.bind(this));
     } 
   },
   determineDomUpdates: function(newMedia){
