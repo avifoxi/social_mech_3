@@ -3,9 +3,9 @@
   <div data-toggle="popover" 
     title="Enter the Display Name of the entity you want to query."
     data-placement="bottom" 
-    data-content="And here's some amazing content. It's very engaging. Right?"
+    data-content="Enter the human-readable name of your search entity here."
   >
-    <%= f.input :display_name %>
+    <%= f.input :display_name, label: 'Display Name <i class="fa fa-question-circle"></i>'.html_safe %>
   </div>
 
 
@@ -14,7 +14,7 @@
     data-placement="bottom"
     data-content="Facebook don't really work too good yet. ho hum."
   >
-    <%= f.input :facebook_id %>
+    <%= f.input :facebook_id, label: 'Facebook Username <i class="fa fa-question-circle"></i>'.html_safe  %>
   </div>
 
   <div data-toggle="popover" 
@@ -22,7 +22,7 @@
     data-placement="bottom" 
     data-content="Enter the twitter username or handle that you'd like to search."
   >
-    <%= f.input :twitter_handle %>
+    <%= f.input :twitter_handle, label: 'Twitter Handle <i class="fa fa-question-circle"></i>'.html_safe %>
   </div>
 
   <div data-toggle="popover" 
@@ -30,7 +30,7 @@
     data-placement="bottom" 
     data-content="Want to search for specific phrases on Twitter? Enter each search term separated by a comma."
   >
-    <%= f.input :twitter_search_terms %>
+    <%= f.input :twitter_search_terms, label: 'Twitter search terms <i class="fa fa-question-circle"></i>'.html_safe %>
   </div>
 
   <div data-toggle="popover" 
@@ -38,7 +38,7 @@
     data-placement="bottom" 
     data-content="Enter the Instagram username you'd like to query!"
   >
-    <%= f.input :instagram_id %>
+    <%= f.input :instagram_id, label: 'Instagram Username <i class="fa fa-question-circle"></i>'.html_safe %>
   </div>
 
   <div data-toggle="popover" 
@@ -46,7 +46,7 @@
     data-placement="bottom" 
     data-content="Want to search for Instagrams tagged with specific hashtags? Enter each tag separated by a comma."
   >
-    <%= f.input :instagram_search_tags %>
+    <%= f.input :instagram_search_tags, label: 'Instagram search terms <i class="fa fa-question-circle"></i>'.html_safe %>
   </div>
 
   <div class='btn btn-info' data='preview'>Preview</div>
