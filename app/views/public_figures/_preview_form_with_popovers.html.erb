@@ -49,10 +49,11 @@
     <%= f.input :instagram_search_tags, label: 'Instagram search terms <i class="fa fa-question-circle"></i>'.html_safe %>
   </div>
 
-  <div class='btn btn-info' data='preview'>Preview</div>
+  <div class='btn btn-primary' data='preview'>Preview</div>
   
 
-
-  <%= f.button :submit %>
+  <!-- currently not actually submitting to DB, only handing off for social media queries without save -->
+  <!-- so - for semantic reasons, no submit button. only preview -->
+  <!-- < %= f.button :submit %> -->
 
 <% end %>

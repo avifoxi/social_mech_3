@@ -1,9 +1,19 @@
+@import '_variable_overrides';
+
 .pad-the-nav {
   padding-top: 60px;
 }
 
+#collapsed-form{
+  margin-bottom: 2em;
+}
+
 .masonryGrid {
   margin: 0 auto;
+}
+
+.fa-question-circle {
+  color: @brand-warning;
 }
 
 div .thumbnail.social {
@@ -12,7 +22,7 @@ div .thumbnail.social {
   word-wrap: break-word;
 
   .tweetText {
-    background-color: rgb(40, 150, 237);
+    background-color: @brand-primary;
     color: white;
     padding: 1.5em;
     font-size: 1.15em;
@@ -28,7 +38,7 @@ div .thumbnail.social {
   }
   
   a.btn {
-    opacity: 0;
+    opacity: 0.5;
   }
   &:hover {
     a.btn{
@@ -38,7 +48,9 @@ div .thumbnail.social {
   }
   p.links {
     position: absolute;
-    top: 1em;
-    left: 2em;
+/*    top: 1em;
+    left: 2em;*/
+    bottom: 1em;
+    right: 2em;
   }
 }
