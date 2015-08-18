@@ -10,14 +10,9 @@ var SocialMediaFormController = function(MASTER){
     var formData = $form.serialize();
 
     if ( isValid(formData) ){
-      MASTER.previewClicked();
-      // if the user has changed their data... 
-      // TODO - add a thorough validation
-      if ( _previewModel !== formData ) {
-        _previewModel = formData;
-        postPreviewGetMedia( _previewModel );
-      } 
-      animateFormCollapse();
+      MASTER.previewClicked( function(){
+        proceedWPreview(formData);
+      }); 
     } else {
       MASTER.invalidFormSubmit( $form );
     }
@@ -26,7 +21,15 @@ var SocialMediaFormController = function(MASTER){
   $('[data="unCollapse"]').click(function(){
     MASTER.hideThumbs();
     animateFormRedraw();
-  })
+  });
+
+  function proceedWPreview(formData){
+    if ( _previewModel !== formData ) {
+      _previewModel = formData;
+      postPreviewGetMedia( _previewModel );
+    } 
+    animateFormCollapse();
+  };
   
   function postPreviewGetMedia(data){
     var callback = MASTER.serverResponse;

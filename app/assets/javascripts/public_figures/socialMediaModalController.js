@@ -50,9 +50,12 @@ function SocialMediaModalCtrl(MASTER){
     // currently no custom options!
     $modal.modal(_options);
     var missingFields = getEmptyFields(data);
-    showUserErrors(missingFields);
+    showUserErrors(missingFields, dismissNClearModal);
   };
-
+  function dismissNClearModal(){
+    $modal.modal('hide');
+    $body.html('');
+  };
   function prepareNewUserModal(modelAction){ 
     // set template contents for this context
   	$title.html('Like what you see?');
@@ -71,10 +74,13 @@ function SocialMediaModalCtrl(MASTER){
       if ( _.isEmpty( missingFields ) ){
         allowSubmit(e);        
       } else {
-        showUserErrors(missingFields);
+        showUserErrors(missingFields, reloadUserForm);
       }
     });
   };
+  function reloadUserForm(){
+    fadeBetweenInnerContents($('#validationErrors'), _views['user#new'], attachFormListener);
+  }
   function allowSubmit(e){
     var data = $(e.target).serialize(),
       url = e.target.action;
@@ -88,7 +94,7 @@ function SocialMediaModalCtrl(MASTER){
     }, 1500);  
   };
 
-  function showUserErrors(missingFields){
+  function showUserErrors(missingFields, onClickCallback){
     var errorView = _views['user#error'],
       fieldToEng = {
         'user[name]': 'name',
@@ -110,7 +116,7 @@ function SocialMediaModalCtrl(MASTER){
     
     $('.modal a.btn-warning').click(function(e){
       e.preventDefault();
-      fadeBetweenInnerContents($('#validationErrors'), _views['user#new'], attachFormListener);
+      onClickCallback();
     });
   };
 

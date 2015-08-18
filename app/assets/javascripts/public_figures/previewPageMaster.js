@@ -50,21 +50,25 @@ var PreviewPageMaster = function(PATHS){
   };
 
   // EVENT REPORTING
-  this.previewClicked = function(){
+  this.previewClicked = function(callback){
     ++_previewFreebieCount;
-    console.log(_previewFreebieCount);
     if ( _previewFreebieCount === 2 ){
       _ModalCtrl.show('user#new');
-      _callbackToBeResumed = handlePreview;
-      return;
+      
+      _callbackToBeResumed = function(){
+        handlePreview(callback);
+      };
+    } else {
+      handlePreview(callback);
     }
-    handlePreview();
   };
   this.hideThumbs = function(){
     _thumbsShowing = false;
     toggleThumbs();
   };
   this.callingServer = function(){
+    console.log('calling server in master??');
+    debugger;
     _waitingForServer = true;
     toggleWaiting();
   };
@@ -84,9 +88,8 @@ var PreviewPageMaster = function(PATHS){
       _callbackToBeResumed();
     }
   };
-  this.invalidFormSubmit = function( serializedArray ){
-    _ModalCtrl.show('user#error', serializedArray);
-    // _callbackToBeResumed = handlePreview;
+  this.invalidFormSubmit = function( form ){
+    _ModalCtrl.show('user#error', form);
   };
   /*
   *   PRIVATE METHODS
@@ -100,12 +103,6 @@ var PreviewPageMaster = function(PATHS){
     _WaitingCtrl = new SocialMediaWaitingController();
     _PopoverCtrl = new SocialMediaPopoversCtrl();
     _ThumbnailCtrl.init();
-  }
-
-  function toggleModal(type){
-    // if ( _previewFreebieCount > 1 ){
-      _ModalCtrl.show();
-    // }
   }
 
   function toggleWaiting(){
@@ -124,7 +121,10 @@ var PreviewPageMaster = function(PATHS){
     }
   }
 
-  function handlePreview(){   
+  function handlePreview(callback){
+    if ( callback ){
+      callback();
+    }   
     _thumbsShowing = true;
     toggleThumbs();
   }

@@ -32,7 +32,6 @@ SocialMediaThumbnailController.prototype = {
   },
   setPublicFigure: function(previewFigure){
     if (this.context === 'preview'){
-      this.clearGrid();
       this.publicFigure = previewFigure;
       this.appendThumbnails();
     }
@@ -60,7 +59,8 @@ SocialMediaThumbnailController.prototype = {
   },
   clearGrid: function(){
     if ( this.$grid ) {
-      this.$grid.html('').masonry();
+      this.$grid.masonry( 'remove', $('.masonryThumb') );
+      // this.$grid.html('').masonry();
     }
   },
   checkWhenLastQueried: function(){
@@ -129,12 +129,12 @@ SocialMediaThumbnailController.prototype = {
     _.map(preppedThumbs, function(thumb){
       $thumbs.push($.trim(thumb))
     });
-
     if ( !this.$grid ){
       this.configureGrid($thumbs);
     } else {
-      this.$grid.append($thumbs)
-        .masonry( 'appended', $thumbs );
+      this.clearGrid();
+        this.$grid.append( $thumbs )
+        .masonry('appended', $('.masonryThumb'));
     } 
   },
   determineDomUpdates: function(newMedia){
