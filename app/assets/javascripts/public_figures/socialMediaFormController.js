@@ -19,7 +19,7 @@ var SocialMediaFormController = function(MASTER){
       } 
       animateFormCollapse();
     } else {
-      MASTER.invalidFormSubmit( $form.serializeArray() );
+      MASTER.invalidFormSubmit( $form );
     }
   });
 

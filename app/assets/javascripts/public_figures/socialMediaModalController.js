@@ -15,8 +15,11 @@ function SocialMediaModalCtrl(MASTER){
 	
   getViewsFromDom();
 
- 	this.show = function(modelAction){
-    parseContent(modelAction)
+ 	this.show = function(modelAction, data){
+    // if ( !data ){
+    //   data = null;
+    // }
+    parseContent(modelAction, data)
  	};
 
   function getViewsFromDom(){
@@ -26,25 +29,28 @@ function SocialMediaModalCtrl(MASTER){
     });
   }
 
-  function parseContent(modelAction){
+  function parseContent(modelAction, data){
     switch ( modelAction ){
       case 'user#new':
         prepareNewUserModal(modelAction);
         break;
       case 'user#error':
-        prepareErrorModal(modelAction);
+        prepareErrorModal(modelAction, data);
         break;
     }
   }
 
-  function prepareErrorModal(modelAction){
-    $title.html('You fucked everything up!');
+  function prepareErrorModal(modelAction, data){
+    console.log('passing data through');
+    console.log(data);
+    $title.html('We\'re missing some info!');
     // $body.html( _views[modelAction] );
     $footer.html('');
 
     // currently no custom options!
     $modal.modal(_options);
-    showUserErrors();
+    var missingFields = getEmptyFields(data);
+    showUserErrors(missingFields);
   };
 
   function prepareNewUserModal(modelAction){ 
@@ -61,9 +67,9 @@ function SocialMediaModalCtrl(MASTER){
   function attachFormListener(){
     $('.modal form').submit(function(e){
       e.preventDefault();
-      var missingFields = validUser( e.target );
+      var missingFields = getEmptyFields( e.target );
       if ( _.isEmpty( missingFields ) ){
-        allowSubmit(e); // somehow passing the event wakes it up ... this is confusing        
+        allowSubmit(e);        
       } else {
         showUserErrors(missingFields);
       }
@@ -86,12 +92,18 @@ function SocialMediaModalCtrl(MASTER){
     var errorView = _views['user#error'],
       fieldToEng = {
         'user[name]': 'name',
-        'user[email]': 'email'
+        'user[email]': 'email',
+        'public_figure[display_name]': 'display name',
+        'public_figure[facebook_id]': 'Facebook username', 
+        'public_figure[twitter_handle]': 'Twitter handle', 
+        'public_figure[twitter_search_terms]': 'Twitter search terms', 
+        'public_figure[instagram_id]': 'Instagram username', 
+        'public_figure[instagram_search_tags]': 'Instagram search terms'
       },
       missingFields = _.map(missingFields, function(f){
         return fieldToEng[f];
       }),
-      errors = missingFields.join(' and ');
+      errors = missingFields.length > 2 ? 'some inputs' : missingFields.join(' and ');
 
     fadeBetweenInnerContents($('#solicit'), errorView);
     $('span.form-errors').html(errors);
@@ -114,12 +126,12 @@ function SocialMediaModalCtrl(MASTER){
     }
   };
 
-  function validUser(form){
+  function getEmptyFields(form){
     var fields = $( form ).serializeArray(),
       invalids = [];
     // 0 => utf code, 1 => name, 2 => email
     // slightly smarter email validation
-    _.each(fields, function(field){
+    _.forEach(fields, function(field){
       if ( field.value === '' ){
         invalids.push(field.name);
       }
