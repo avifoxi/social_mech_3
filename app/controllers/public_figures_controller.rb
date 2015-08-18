@@ -1,7 +1,9 @@
 class PublicFiguresController < ApplicationController
   layout 'public_figures', only: :show
+  layout 'iframes', only: :new
 
   def new
+    headers['X-Frame-Options'] = 'ALLOWALL'
     @pf = PublicFigure.new
     @user = User.new
   end
