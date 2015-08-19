@@ -4,7 +4,7 @@ var SocialMediaWaitingController = function () {
 
     // the html is within script tags, so not active in dom on page load
     // hence lag on icon display when querying server, and need to add then quickly hide
-  $body.append(_waitingHtml)
+  $body.append(_waitingHtml);
   $(_waitingHtml).hide();
 
   this.hide = function(){

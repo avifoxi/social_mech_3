@@ -2,6 +2,7 @@
 
 
 // PATHS constant, object, instantiated in views/public_figures/show.html.erb
+
 function SocialMediaThumbnailController(MASTER){
   this.PATHS = MASTER.getPATHS();
   this.context = MASTER.getCONTEXT();
@@ -138,7 +139,7 @@ SocialMediaThumbnailController.prototype = {
       this.$grid.imagesLoaded(function(){
         this.$grid.append( $thumbs )
           .masonry('appended', $('.masonryThumb'));
-        this.$grid.masonry();
+        this.$grid.masonry(); // need multiple calls to masonry layout... not interested in debugging this currently though i suspect its a glitch with the library, and not my useage
       }.bind(this));
     } 
   },

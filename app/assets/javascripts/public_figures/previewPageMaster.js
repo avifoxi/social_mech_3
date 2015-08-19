@@ -67,8 +67,7 @@ var PreviewPageMaster = function(PATHS){
     toggleThumbs();
   };
   this.callingServer = function(){
-    console.log('calling server in master??');
-    debugger;
+    console.log('calling server in master');
     _waitingForServer = true;
     toggleWaiting();
   };
@@ -86,6 +85,7 @@ var PreviewPageMaster = function(PATHS){
   this.resume = function(){
     if ( _callbackToBeResumed ){
       _callbackToBeResumed();
+      _callbackToBeResumed = undefined; // clear the cache after callback
     }
   };
   this.invalidFormSubmit = function( form ){

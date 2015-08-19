@@ -1,11 +1,6 @@
 <div class="pad-the-nav"></div>
-<div id="collapsed-form" class="row">
-  <div 
-    class='btn btn-primary col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4' 
-    data='unCollapse'>
-    Redo query terms?
-  </div>
-</div>
+
+<%= render 'uncollapse_button' %>
 
 <%= render 'preview_form_with_popovers', pf: @pf %>
 
@@ -22,7 +17,7 @@
     }
     
     // global for the time being - ease of debugging
-    window.Master = new PreviewPageMaster(PATHS);
+    new PreviewPageMaster(PATHS);
   });
   
     

@@ -41,7 +41,6 @@ var SocialMediaFormController = function(MASTER){
       data: data,
       success: function(res){
         callback(res);
-        window.previewJson = JSON.stringify(res);
       },
       dataType: 'json'
     });
