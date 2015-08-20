@@ -4,6 +4,11 @@
   <div>I'm in the form</div>
   <label for="fb">actually insta</label></br>
   <input type="text" name="fb"></br>
+
+  <select name="select">
+
+  </select>
+
   <input type="submit" value="test this value">
 </form>
 
@@ -12,7 +17,7 @@
 
 <script type="text/template" id="insta-temp">
   
-    <li class="media" data-id="{{ id }}">
+    <option class="media" value="{{ id }}">
       <div class="media-left">
         <img class="media-object" src="{{ profile_picture }}" alt="{{ username }}">
         
@@ -20,7 +25,7 @@
       <div class="media-body">
         <h4 class="media-heading">{{ username }}</h4>
       </div>
-    </li>
+    </option>
   
 </script>
 
@@ -51,6 +56,6 @@
     var listItems = instas.map(function(inst){
       return temp(inst);
     });
-    $('ul').append(listItems);
+    $('select').append(listItems);
   }
 </script>
