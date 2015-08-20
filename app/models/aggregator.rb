@@ -1,4 +1,15 @@
-class Aggregator #< ActiveRecord::Base
+##########
+=begin 
+
+  each of Aggregator's modules is defined in 2 places
+  under config/initializers => modules initially defined, and api connections are assigned under their namespace. check it out, additional comments in code there.
+  
+  functionality in Aggregator context is assigned in module definitions over here
+
+=end
+##########
+
+class Aggregator
   
   include Aggregator::Tweets
   include Aggregator::Instagrams
