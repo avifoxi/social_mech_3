@@ -34,7 +34,7 @@ class Aggregator
       @social_media[:most_recent_instagrams] = get_instagrams_by_tag(@public_figure.instagram_id, @count)
     end
     if @public_figure.twitter_handle
-      @social_media[:most_recent_tweets] = get_tweets(@public_figure.twitter_handle, @count)
+      @social_media[:most_recent_tweets] = get_tweets_by_search_term(@public_figure.twitter_handle, @count)
     end
   end
 end

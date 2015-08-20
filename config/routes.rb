@@ -13,6 +13,12 @@ Rails.application.routes.draw do
 
   root 'public_figures#new'
 
+  # custom aggregators routes for id related queries in advance of social media queries
+
+  resources :aggregators, only: :index 
+  post '/aggregators/fb-id-from-string' => 'aggregators#fb_id_from_string'
+  
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
