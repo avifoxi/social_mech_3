@@ -18,3 +18,9 @@ Accessing social media via 3rd party gems -- [Koala](https://github.com/arsduo/k
 Devs will need to get API keys from each of these social media providers, and save them to a '.env' file you will need to manually create in the root of the directory. It's .gitignore'd, per convention. For deployment, you'll need to ensure that global ENV variabls are initialized somewhere -- depending where you deploy, you can figure this out. We're up on Heroku currently. 
 
 ### DOCUMENTATION - AND HOW TO NAVIGATE FILE STRUCTURE FOR DEVS
+  #### Backend
+  Very simple, quick and dirty. 
+  3 custom classes I've added to a conventional Rails structure. 
+
+  ####
+
