@@ -27,7 +27,7 @@ Custom class - not backed by Active Record. In fact - Aggregator does not write 
 Aggregator defines it's interface with the 3rd party API's in its modules. Aggregator::Facebook, Aggregator::Instagram, Aggregator::Twitter. Each module is defined in 2 places => config/initializers wraps the external api connections within each  Aggregator namespace, and then the fuller functionality is defined in app/models/aggregator
 
 #### PublicFigure
-This class is backed by ActiveRecord -- and leverages Postgres' awesome json field capability to avoid multiple tables for the time being. Quick and dirty.... 
+This class is backed by ActiveRecord -- and leverages Postgres' awesome json field capability to avoid multiple tables for the time being. Quick and dirty....</br>
 Here we save a public figure, ala 'Beyonce' and save all the query terms we would like to use for searching various social media. We have the option of saving query results to json fields. If this app grows, and we want to persist queries in a smarter way, we will need to revisit this class. 
 
 #### User
