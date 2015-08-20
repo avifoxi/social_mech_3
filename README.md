@@ -34,6 +34,10 @@ Here we save a public figure, ala 'Beyonce' and save all the query terms we woul
 This app is a taste to hopefully attract new clients -- so on the front end, after a user plays with the queries a few times, we ask for their contact info. This info is saved to the DB, hence we get a class. 
 
 #### FRONTEND
-Thank you bootstrap, lodash, and jquery. 
-When the user navigates to a new public_figure page, or navigates to an embedded iframe on a 3rd party site (which serves the same content for the time being) -- \n
-The page is managed by a
+Thank you Bootstrap, lodash, and jQuery. </br>
+When the user navigates to a new public_figure page, or navigates to an embedded iframe on a 3rd party site (which serves the same content for the time being) -- </br>
+__Rails is serving views/public_figures/new.html.erb__ in both contexts -- and you can see all partials, layouts, etc in that file.
+<br><br>All js lives in app/assets/js/public_figures 
+
+#### PreviewPageMaster
+The page is controlled by a PreviewPageMaster object, and it's child-modules. The app relies on traditional DOM manipulation via jQuery, and component based heirarchy somewhat influenced by React architecture and component hierarchy. 
