@@ -9,8 +9,9 @@ module Aggregator::Facebook
     end
   end
 
-  def get_facebook_feed(fb_id, num)
-    fb_graph_api.get_connections(fb_id, 'feed') # possible to return limited amount in query ? untested
+  def get_facebook_feed(fb_id, num=5)
+    feed = fb_graph_api.get_connections(fb_id, 'feed') # possible to return limited amount in query?
+    feed.first(num)
   end
 
 end

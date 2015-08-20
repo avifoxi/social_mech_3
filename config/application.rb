@@ -21,6 +21,11 @@ module SocialMechThree
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+
+    # AVI addition -- i think this is a bad practice - but my initializers are not loading consistenly to the Aggregator namespace. very not cool... so I'm strongarming / repeating the initializers install, but this seems to work. there is probably a more elegant solution 
+    config.autoload_paths += %W(#{config.root}/initializers)
+    
+
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
