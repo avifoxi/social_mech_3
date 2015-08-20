@@ -37,7 +37,26 @@ This app is a taste to hopefully attract new clients -- so on the front end, aft
 Thank you Bootstrap, lodash, and jQuery. </br>
 When the user navigates to a new public_figure page, or navigates to an embedded iframe on a 3rd party site (which serves the same content for the time being) -- </br>
 __Rails is serving views/public_figures/new.html.erb__ in both contexts -- and you can see all partials, layouts, etc in that file.
-<br><br>All js lives in app/assets/js/public_figures 
+<br><br>All js lives in app/assets/js/public_figures. The app relies on traditional DOM manipulation via jQuery, and component based heirarchy somewhat influenced by React architecture and component hierarchy. 
 
 #### PreviewPageMaster
-The page is controlled by a PreviewPageMaster object, and it's child-modules. The app relies on traditional DOM manipulation via jQuery, and component based heirarchy somewhat influenced by React architecture and component hierarchy. 
+The page is controlled by a PreviewPageMaster object, and it's child-modules. 
+This object holds most app state, and caches references to each component module. Interaction between modules is mediated by PageMaster.
+
+#### SocialMediaThumbnailController
+Formats social media content for page view, and manages these templates.
+This would be a good place to start refactoring, btw, lots goin on in one place, can likely be separated a bit.
+
+#### SocialMediaFormController
+Manages the form actions for submiting PublicFigure info to backend for aggregating. 
+
+#### SocialMediaModalController
+Manages the modal, for reporting user errors in form usage, and soliciting a user's contact info. Another good candidate for refactoring.
+
+#### SocialMediaPopoverController
+Simple intialization of listeners for form popovers.
+
+#### SocialMediaWaitingController
+Manages the spinning 'waiting for the server' icon
+
+
