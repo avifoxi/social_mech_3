@@ -21,7 +21,20 @@
 
 <script>
   var PATHS = {
-    fb_id_from_string: '<%= aggregators_fb_id_from_string_path %>'
-  }  
+    fb_id_from_string: '<%= aggregators_fb_id_from_string_path %>',
+    instagram_ids_from_string: '<%=  %>'
+  };  
+
+  $('form').submit(function (e) {
+    e.preventDefault();
+    var data = {
+      aggregator: {
+        test_string: $('input[type="text"]').val()
+      }
+    };
+    $.post(PATHS.fb_id_from_string, data, function(res){
+      console.log(res);
+    });
+  });
 
 </script>

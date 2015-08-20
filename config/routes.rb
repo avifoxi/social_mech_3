@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   resources :aggregators, only: :index 
   post '/aggregators/fb-id-from-string' => 'aggregators#fb_id_from_string'
+  post '/aggregators/insta-id-from-string' => 'aggregators#insta_id_from_string'
   
 
   # You can have the root of your site routed with "root"

@@ -17,17 +17,16 @@ class Aggregator
 
   attr_reader :social_media
 
-  # def initialize(public_figure, count=5)
-  #   @public_figure = public_figure
-  #   @count = count
-  #   @social_media = {
-  #     most_recent_instagrams: [],
-  #     most_recent_tweets: []
-  #   }
-  #   aggregate
-  # end
-
-  private 
+  def initialize(public_figure, count=5)
+    @public_figure = public_figure
+    @count = count
+    @social_media = {
+      most_recent_instagrams: [],
+      most_recent_tweets: []
+    }
+    aggregate
+  end
+ 
 
   def aggregate
     if @public_figure.instagram_id
