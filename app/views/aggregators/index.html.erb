@@ -2,27 +2,32 @@
 
 <form action="#" class="form" style="border: solid black 0.15em; margin: 3em; padding: 1em;">
   <div>I'm in the form</div>
-  <input type="text">
+  <label for="fb">actually insta</label></br>
+  <input type="text" name="fb"></br>
   <input type="submit" value="test this value">
 </form>
 
 <ul class="media-list">
-  <li class="media">
-    <div class="media-left">
-      <a href="#">
-        <img class="media-object" src="" alt="...">
-      </a>
-    </div>
-    <div class="media-body">
-      <h4 class="media-heading"></h4>
-    </div>
-  </li>
 </ul>
+
+<script type="text/template" id="insta-temp">
+  
+    <li class="media" data-id="{{ id }}">
+      <div class="media-left">
+        <img class="media-object" src="{{ profile_picture }}" alt="{{ username }}">
+        
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">{{ username }}</h4>
+      </div>
+    </li>
+  
+</script>
 
 <script>
   var PATHS = {
     fb_id_from_string: '<%= aggregators_fb_id_from_string_path %>',
-    instagram_ids_from_string: '<%=  %>'
+    instagram_ids_from_string: '<%= aggregators_insta_id_from_string_path %>'
   };  
 
   $('form').submit(function (e) {
@@ -32,9 +37,20 @@
         test_string: $('input[type="text"]').val()
       }
     };
-    $.post(PATHS.fb_id_from_string, data, function(res){
+    $.post(PATHS.instagram_ids_from_string, data, function(res){
       console.log(res);
+      formatInstasToList(res);
     });
   });
 
+
+  function formatInstasToList(instas){
+    _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
+
+    var temp = _.template( $.trim( $('#insta-temp').html() ) );
+    var listItems = instas.map(function(inst){
+      return temp(inst);
+    });
+    $('ul').append(listItems);
+  }
 </script>
