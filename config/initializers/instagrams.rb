@@ -7,7 +7,7 @@
   functionality in Aggregator context is assigned in module definitions over here
 
   note on Instagram -- 
-  the gem default configures a  global Instagram connection. I'm choosing to wrap in module bc of conventions established with my inegrations of twitter + facebook -- see other intializers + notes aboe
+  the gem default configures a  global Instagram connection. I'm choosing to wrap in module bc of conventions established with my inegrations of twitter + facebook -- see other intializers + notes above
 
 =end
 ##########
