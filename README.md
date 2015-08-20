@@ -22,5 +22,14 @@ Devs will need to get API keys from each of these social media providers, and sa
 Very simple, quick and dirty. 
 3 custom classes I've added to a conventional Rails structure. 
 
-####
+#### Aggregator
+Custom class - not backed by Active Record. In fact - Aggregator does not write to the database directly ever. It just aggregates social media content. Hence its fancy name. 
+Aggregator defines it's interface with the 3rd party API's in its modules. Aggregator::Facebook, Aggregator::Instagram, Aggregator::Twitter. Each module is defined in 2 places => config/initializers wraps the external api connections within each  Aggregator namespace, and then the fuller functionality is defined in app/models/aggregator
+
+#### PublicFigure
+This class is backed by ActiveRecord -- and leverages Postgres' awesome json field capability to avoid multiple tables for the time being. Quick and dirty.... 
+Here we save a public figure, ala 'Beyonce' and save all the query terms we would like to use for searching various social media. 
+
+#### User
+This app is a taste to hopefully attract new clients -- so on the front end, after a user plays with the queries a few times, we ask for their contact info. This info is saved to the DB, hence we get a class. 
 
