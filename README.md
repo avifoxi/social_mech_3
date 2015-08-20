@@ -18,7 +18,7 @@ Accessing social media via 3rd party gems -- [Koala](https://github.com/arsduo/k
 Devs will need to get API keys from each of these social media providers, and save them to a '.env' file you will need to manually create in the root of the directory. It's .gitignore'd, per convention. For deployment, you'll need to ensure that global ENV variabls are initialized somewhere -- depending where you deploy, you can figure this out. We're up on Heroku currently. 
 
 ### DOCUMENTATION - AND HOW TO NAVIGATE FILE STRUCTURE FOR DEVS
-#### Backend
+#### BACKEND
 Very simple, quick and dirty. 
 3 custom classes I've added to a conventional Rails structure. 
 
@@ -28,8 +28,12 @@ Aggregator defines it's interface with the 3rd party API's in its modules. Aggre
 
 #### PublicFigure
 This class is backed by ActiveRecord -- and leverages Postgres' awesome json field capability to avoid multiple tables for the time being. Quick and dirty.... 
-Here we save a public figure, ala 'Beyonce' and save all the query terms we would like to use for searching various social media. 
+Here we save a public figure, ala 'Beyonce' and save all the query terms we would like to use for searching various social media. We have the option of saving query results to json fields. If this app grows, and we want to persist queries in a smarter way, we will need to revisit this class. 
 
 #### User
 This app is a taste to hopefully attract new clients -- so on the front end, after a user plays with the queries a few times, we ask for their contact info. This info is saved to the DB, hence we get a class. 
 
+#### FRONTEND
+Thank you bootstrap, lodash, and jquery. 
+When the user navigates to a new public_figure page, or navigates to an embedded iframe on a 3rd party site (which serves the same content for the time being) -- \n
+The page is managed by a
