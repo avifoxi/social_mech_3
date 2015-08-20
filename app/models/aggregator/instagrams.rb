@@ -17,6 +17,17 @@ module Aggregator::Instagrams
   end
 
   def get_instagrams_by_username(name, num=5)
-    Instagram.user_search(name).first(num)
+    insta_connection.user_search(name).first(num)
+  end
+  
+  def get_insta_potential_ids_from_username(name)
+    matches = insta_connection.user_search(name) # returns massive hash of potential matches -- user probably needs to select the correct one
+    matches.map do |match| 
+      {
+        profile_picture: match['profile_picture'],
+        id: match['id'], 
+        username: match['username']
+      }
+    end
   end
 end
