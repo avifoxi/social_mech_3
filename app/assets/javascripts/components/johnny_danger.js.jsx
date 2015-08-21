@@ -6,17 +6,19 @@
 var Button = ReactBootstrap.Button;
 var Modal = ReactBootstrap.Modal;
 
-var Billy = require('./UsernameForIDFormInputs');
+var NameForId = require('./UsernameForIDFormInputs');
 
 var JohnnyDanger = React.createClass({
   getInitialState: function(){
     return {
-      showModal: false
+      showModal: false,
+      unknownIds: ['Instagram', 'Facebook']
     };
   },
   render: function () {
     let callback = this.close,
-      show = this.state.showModal; 
+      show = this.state.showModal,
+      nameInputs = ; 
     return (
       <div ref='modal-parent'>
         i so dangerious
