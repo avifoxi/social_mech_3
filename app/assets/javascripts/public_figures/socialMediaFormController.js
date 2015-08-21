@@ -1,3 +1,5 @@
+'use strict';
+
 var SocialMediaFormController = function(MASTER){
   
   var $form = $('form#new_public_figure'),
@@ -70,5 +72,6 @@ var SocialMediaFormController = function(MASTER){
       return true;
     }
   }
-
 }
+
+module.exports = SocialMediaFormController;

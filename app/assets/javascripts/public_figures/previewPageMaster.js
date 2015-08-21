@@ -1,3 +1,11 @@
+'use strict';
+
+var SocialMediaThumbnailController = require('./socialMediaThumbnailController.js'),
+  SocialMediaModalCtrl = require('./socialMediaModalController.js'),
+  SocialMediaFormController = require('./socialMediaFormController.js'),
+  SocialMediaWaitingController = require('./socialMediaWaitingCtrl.js'),
+  SocialMediaPopoversCtrl = require('./socialMediaPopoversCtrl.js');
+
 var PreviewPageMaster = function(PATHS){
   // component oriented JS separation of concerns
   // this is the master controller for Preview page
@@ -67,7 +75,6 @@ var PreviewPageMaster = function(PATHS){
     toggleThumbs();
   };
   this.callingServer = function(){
-    console.log('calling server in master');
     _waitingForServer = true;
     toggleWaiting();
   };
@@ -131,3 +138,5 @@ var PreviewPageMaster = function(PATHS){
 
   init();
 }
+
+module.exports = PreviewPageMaster;

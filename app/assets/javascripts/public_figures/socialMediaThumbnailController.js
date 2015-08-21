@@ -1,7 +1,7 @@
 // This object is instantiated in public_figures/show.html in a script tag, to coerce loading if rails does not reload full page
-
-
 // PATHS constant, object, instantiated in views/public_figures/show.html.erb
+
+'use strict';
 
 function SocialMediaThumbnailController(MASTER){
   this.PATHS = MASTER.getPATHS();
@@ -161,3 +161,5 @@ SocialMediaThumbnailController.prototype = {
       .masonry('prepended', $thumbs);
   }
 }
+
+module.exports = SocialMediaThumbnailController;

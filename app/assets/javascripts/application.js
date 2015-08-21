@@ -20,3 +20,9 @@
 //= require turbolinks
 //= require_tree .
 //= ./public_figures require_tree 
+
+var PreviewPageMaster = require('./public_figures/previewPageMaster.js');
+
+$(document).ready(function() {
+  window.PreviewPageMaster = PreviewPageMaster;
+});

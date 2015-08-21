@@ -1,3 +1,5 @@
+'use strict';
+
 function SocialMediaModalCtrl(MASTER){
 	_.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
   var $modal = $('.modal'),
@@ -41,8 +43,6 @@ function SocialMediaModalCtrl(MASTER){
   }
 
   function prepareErrorModal(modelAction, data){
-    console.log('passing data through');
-    console.log(data);
     $title.html('We\'re missing some info!');
     // $body.html( _views[modelAction] );
     $footer.html('');
@@ -145,3 +145,5 @@ function SocialMediaModalCtrl(MASTER){
     return invalids;
   };
 }
+
+module.exports = SocialMediaModalCtrl;

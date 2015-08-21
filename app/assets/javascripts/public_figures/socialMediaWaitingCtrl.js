@@ -1,3 +1,5 @@
+'use strict';
+
 var SocialMediaWaitingController = function () {
   var $body = $('body'),
     _waitingHtml = $.parseHTML( $.trim( $('#waiting-icon' ).html() ) );
@@ -14,3 +16,5 @@ var SocialMediaWaitingController = function () {
     $(_waitingHtml).fadeIn(400);
   };
 }
+
+module.exports = SocialMediaWaitingController;
