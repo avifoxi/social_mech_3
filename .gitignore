@@ -14,3 +14,6 @@
 
 # env variables, for the time being keep all env vars out of database, and do not worry about encryption
 .env
+
+# ignore npm modules, as devs need they can npm install and badda bing
+node_modules
