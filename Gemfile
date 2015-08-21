@@ -24,11 +24,13 @@ gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem 'momentjs-rails'
 gem 'imagesLoaded_rails'
-gem 'browserify-rails'
 
 #### upgrade js to be a react based app. As i implement transition -- yes. code bloat. jQ + Globals + React
 #### but one step at a time, and allow testability
+gem 'browserify-rails'
 gem 'react-rails'
+gem 'react-bootstrap-rails'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'

@@ -173,6 +173,8 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     rdoc (4.2.0)
+    react-bootstrap-rails (0.23.7)
+      rails (>= 3.1)
     react-rails (1.1.0)
       babel-transpiler (>= 0.7.0)
       coffee-script-source (~> 1.8)
@@ -279,6 +281,7 @@ DEPENDENCIES
   pg
   rails (= 4.2.3)
   rails_12factor
+  react-bootstrap-rails
   react-rails
   rspec-rails
   sass-rails (~> 5.0)
