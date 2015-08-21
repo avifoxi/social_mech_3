@@ -13,12 +13,12 @@ var JohnnyDanger = React.createClass({
     return {
       showModal: false,
       unknownIds: ['Instagram', 'Facebook']
-    };
+    }
   },
   render: function () {
     let callback = this.close,
       show = this.state.showModal,
-      nameInputs = ; 
+      nameInputs = ''; 
     return (
       <div ref='modal-parent'>
         i so dangerious
@@ -27,7 +27,7 @@ var JohnnyDanger = React.createClass({
           >
           launch a modal
          </Button>
-         <Billy />
+         
          <Modal show={this.state.showModal} onHide={this.close} >
           <Modal.Title>
             I am form

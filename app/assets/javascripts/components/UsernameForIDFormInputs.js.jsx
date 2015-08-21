@@ -2,10 +2,10 @@
 
 'use strict';
 
-var Input = ReactBootstrap.Input;
+// var Input = ReactBootstrap.Input;
 
 var UsernameForIDFormInputs = React.createClass({
-  getInitialState() {
+  getInitialState: function () {
     return {
       value: ''
     };
@@ -19,7 +19,7 @@ var UsernameForIDFormInputs = React.createClass({
           placeholder='Enter text'
           label='Working example with validation'
           help='Validation is based on string length.'
-          /* bsStyle={this.validationState()} */ 
+          
           hasFeedback
           ref='input'
           groupClassName='group-class'
