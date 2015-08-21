@@ -18,6 +18,9 @@
 //= require imagesloaded
 //= require moment
 //= require turbolinks
+//= require react
+//= require react_ujs
+
 
 var PreviewPageMaster = require('./public_figures/previewPageMaster.js');
 
