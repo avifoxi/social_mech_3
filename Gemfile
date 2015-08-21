@@ -24,8 +24,7 @@ gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem 'momentjs-rails'
 gem 'imagesLoaded_rails'
-
-
+gem 'browserify-rails'
 
 
 
