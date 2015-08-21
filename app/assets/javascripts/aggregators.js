@@ -1,4 +1,4 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
-
-module.exports = 'testing that we can do this';
+//= require turbolinks
+//= require react
+//= require react_ujs
+//= require components

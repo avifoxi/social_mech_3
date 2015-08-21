@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   # custom aggregators routes for id related queries in advance of social media queries
 
-  resources :aggregators, only: :index 
+  resources :aggregators, only: [:index, :new] 
   post '/aggregators/fb-id-from-string' => 'aggregators#fb_id_from_string'
   post '/aggregators/insta-id-from-string' => 'aggregators#insta_id_from_string'
   

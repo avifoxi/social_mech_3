@@ -4,6 +4,7 @@ class AggregatorsController < ApplicationController
   include Aggregator::Instagrams
   include Aggregator::Facebook
 
+  layout 'react_browserify', only: :new
 
   def fb_id_from_string
     result = get_fb_id_from_page(ag_params['test_string'])
@@ -16,6 +17,11 @@ class AggregatorsController < ApplicationController
   end
 
   def index
+  end
+
+  def new
+    @user = User.new
+    @form = (render_to_string partial: 'users/new_sans_submit_button', locals: {user: @user}, layout: false)
   end
 
   def format_and_return(result=nil)

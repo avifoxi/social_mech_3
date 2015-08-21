@@ -24,9 +24,21 @@
   "homepage": "https://github.com/avifoxi/social_mech_3",
   "devDependencies": {
     "browserify": "^11.0.1",
-    "browserify-incremental": "^3.0.1"
+    "browserify-incremental": "^3.0.1",
+    "reactify": "^1.1.1"
   },
   "engines": {
     "node": ">= 0.10"
+  },
+  "dependencies": {
+    "react": "^0.13.3",
+    "react-bootstrap": "^0.24.5"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "reactify"
+      ]
+    ]
   }
 }
