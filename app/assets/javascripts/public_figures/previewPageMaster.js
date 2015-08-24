@@ -87,9 +87,9 @@ var PreviewPageMaster = function(PATHS){
     _waitingForServer = false;
     toggleWaiting();
     if ( type ===  'username#check' ){
-      
+
     }
-    if ( data ) {
+    else if ( data ) {
       _ThumbnailCtrl.setPublicFigure(data);
       _thumbsShowing = true;
       toggleThumbs();
@@ -111,6 +111,10 @@ var PreviewPageMaster = function(PATHS){
   };
   this.testUsernameClicked = function( testFor, value ){
     _usernameChecker.getUsernameList( testFor, value );
+  };
+  this.usernameSelected = function( data ){
+    console.log(data);
+    window.CHEATING = data;
   };
   /*
   *   PRIVATE METHODS

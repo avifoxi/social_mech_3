@@ -9,27 +9,20 @@ function SocialMediaModalCtrl(MASTER){
     _views = {
       'user#new': undefined,
       'thanks-for-submission': undefined,
-      'user#error': undefined,
-      'username#check': undefined
+      'user#error': undefined
     },
 		_options = {};
 
-	// anticipating multiple contexts for modal usage
 	
   getViewsFromDom();
 
  	this.show = function(modelAction, data){
-    // if ( !data ){
-    //   data = null;
-    // }
-    debugger;
     parseContent(modelAction, data)
  	};
 
   function getViewsFromDom(){
     var keys = Object.getOwnPropertyNames( _views );
     // note => username#check not in dom - sent from server on request
-    // silent error i believe
     _.each(keys, function(key){
       _views[key] = $( '[data-modal-contents="' + key + '"]').html();
     });
@@ -44,7 +37,8 @@ function SocialMediaModalCtrl(MASTER){
         prepareErrorModal(modelAction, data);
         break;
       case 'username#check':
-        prepareUsernameCheck()
+        prepareUsernameCheck(modelAction, data);
+        break;
     }
   }
 
@@ -61,6 +55,25 @@ function SocialMediaModalCtrl(MASTER){
   function dismissNClearModal(){
     $modal.modal('hide');
     $body.html('');
+  };
+  function prepareUsernameCheck(modelAction, data){
+    $title.html('Which username would you like to use?');
+    $body.html( data.html );
+    $footer.html('');
+    // currently no custom options!
+    $modal.modal(_options);
+    attachUsernameListener( data.testFor );
+  };
+  function attachUsernameListener( testFor ) {
+    $('.modal [data="select-username"]').click(function(e){
+      e.preventDefault();
+      var data = {
+        id: $(e.target).val(),
+        type: testFor,
+        html: $(e.target).parent()
+      }
+      MASTER.usernameSelected( data );
+    });
   };
   function prepareNewUserModal(modelAction){ 
     // set template contents for this context
