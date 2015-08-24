@@ -11,7 +11,7 @@ var usernameChecker = function( MASTER ) {
     'insta': undefined,
     'facebook': undefined
   };
-  
+
   var _callback = function( data ){ 
     MASTER.showModal().show( 'username#check', data );
   };
@@ -29,7 +29,7 @@ var usernameChecker = function( MASTER ) {
 
     $.post(path, data, function(res){
       if ( res.html )
-        _cachedLists[ value ] = res.html;
+        _cachedLists[ testFor ][ value ] = res.html;
 
       var data = _.assign(res, {testFor: testFor});
       MASTER.serverResponse(data, 'username#check');
