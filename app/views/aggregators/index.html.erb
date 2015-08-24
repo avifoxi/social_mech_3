@@ -1,70 +1,50 @@
 <h1>WHAT?</h1>
 
 <form action="#" class="form" style="border: solid black 0.15em; margin: 3em; padding: 1em;">
-  <div>I'm in the form</div>
-  <label for="fb">actually insta</label></br>
-  <input type="text" name="fb"></br>
+  
+  <label for="fb">Facebook Username</label>
+  <input type="text" name="fb" data="facebook-username"></br>
+  <button data="test-username" type="facebook">TESTSTSTST</button></br>
 
-  <select name="select">
-
-  </select>
-
-  <input type="submit" value="test this value">
+  <label for="insta">Instagram Username</label>
+  <input type="text" name="insta" data="insta-username"></br>
+  <button data="test-username" type="insta">TESTSTSTST</button></br>
 </form>
 
 <script type="text/template" id="list-temp">
-  <ul class="media-list">
+  <ul >
 
   </ul>
 </script>
 
-
-<script type="text/template" id="insta-temp">
-  
-    <li class="media" data-id="{{ id }}">
-      <div class="media-left">
-        <img class="media-object" src="{{ profile_picture }}" alt="{{ username }}">
-        
-      </div>
-      <div class="media-body">
-        <h4 class="media-heading">{{ username }}</h4>
-        <button class="btn btn-default" value="{{ id }}" >Select {{ username }}? </button>
-
-      </div>
-    </li>
-  
-</script>
 
 <script>
   var PATHS = {
     fb_id_from_string: '<%= aggregators_fb_id_from_string_path %>',
     instagram_ids_from_string: '<%= aggregators_insta_id_from_string_path %>'
   };  
+  var testableInputs = {
+    facebook: $('input[data="facebook-username"]'),
+    insta: $('input[data="insta-username"]')
+  };
 
-  $('form').submit(function (e) {
+  var insta = new INSTA(PATHS);
+
+  $('button[data="test-username"]').click(function(e){
     e.preventDefault();
-    var data = {
-      aggregator: {
-        test_string: $('input[type="text"]').val()
-      }
-    };
-    $.post(PATHS.instagram_ids_from_string, data, function(res){
-      console.log(res);
-      formatInstasToList(res);
-    });
+    var testFor = $(this).attr('type');
+    var $input = testableInputs[ testFor ];
+    insta.getUsernameList( $input, showModal );
   });
 
 
-  function formatInstasToList(instas){
-    _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
 
-    var temp = _.template( $.trim( $('#insta-temp').html() ) );
-    var listItems = instas.map(function(inst){
-      return temp(inst);
-    });
-    var ul = $.parseHTML( $('#list-temp').html() );
-    $(ul).append(listItems);
-    $('.modal-body').append( ul )
+  function showModal(response){
+    if ( response.html ){
+      $('.modal-body').html(response.html);
+    } else {
+      $('.modal-body').html('oh shit')
+    }
     $('.modal').modal();
   }
 </script>

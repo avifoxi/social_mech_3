@@ -1,10 +1,11 @@
 'use strict';
 
 var SocialMediaThumbnailController = require('./socialMediaThumbnailController.js'),
-  SocialMediaModalCtrl = require('./socialMediaModalController.js'),
-  SocialMediaFormController = require('./socialMediaFormController.js'),
-  SocialMediaWaitingController = require('./socialMediaWaitingCtrl.js'),
-  SocialMediaPopoversCtrl = require('./socialMediaPopoversCtrl.js');
+  SocialMediaModalCtrl             = require('./socialMediaModalController.js'),
+  SocialMediaFormController        = require('./socialMediaFormController.js'),
+  SocialMediaWaitingController     = require('./socialMediaWaitingCtrl.js'),
+  SocialMediaPopoversCtrl          = require('./socialMediaPopoversCtrl.js'),
+  usernameChecker                  = require('./usernameChecker.js');
 
 var PreviewPageMaster = function(PATHS){
   // component oriented JS separation of concerns
@@ -20,6 +21,7 @@ var PreviewPageMaster = function(PATHS){
     _FormCtrl = {},
     _WaitingCtrl = {}, // this is animated refresh icon overlay
     _PopoverCtrl = {},
+    _usernameChecker = {},
 
     // Master State Variables
     _formShowing = true,
@@ -104,11 +106,12 @@ var PreviewPageMaster = function(PATHS){
   */  
   
   function init(){
-    _ThumbnailCtrl = new SocialMediaThumbnailController(_self);
-    _ModalCtrl = new SocialMediaModalCtrl(_self);
-    _FormCtrl = new SocialMediaFormController(_self);
+    _ThumbnailCtrl = new SocialMediaThumbnailController( _self );
+    _ModalCtrl = new SocialMediaModalCtrl( _self );
+    _FormCtrl = new SocialMediaFormController( _self );
     _WaitingCtrl = new SocialMediaWaitingController();
     _PopoverCtrl = new SocialMediaPopoversCtrl();
+    _usernameChecker = new usernameChecker( _self );
     _ThumbnailCtrl.init();
   }
 

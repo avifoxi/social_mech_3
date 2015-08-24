@@ -1,5 +1,5 @@
 class AggregatorsController < ApplicationController
-  # for now, include modules directly, bc we're just testing validity of input fields, need not instaniate new aggregator obj w query data
+  # for now, include modules directly, bc we're just testing validity of input fields, need not instantiate new aggregator obj w query data
   include Aggregator::Tweets
   include Aggregator::Instagrams
   include Aggregator::Facebook
@@ -12,8 +12,8 @@ class AggregatorsController < ApplicationController
   end
 
   def insta_id_from_string
-    result = get_insta_potential_ids_from_username(ag_params['test_string'])
-    format_and_return(result)
+    @result = get_insta_potential_ids_from_username(ag_params['test_string'])
+    format_and_return(@result)
   end
 
   def index
@@ -26,10 +26,12 @@ class AggregatorsController < ApplicationController
 
   def format_and_return(result=nil)
     if result
-      render json: result.to_json
+      render json: {
+        html: (render_to_string partial: 'potential_insta_users', locals: {potentials: @result}, layout: false)
+      }
     else
       render json: {
-        failed_query: 'Unfortunately your query returned no results.'
+        error: 'Unfortunately your query returned no results.'
       }
     end
   end

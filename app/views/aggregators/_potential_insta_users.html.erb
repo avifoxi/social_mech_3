@@ -1,0 +1,14 @@
+<ul class="media-list">
+  <% potentials.each do |popo| %>
+    <li class="media" data-id="<%= popo[:id] %>">
+      <div class="media-left">
+        <img class="media-object" src="<%= popo[:profile_picture] %>" alt="<%= popo[:username] %> thumbnail">
+        
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading"><%= popo[:username] %></h4>
+        <button class="btn btn-default" value="<%= popo[:id] %>" data="select-insta-username">Select <%= popo[:username] %> ? </button>
+      </div>
+    </li>
+  <% end %>
+</ul>

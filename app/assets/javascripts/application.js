@@ -11,7 +11,6 @@
 // about supported directives.
 //
 
-// var React = require('react');
 
 //= require jquery
 //= require jquery_ujs
@@ -22,16 +21,13 @@
 //= require moment
 //= require turbolinks
 
-//= require react
-//= require react_ujs
-//= require components
 
-var PreviewPageMaster = require('./public_figures/previewPageMaster.js');
-var JohnnyDanger = require('./components/johnny_danger');
-
-// dilemma ... do we convert js package management to NPM, clear global namespaces?
-// many libraries above... and not sure what will happen to bootstrap dependencies if i remove global jQuery 
+// expose the single global var, Parent Component.
+// the mixed blessings of the asset pipeline...
+window.PreviewPageMaster = require('./public_figures/previewPageMaster.js');
 
 
-window.PreviewPageMaster = PreviewPageMaster;
-window.JohnnyDanger = JohnnyDanger;
+
+// NEW FEATURES EXPOSE GLOBALLY, THEN INTEGRATE TO MASTER UPON ACHIEVING FUNCTIONALITY
+
+// window.Dis = require('./public_figures/previewDispatcher.js');

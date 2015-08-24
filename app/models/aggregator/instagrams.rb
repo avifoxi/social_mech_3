@@ -11,13 +11,21 @@ module Aggregator::Instagrams
   
   def get_insta_potential_ids_from_username(name)
     matches = insta_connection.user_search(name) # returns massive hash of potential matches -- user probably needs to select the correct one
-    matches.map do |match| 
+    p '#'*80
+    p 'matches from insta, unformatted'
+    p "#{matches.inspect}"
+    formatted = matches.map do |match|
+      puts match['profile_picture'] 
       {
         profile_picture: match['profile_picture'],
         id: match['id'], 
         username: match['username']
       }
     end
+    p '#'*80
+    p 'formatted'
+    p "#{formatted.inspect}" 
+    return formatted
   end
 
   def format_instas(instas)
