@@ -9,7 +9,8 @@ function SocialMediaModalCtrl(MASTER){
     _views = {
       'user#new': undefined,
       'thanks-for-submission': undefined,
-      'user#error': undefined
+      'user#error': undefined,
+      'username#check': undefined
     },
 		_options = {};
 
@@ -21,11 +22,14 @@ function SocialMediaModalCtrl(MASTER){
     // if ( !data ){
     //   data = null;
     // }
+    debugger;
     parseContent(modelAction, data)
  	};
 
   function getViewsFromDom(){
     var keys = Object.getOwnPropertyNames( _views );
+    // note => username#check not in dom - sent from server on request
+    // silent error i believe
     _.each(keys, function(key){
       _views[key] = $( '[data-modal-contents="' + key + '"]').html();
     });
@@ -39,6 +43,8 @@ function SocialMediaModalCtrl(MASTER){
       case 'user#error':
         prepareErrorModal(modelAction, data);
         break;
+      case 'username#check':
+        prepareUsernameCheck()
     }
   }
 

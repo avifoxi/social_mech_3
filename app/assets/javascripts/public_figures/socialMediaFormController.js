@@ -20,6 +20,15 @@ var SocialMediaFormController = function(MASTER){
     }
   });
 
+  $('button[data="test-username"]').click(function(e){
+    e.preventDefault();
+    var testFor = $(this).attr('type');
+    // parent is the label for the form input -- and it's 'for' attr
+    // corresponds to id of input val we want
+    var parent = $(this).parent();
+    MASTER.testUsernameClicked( testFor, $('#' + parent.attr('for') ).val() );
+  });
+
   $('[data="unCollapse"]').click(function(){
     MASTER.hideThumbs();
     animateFormRedraw();

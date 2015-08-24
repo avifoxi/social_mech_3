@@ -12,9 +12,10 @@
   <div data-toggle="popover" 
     title="Facebook timeline query"
     data-placement="bottom"
-    data-content="Facebook don't really work too good yet. ho hum."
+    data-content="We need to find your chosen page by Facebook ID number. If you don't know what your number is, we can search for it. Just type the page name in this field, and click 'Get Page ID'"
   >
-    <%= f.input :facebook_id, label: 'Facebook Username <i class="fa fa-question-circle"></i>'.html_safe  %>
+    <%= f.input :facebook_id, label: 'Facebook Page ID <i class="fa fa-question-circle"></i> <button data="test-username" type="facebook" class="btn btn-default btn-xs">Get Page ID</button></br>'.html_safe  %>
+
   </div>
 
   <div data-toggle="popover" 

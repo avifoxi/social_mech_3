@@ -76,19 +76,28 @@ var PreviewPageMaster = function(PATHS){
     _thumbsShowing = false;
     toggleThumbs();
   };
-  this.callingServer = function(){
+  this.callingServer = function( callbackToCache ){
+    if ( callbackToCache ){
+      _callbackToBeResumed = callbackToCache;
+    }
     _waitingForServer = true;
     toggleWaiting();
   };
-  this.serverResponse = function(data){
+  this.serverResponse = function(data, type){
     _waitingForServer = false;
     toggleWaiting();
+    if ( type ===  'username#check' ){
+      
+    }
     if ( data ) {
       _ThumbnailCtrl.setPublicFigure(data);
       _thumbsShowing = true;
       toggleThumbs();
     } else {
 
+    }
+    if ( _callbackToBeResumed ){
+      _callbackToBeResumed( data );
     }
   };
   this.resume = function(){
@@ -99,6 +108,9 @@ var PreviewPageMaster = function(PATHS){
   };
   this.invalidFormSubmit = function( form ){
     _ModalCtrl.show('user#error', form);
+  };
+  this.testUsernameClicked = function( testFor, value ){
+    _usernameChecker.getUsernameList( testFor, value );
   };
   /*
   *   PRIVATE METHODS
