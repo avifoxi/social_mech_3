@@ -7,11 +7,11 @@ var SocialMediaFormController = function(MASTER){
   
   var $form = $('form#new_public_figure'),
     $inputs = $('form#new_public_figure input'),
+    $actionButtons = $('form#new_public_figure [data]'),
     $collapsed = $('#collapsed-form'),
     _pastQueries = [], 
     _aggregate_service = new MyService(MASTER),
     _queryModel = new MyQueryModel();
-
 
   $inputs.keyup(function(e){
     _queryModel.update({
@@ -19,33 +19,54 @@ var SocialMediaFormController = function(MASTER){
       value: $(e.target).val() 
     });
   });
-  
-  $('[data="preview"]').click(function(e){
-    e.preventDefault();
-    var data = _queryModel.getActiveFields();
 
+  $actionButtons.click(function(e){
+    e.preventDefault();
+    switch( $(e.target).attr('data') ) {
+      case 'preview': 
+        handlePreview();
+        break;
+      case 'test-username':
+        handleTestUsername(e);
+        break;
+      case 'unCollapse':
+        handleUncollapse();
+        break;
+      default:
+        console.log('seems we hit a snag, no case met in SocialMediaFormController switch statement.');
+    } 
+  });
+  
+  function handlePreview(){
+    var data = _queryModel.getActiveFields();
     if ( !_.isEmpty( data ) ){
-      MASTER.previewClicked( function(){
-        proceedWPreview();
-      }); 
+      MASTER.previewClicked( proceedWPreview ); 
     } else {
       MASTER.invalidFormSubmit( $form );
     }
-  });
+  }
 
-  $('button[data="test-username"]').click(function(e){
-    e.preventDefault();
-    var testFor = $(this).attr('type');
-    // parent is the label for the form input -- and it's 'for' attr
-    // corresponds to id of input val we want
-    var parent = $(this).parent();
-    MASTER.testUsernameClicked( testFor, $('#' + parent.attr('for') ).val() );
-  });
-
-  $('[data="unCollapse"]').click(function(){
+  function handleTestUsername(e){
+    var $target = $(e.target),
+      testFor = $target.attr('type'),
+      $parent = $target.parent();
+    MASTER.testUsernameClicked( testFor, $('#' + $parent.attr('for') ).val() );
+  }
+  function handleUncollapse(){
     MASTER.hideThumbs();
     animateFormRedraw();
-  });
+  }
+  
+  this.handleUsernameSelect = function( data ){
+    var $input = ( data.type === 'insta' ) ? $('#public_figure_instagram_id') : $('#public_figure_facebook_id');
+    $input.val('Your selected id is ' + data.id);
+    $input.prop('disabled', true);
+    _queryModel.update({
+      name: ( data.type === 'insta' ) ? 'public_figure[instagram_id]' : 'public_figure[facebook_id]' ,
+      value: data.id
+    });
+    console.log(_queryModel.getActiveFields());
+  };
 
   function proceedWPreview(){
     var newQuery = _queryModel.getActiveFields(),

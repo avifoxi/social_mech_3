@@ -73,6 +73,7 @@ function SocialMediaModalCtrl(MASTER){
         html: $(e.target).parent()
       }
       MASTER.usernameSelected( data );
+      $modal.modal('hide');
     });
   };
   function prepareNewUserModal(modelAction){ 

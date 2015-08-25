@@ -112,9 +112,7 @@ var PreviewPageMaster = function(PATHS){
     _usernamePotentials.getUsernameList( testFor, value );
   };
   this.usernameSelected = function( data ){
-    console.log(data);
-    window.CHEATING = data;
-
+    _FormCtrl.handleUsernameSelect( data );
     // update form with name ~ id 
   };
   /*
