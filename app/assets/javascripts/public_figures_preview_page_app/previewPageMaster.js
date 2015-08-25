@@ -1,11 +1,11 @@
 'use strict';
 
-var SocialMediaThumbnailController = require('./socialMediaThumbnailController.js'),
-  SocialMediaModalCtrl             = require('./socialMediaModalController.js'),
-  SocialMediaFormController        = require('./socialMediaFormController.js'),
-  SocialMediaWaitingController     = require('./socialMediaWaitingCtrl.js'),
-  SocialMediaPopoversCtrl          = require('./socialMediaPopoversCtrl.js'),
-  usernameChecker                  = require('./usernameChecker.js');
+var ThumbnailController    = require('./DOMcomponents/socialMediaThumbnailController.js'),
+  ModalCtrl                = require('./DOMcomponents/socialMediaModalController.js'),
+  FormController           = require('./DOMcomponents/socialMediaFormController.js'),
+  WaitingController        = require('./DOMcomponents/socialMediaWaitingCtrl.js'),
+  PopoversCtrl             = require('./DOMcomponents/socialMediaPopoversCtrl.js'),
+  usernamePotentials       = require('./services/usernamePotentials.js');
 
 var PreviewPageMaster = function(PATHS){
   // component oriented JS separation of concerns
@@ -16,12 +16,14 @@ var PreviewPageMaster = function(PATHS){
     PATHS = PATHS, // redundant - but passed in and don't want to forget
 
     // Component Controllers - initialized in private function
-    _ThumbnailCtrl = {},
-    _ModalCtrl = {},
-    _FormCtrl = {},
-    _WaitingCtrl = {}, // this is animated refresh icon overlay
-    _PopoverCtrl = {},
-    _usernameChecker = {},
+    _ThumbnailCtrl      = {},
+    _ModalCtrl          = {},
+    _FormCtrl           = {},
+    _WaitingCtrl        = {}, // this is animated refresh icon overlay
+    _PopoverCtrl        = {},
+
+    // Services -- tools to get stuff, ajax etc
+    _usernamePotentials = {},
 
     // Master State Variables
     _formShowing = true,
@@ -110,7 +112,7 @@ var PreviewPageMaster = function(PATHS){
     _ModalCtrl.show('user#error', form);
   };
   this.testUsernameClicked = function( testFor, value ){
-    _usernameChecker.getUsernameList( testFor, value );
+    _usernamePotentials.getUsernameList( testFor, value );
   };
   this.usernameSelected = function( data ){
     console.log(data);
@@ -122,12 +124,13 @@ var PreviewPageMaster = function(PATHS){
   */  
   
   function init(){
-    _ThumbnailCtrl = new SocialMediaThumbnailController( _self );
-    _ModalCtrl = new SocialMediaModalCtrl( _self );
-    _FormCtrl = new SocialMediaFormController( _self );
-    _WaitingCtrl = new SocialMediaWaitingController();
-    _PopoverCtrl = new SocialMediaPopoversCtrl();
-    _usernameChecker = new usernameChecker( _self );
+    _ThumbnailCtrl      = new ThumbnailController( _self );
+    _ModalCtrl          = new ModalCtrl( _self );
+    _FormCtrl           = new FormController( _self );
+    _WaitingCtrl        = new WaitingController();
+    _PopoverCtrl        = new PopoversCtrl();
+    _usernamePotentials = new usernamePotentials( _self );
+    
     _ThumbnailCtrl.init();
   }
 

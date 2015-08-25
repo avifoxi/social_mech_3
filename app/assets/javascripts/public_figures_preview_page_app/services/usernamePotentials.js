@@ -1,6 +1,6 @@
 'use strict';
 
-var usernameChecker = function( MASTER ) {
+var usernamePotentials = function( MASTER ) {
 
   var _pathMap = {
     'insta': MASTER.getPATHS('instagram_ids_from_string'),
@@ -38,4 +38,4 @@ var usernameChecker = function( MASTER ) {
   };
 }
 
-module.exports = usernameChecker;
+module.exports = usernamePotentials;

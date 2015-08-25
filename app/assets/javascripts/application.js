@@ -30,4 +30,5 @@ window.PreviewPageMaster = require('./public_figures_preview_page_app/previewPag
 
 // NEW FEATURES EXPOSE GLOBALLY, THEN INTEGRATE TO MASTER UPON ACHIEVING FUNCTIONALITY
 
+// on fence abt integrating dispatcher sans react
 // window.Dis = require('./public_figures/previewDispatcher.js');
