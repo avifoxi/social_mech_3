@@ -65,7 +65,6 @@ var SocialMediaFormController = function(MASTER){
       name: ( data.type === 'insta' ) ? 'public_figure[instagram_id]' : 'public_figure[facebook_id]' ,
       value: data.id
     });
-    console.log(_queryModel.getActiveFields());
   };
 
   function proceedWPreview(){
