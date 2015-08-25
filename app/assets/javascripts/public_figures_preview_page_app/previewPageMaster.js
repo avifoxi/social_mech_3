@@ -19,8 +19,8 @@ var PreviewPageMaster = function(PATHS){
     _ThumbnailCtrl      = {},
     _ModalCtrl          = {},
     _FormCtrl           = {},
-    _WaitingCtrl        = {}, // this is animated refresh icon overlay
-    _PopoverCtrl        = {},
+    _WaitingCtrl        = {}, // animated refresh icon overlay
+    _PopoverCtrl        = {}, // popover instructions for form inputs, on hover over questions
 
     // Services -- tools to get stuff, ajax etc
     _usernamePotentials = {},
@@ -117,6 +117,8 @@ var PreviewPageMaster = function(PATHS){
   this.usernameSelected = function( data ){
     console.log(data);
     window.CHEATING = data;
+
+    // update form with name ~ id 
   };
   /*
   *   PRIVATE METHODS

@@ -32,7 +32,7 @@ var usernamePotentials = function( MASTER ) {
         _cachedLists[ testFor ].push({
           [ value ]: res.html
         });
-      var data = _.assign(res, {testFor: testFor});
+      var data = _.assign(res, {testFor: testFor}); // better to manually include function above, move towards less global
       MASTER.serverResponse(data, 'username#check');
     });
   };

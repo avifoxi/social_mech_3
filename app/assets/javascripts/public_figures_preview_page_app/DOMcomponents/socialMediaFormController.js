@@ -1,11 +1,21 @@
 'use strict';
 
+var MyService = require('../services/publicFigureMediaAggregate.js'),
+  MyQueryModel = require('../models/publicFigureQuery.js');
+
 var SocialMediaFormController = function(MASTER){
   
   var $form = $('form#new_public_figure'),
+    $inputs = $('form#new_public_figure input'),
     $collapsed = $('#collapsed-form'),
-    _path = MASTER.getPATHS( MASTER.getCONTEXT() ),
-    _previewModel = undefined;
+    _previewModel = undefined, 
+    _aggregate_service = new MyService(MASTER),
+    _queryModel = new MyQueryModel();
+
+
+  $inputs.keypress(function(e){
+    $(e.target).val
+  });
   
   $('[data="preview"]').click(function(e){
     e.preventDefault();
@@ -43,18 +53,7 @@ var SocialMediaFormController = function(MASTER){
   };
   
   function postPreviewGetMedia(data){
-    var callback = MASTER.serverResponse;
-    MASTER.callingServer();
-
-    $.ajax({
-      type: "POST",
-      url: _path,
-      data: data,
-      success: function(res){
-        callback(res);
-      },
-      dataType: 'json'
-    });
+    _aggregate_service.getAggregateFeeds(data);
   };
   
   function animateFormCollapse(){
