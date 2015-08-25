@@ -13,8 +13,8 @@ var SocialMediaFormController = function(MASTER){
     _queryModel = new MyQueryModel();
 
 
-  $inputs.keypress(function(e){
-    $(e.target).val
+  $inputs.keyup(function(e){
+    _queryModel.update($(e.target).attr('name'), $(e.target).val() );
   });
   
   $('[data="preview"]').click(function(e){

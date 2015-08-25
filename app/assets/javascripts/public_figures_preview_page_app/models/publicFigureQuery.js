@@ -25,4 +25,3 @@ var PublicFigureQuery = function () {
 }
 
 module.exports = PublicFigureQuery;
-window.ISOPUBLIC = PublicFigureQuery;
