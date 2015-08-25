@@ -8,8 +8,8 @@ var usernameChecker = function( MASTER ) {
   };
 
   var _cachedLists = {
-    'insta': undefined,
-    'facebook': undefined
+    'insta': [],
+    'facebook': []
   };
 
   var _callback = function( data ){ 
@@ -26,11 +26,12 @@ var usernameChecker = function( MASTER ) {
       };
 
     MASTER.callingServer( _callback );
-
+    // debugger;
     $.post(path, data, function(res){
       if ( res.html )
-        _cachedLists[ testFor ][ value ] = res.html;
-
+        _cachedLists[ testFor ].push({
+          [ value ]: res.html
+        });
       var data = _.assign(res, {testFor: testFor});
       MASTER.serverResponse(data, 'username#check');
     });

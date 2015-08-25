@@ -24,7 +24,7 @@
 
 // expose the single global var, Parent Component.
 // the mixed blessings of the asset pipeline...
-window.PreviewPageMaster = require('./public_figures/previewPageMaster.js');
+window.PreviewPageMaster = require('./public_figures_preview_page_app/previewPageMaster.js');
 
 
 
