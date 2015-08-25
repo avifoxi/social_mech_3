@@ -8,22 +8,25 @@ var SocialMediaFormController = function(MASTER){
   var $form = $('form#new_public_figure'),
     $inputs = $('form#new_public_figure input'),
     $collapsed = $('#collapsed-form'),
-    _previewModel = undefined, 
+    _pastQueries = [], 
     _aggregate_service = new MyService(MASTER),
     _queryModel = new MyQueryModel();
 
 
   $inputs.keyup(function(e){
-    _queryModel.update($(e.target).attr('name'), $(e.target).val() );
+    _queryModel.update({
+      name: $(e.target).attr('name'), 
+      value: $(e.target).val() 
+    });
   });
   
   $('[data="preview"]').click(function(e){
     e.preventDefault();
-    var formData = $form.serialize();
+    var data = _queryModel.getActiveFields();
 
-    if ( isValid(formData) ){
+    if ( !_.isEmpty( data ) ){
       MASTER.previewClicked( function(){
-        proceedWPreview(formData);
+        proceedWPreview();
       }); 
     } else {
       MASTER.invalidFormSubmit( $form );
@@ -44,16 +47,20 @@ var SocialMediaFormController = function(MASTER){
     animateFormRedraw();
   });
 
-  function proceedWPreview(formData){
-    if ( _previewModel !== formData ) {
-      _previewModel = formData;
-      postPreviewGetMedia( _previewModel );
-    } 
+  function proceedWPreview(){
+    var newQuery = _queryModel.getActiveFields(),
+      weAlreadyQueriedThis = _.find(_pastQueries, function(old){
+        return _.isEqual( old, newQuery );
+      });
+
+    if ( !weAlreadyQueriedThis ) {
+      _pastQueries.push(newQuery)
+      _aggregate_service.getAggregateFeeds( newQuery );
+    } else {
+      console.log( 'TELL MASTER TO SHOW THE OLD QUERY' );
+      console.log( weAlreadyQueriedThis );
+    }
     animateFormCollapse();
-  };
-  
-  function postPreviewGetMedia(data){
-    _aggregate_service.getAggregateFeeds(data);
   };
   
   function animateFormCollapse(){
@@ -70,16 +77,6 @@ var SocialMediaFormController = function(MASTER){
       height: "toggle"
     }, 1000);
   }; 
-  function isValid(formData){
-    var regEx,
-      splat;
-    regEx = new RegExp(/[= &]/);
-    splat = formData.split(regEx);
-    // in other words, if the form data contains no empty strings
-    if ( splat.indexOf('') === -1 ){
-      return true;
-    }
-  }
 }
 
 module.exports = SocialMediaFormController;

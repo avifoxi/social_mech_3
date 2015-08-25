@@ -99,14 +99,11 @@ var PreviewPageMaster = function(PATHS){
 
     }
     if ( _callbackToBeResumed ){
-      _callbackToBeResumed( data );
+      resumeCallback( data )
     }
   };
-  this.resume = function(){
-    if ( _callbackToBeResumed ){
-      _callbackToBeResumed();
-      _callbackToBeResumed = undefined; // clear the cache after callback
-    }
+  this.resume = function(data){
+    resumeCallback( data )
   };
   this.invalidFormSubmit = function( form ){
     _ModalCtrl.show('user#error', form);
@@ -123,7 +120,13 @@ var PreviewPageMaster = function(PATHS){
   /*
   *   PRIVATE METHODS
   *
-  */  
+  */
+  function resumeCallback( data ){
+    if ( _callbackToBeResumed ){
+      _callbackToBeResumed( data );
+      _callbackToBeResumed = undefined; // clear the cache after callback
+    }
+  }  
   
   function init(){
     _ThumbnailCtrl      = new ThumbnailController( _self );

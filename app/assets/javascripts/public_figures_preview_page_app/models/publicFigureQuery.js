@@ -4,8 +4,8 @@ var PublicFigureQuery = function () {
   var _activeFields = {},
     _inactiveFields = {};
 
-  this.update = function( name, value ){
-    _activeFields[ name ] = value;
+  this.update = function( nameVal ){
+    _activeFields[ nameVal.name ] = nameVal.value;
   };
   this.removeFromActive = function( name ){
     if ( _activeFields[ name ] ) {

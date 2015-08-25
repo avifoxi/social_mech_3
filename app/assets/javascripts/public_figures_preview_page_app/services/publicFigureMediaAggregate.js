@@ -2,10 +2,13 @@
 
 var PublicFigureMediaAggregate = function (MASTER) {
   var _path = MASTER.getPATHS( MASTER.getCONTEXT() ),
-    _callback = MASTER.serverResponse;
-    
+    _callback = function( data ){
+      MASTER.serverResponse(data, 'thumb#set');
+    };
+ 
   this.getAggregateFeeds = function( data ){
     MASTER.callingServer();
+    debugger;
     $.ajax({
       type: "POST",
       url: _path,
