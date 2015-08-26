@@ -76,6 +76,7 @@ var SocialMediaFormController = function(MASTER){
     if ( !weAlreadyQueriedThis ) {
       _pastQueries.push(newQuery)
       _aggregate_service.getAggregateFeeds( newQuery );
+      _queryModel = new MyQueryModel();
     } else {
       console.log( 'TELL MASTER TO SHOW THE OLD QUERY' );
       console.log( weAlreadyQueriedThis );

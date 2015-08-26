@@ -20,14 +20,6 @@ function SocialMediaModalCtrl(MASTER){
     parseContent(modelAction, data)
  	};
 
-  function getViewsFromDom(){
-    var keys = Object.getOwnPropertyNames( _views );
-    // note => username#check not in dom - sent from server on request
-    _.each(keys, function(key){
-      _views[key] = $( '[data-modal-contents="' + key + '"]').html();
-    });
-  }
-
   function parseContent(modelAction, data){
     switch ( modelAction ){
       case 'user#new':
@@ -40,6 +32,14 @@ function SocialMediaModalCtrl(MASTER){
         prepareUsernameCheck(modelAction, data);
         break;
     }
+  }
+
+  function getViewsFromDom(){
+    var keys = Object.getOwnPropertyNames( _views );
+    // note => username#check not in dom - sent from server on request
+    _.each(keys, function(key){
+      _views[key] = $( '[data-modal-contents="' + key + '"]').html();
+    });
   }
 
   function prepareErrorModal(modelAction, data){
