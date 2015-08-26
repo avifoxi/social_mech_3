@@ -32,10 +32,33 @@ var SocialMediaFormController = function(MASTER){
       case 'unCollapse':
         handleUncollapse();
         break;
+      case 'toggle-active':
+        handleToggleActive(e);
+        break;
       default:
         console.log('seems we hit a snag, no case met in SocialMediaFormController switch statement.');
     } 
   });
+
+  function handleToggleActive(e){
+    var $target = $(e.target),
+      inputId = $target.closest('label').attr('for'),
+      $input = $('#' + inputId ),
+      name = $input.attr('name'),
+      hidden = $input.data('hidden') ? $input.data('hidden') : false;
+
+    $input.data('hidden', !hidden);
+    
+    if ( $input.data('hidden') ) {
+      _queryModel.removeFromActive(name);
+      $input.hide(250);
+      $target.removeClass('fa-minus-circle').addClass('fa-plus-circle');
+    } else {
+      _queryModel.returnToActive(name);
+      $input.show(250);
+      $target.removeClass('fa-plus-circle').addClass('fa-minus-circle');
+    }
+  };
   
   function handlePreview(){
     var data = _queryModel.getActiveFields();
@@ -44,18 +67,18 @@ var SocialMediaFormController = function(MASTER){
     } else {
       MASTER.invalidFormSubmit( $form );
     }
-  }
+  };
 
   function handleTestUsername(e){
     var $target = $(e.target),
       testFor = $target.attr('type'),
       $parent = $target.parent();
     MASTER.testUsernameClicked( testFor, $('#' + $parent.attr('for') ).val() );
-  }
+  };
   function handleUncollapse(){
     MASTER.hideThumbs();
     animateFormRedraw();
-  }
+  };
   
   this.handleUsernameSelect = function( data ){
     var $input = ( data.type === 'insta' ) ? $('#public_figure_instagram_id') : $('#public_figure_facebook_id');

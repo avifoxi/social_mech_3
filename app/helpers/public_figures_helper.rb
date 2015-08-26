@@ -1,7 +1,7 @@
 module PublicFiguresHelper
 
   def label_template(display_text)
-    html = '<i class="fa fa-minus-circle"></i> ' + display_text + ' <i class="fa fa-question-circle"></i>'
+    html = '<a href="#"><i class="fa fa-minus-circle" data="toggle-active"></i></a> ' + display_text + ' <i class="fa fa-question-circle"></i>'
     html.html_safe
   end
 
