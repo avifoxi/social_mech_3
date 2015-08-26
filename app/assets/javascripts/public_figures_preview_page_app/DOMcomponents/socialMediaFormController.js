@@ -53,27 +53,23 @@ var SocialMediaFormController = function(MASTER){
   };
 
   this.enableUserIdChanges = function( data ) {
-    if ( data.testFor === 'insta' ){
-      // 1) get new Id from list
-
-      var littleButt = $('[data="test-username"][type="insta"]');
-      var $clone = $( $.clone(littleButt[0]) )
-        .attr('data', null)
-        .data('revealUsernameList', {insta: data.value})
-        .text('Choose another match for ' + data.value );
-      littleButt
-        .after( $clone )
-        .data('changeQueryName', true)
-        .text('Redo search with another name ');
-      $clone.click(function(e){
-        e.preventDefault();
-        var data = $(this).data( 'revealUsernameList' );
-        MASTER.revealUsernameList( data )
-      });
-
-      // 2) try a different name
-      
-    }
+    var type = data.testFor;
+    var littleButt = $('[data="test-username"][type="' + type + '"]');
+    var $clone = $( $.clone(littleButt[0]) )
+      .attr('data', null)
+      .data('revealUsernameList', {[type]: data.value})
+      .text('Choose another match for ' + data.value );
+    littleButt
+      .after( $clone )
+      .data('changeQueryName', true)
+      .text('Redo search with another name ');
+    
+    // and attach listener to new button
+    $clone.click(function(e){
+      e.preventDefault();
+      var data = $(this).data( 'revealUsernameList' );
+      MASTER.revealUsernameList( data )
+    });
   };
 
   // Internal Component Events -- triggered by Form UI
