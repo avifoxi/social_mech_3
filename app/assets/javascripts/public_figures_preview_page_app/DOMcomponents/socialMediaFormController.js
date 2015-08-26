@@ -40,6 +40,40 @@ var SocialMediaFormController = function(MASTER){
     } 
   });
 
+  // Public Functions -- explicitly triggerable by Master Controller
+
+  this.handleUsernameSelect = function( data ){
+    var $input = ( data.type === 'insta' ) ? $('#public_figure_instagram_id') : $('#public_figure_facebook_id');
+    $input.val('Your selected id is ' + data.id);
+    $input.prop('disabled', true);
+    _queryModel.update({
+      name: ( data.type === 'insta' ) ? 'public_figure[instagram_id]' : 'public_figure[facebook_id]' ,
+      value: data.id
+    });
+  };
+
+  this.enableUserIdChanges = function( data ) {
+    if ( data.testFor === 'insta' ){
+      // 1) get new Id from list
+
+      var littleButt = $('[data="test-username"][type="insta"]');
+      var $clone = $( $.clone(littleButt[0]) ).attr('data', null);
+      $clone.data('revealUsernameList', {insta: data.value});
+      $clone.text('Choose another match from existing list');
+      littleButt.after( $clone );
+      $clone.click(function(e){
+        e.preventDefault();
+        var data = $(this).data( 'revealUsernameList' );
+        MASTER.revealUsernameList( data )
+      });
+
+      // 2) try a different name
+      
+    }
+  };
+
+  // Internal Component Events -- triggered by Form UI
+
   function handleToggleActive(e){
     var $target = $(e.target),
       inputId = $target.closest('label').attr('for'),
@@ -78,16 +112,6 @@ var SocialMediaFormController = function(MASTER){
   function handleUncollapse(){
     MASTER.hideThumbs();
     animateFormRedraw();
-  };
-  
-  this.handleUsernameSelect = function( data ){
-    var $input = ( data.type === 'insta' ) ? $('#public_figure_instagram_id') : $('#public_figure_facebook_id');
-    $input.val('Your selected id is ' + data.id);
-    $input.prop('disabled', true);
-    _queryModel.update({
-      name: ( data.type === 'insta' ) ? 'public_figure[instagram_id]' : 'public_figure[facebook_id]' ,
-      value: data.id
-    });
   };
 
   function proceedWPreview(){

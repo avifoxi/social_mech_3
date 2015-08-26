@@ -8,12 +8,15 @@ var usernamePotentials = function( MASTER ) {
   };
 
   var _cachedLists = {
-    'insta': [],
-    'facebook': []
+    'insta': {},
+    'facebook': {}
   };
 
   var _callback = function( data ){ 
     MASTER.showModal().show( 'username#check', data );
+  };
+  this.getCachedList = function( testFor, name ){
+    return _cachedLists[ testFor ][ name ];
   };
 
   this.getUsernameList = function( testFor, value ){
@@ -29,10 +32,9 @@ var usernamePotentials = function( MASTER ) {
     // debugger;
     $.post(path, data, function(res){
       if ( res.html )
-        _cachedLists[ testFor ].push({
-          [ value ]: res.html
-        });
-      var data = _.assign(res, {testFor: testFor}); // better to manually include function above, move towards less global
+        _cachedLists[ testFor ][ value ] = res.html;
+      
+      var data = _.assign(res, {testFor: testFor, value: value}); // better to manually include function above, move towards less global
       MASTER.serverResponse(data, 'username#check');
     });
   };

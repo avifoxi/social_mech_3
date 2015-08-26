@@ -52,6 +52,9 @@ var PreviewPageMaster = function(PATHS){
   this.showWaiting = function(){
     return _WaitingCtrl;
   };
+  this.exposeUsernamePotentials = function(){
+    return _usernamePotentials;
+  }
 
   // GETTER FUNCTIONS
   this.getPATHS = function(subpath){
@@ -89,7 +92,7 @@ var PreviewPageMaster = function(PATHS){
     _waitingForServer = false;
     toggleWaiting();
     if ( type ===  'username#check' ){
-
+      _FormCtrl.enableUserIdChanges( data );
     }
     else if ( data ) {
       _ThumbnailCtrl.setPublicFigure(data);
@@ -102,6 +105,10 @@ var PreviewPageMaster = function(PATHS){
       resumeCallback( data )
     }
   };
+  this.revealUsernameList = function(data){
+    var list = _usernamePotentials.getCachedList( _.keys(data)[0], _.values(data)[0] );
+    _ModalCtrl.show('username#check', {html: list});
+  };
   this.resume = function(data){
     resumeCallback( data )
   };
@@ -113,7 +120,6 @@ var PreviewPageMaster = function(PATHS){
   };
   this.usernameSelected = function( data ){
     _FormCtrl.handleUsernameSelect( data );
-    // update form with name ~ id 
   };
   /*
   *   PRIVATE METHODS
