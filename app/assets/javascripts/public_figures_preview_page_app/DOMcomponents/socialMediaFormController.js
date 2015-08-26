@@ -57,10 +57,14 @@ var SocialMediaFormController = function(MASTER){
       // 1) get new Id from list
 
       var littleButt = $('[data="test-username"][type="insta"]');
-      var $clone = $( $.clone(littleButt[0]) ).attr('data', null);
-      $clone.data('revealUsernameList', {insta: data.value});
-      $clone.text('Choose another match from existing list');
-      littleButt.after( $clone );
+      var $clone = $( $.clone(littleButt[0]) )
+        .attr('data', null)
+        .data('revealUsernameList', {insta: data.value})
+        .text('Choose another match for ' + data.value );
+      littleButt
+        .after( $clone )
+        .data('changeQueryName', true)
+        .text('Redo search with another name ');
       $clone.click(function(e){
         e.preventDefault();
         var data = $(this).data( 'revealUsernameList' );
@@ -106,8 +110,17 @@ var SocialMediaFormController = function(MASTER){
   function handleTestUsername(e){
     var $target = $(e.target),
       testFor = $target.attr('type'),
-      $parent = $target.parent();
-    MASTER.testUsernameClicked( testFor, $('#' + $parent.attr('for') ).val() );
+      labelForChildID = $target.parent().attr('for'),
+      $input = $('#' + labelForChildID);
+
+    if ( $target.data( 'changeQueryName' ) ){
+      $input.attr('disabled', false).val('');
+      $target.data('changeQueryName', null).text('Get User ID');
+      $target.siblings('button[type="' + testFor + '"]')
+        .remove();
+    } else {
+      MASTER.testUsernameClicked( testFor, $input.val() );
+    }
   };
   function handleUncollapse(){
     MASTER.hideThumbs();
