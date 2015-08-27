@@ -22,12 +22,15 @@ var SocialMediaFormController = function(MASTER){
       name: $(e.target).attr('name'), 
       value: $(e.target).val() 
     });
-    // console.log( _queryModel.getActiveFields()['public_figure[facebook_id]'].getValue() );
   });
+
   $inputs.focusout(function(e){
-    $(e.target).attr('name')
-    console.log( e.target.value )
+    var key = $(e.target).attr('name'),
+      input = _queryModel.getInputField( key );
+
+    _validator.check( input );      
   });
+
   $actionButtons.click(function(e){
     e.preventDefault();
     switch( $(e.target).attr('data') ) {

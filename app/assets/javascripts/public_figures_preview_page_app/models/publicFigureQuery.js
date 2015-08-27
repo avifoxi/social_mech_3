@@ -28,6 +28,9 @@ var PublicFigureQuery = function () {
   this.getActiveFields = function(){
     return _activeFields;
   };
+  this.getInputField = function( key ){
+    return _activeFields[ key ];
+  }
 }
 
 module.exports = PublicFigureQuery;
