@@ -17,4 +17,4 @@ var InputField = function(args){
 
 module.exports = InputField;
 
-window.CHEAT = InputField;
+// window.CHEAT = InputField;

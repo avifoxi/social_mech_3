@@ -1,7 +1,8 @@
 'use strict';
 
 var MyService = require('../services/publicFigureMediaAggregate.js'),
-  MyQueryModel = require('../models/publicFigureQuery.js');
+  MyQueryModel = require('../models/publicFigureQuery.js'),
+  Validator = require('../utils/realTimeValidator.js');
 
 var SocialMediaFormController = function(MASTER){
   
@@ -11,7 +12,8 @@ var SocialMediaFormController = function(MASTER){
     $collapsed = $('#collapsed-form'),
     _pastQueries = [], 
     _aggregate_service = new MyService(MASTER),
-    _queryModel = new MyQueryModel();
+    _queryModel = new MyQueryModel(), 
+    _validator = new Validator($inputs);
 
   // Add Listeners on text input, focus out, and action button hits
 

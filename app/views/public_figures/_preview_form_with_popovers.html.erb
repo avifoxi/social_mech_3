@@ -1,4 +1,24 @@
-<!-- helper functions in form defined in helpers/public_figures_helper -->
+<!-- 
+  
+  DEV NOTES:
+  helper functions in form defined in helpers/public_figures_helper 
+
+  simple form gem DSL needs augmentation here, with custom icons, buttons, and popover fuctionality with each form element. 
+
+  so - using simple_form conventions, but in 'label' field, defined helper html formatting options
+  tried to be as straight-forward with indentation and intention here
+
+  JavaScript note ->
+  embedded in each form element is a data-key attribute
+  this gives:
+    - expected data type of field for client side validation
+    - validation url if server call is needed for validation
+
+    heirarchy is - FormCtrl holds an instance of RealTimeValidator , check
+      - assets/js/public_figures/utils/realTimeValidator
+      - assets/js/public_figures/DOMcomponents/socialMediaFormController
+
+-->
 
 <%= simple_form_for pf do |f| %>
 
@@ -14,8 +34,16 @@
           }
       })  
   %> -->
-  <%= f.input :validation_keys, as: :hidden, input_html: {script: 'foo my bar'} %>
-  <%= f.input :facebook_id, 
+
+
+
+  <%= f.input :facebook_id,
+      input_html: {
+        'data-key': {
+          type_requirement: 'Number',
+          validate_url: 'foobar.com'
+        }.to_json
+      }, 
       label: label_template({
         expand: true,
         display_text: 'Facebook Page ID',
@@ -28,7 +56,13 @@
       })  
   %>
  
-  <%= f.input :twitter_handle, 
+  <%= f.input :twitter_handle,
+      input_html: {
+        'data-key': {
+          type_requirement: 'String',
+          validate_url: 'foobar.com'
+        }.to_json
+      }, 
       label: label_template({
         expand: true,
         display_text: 'Twitter Handle',
@@ -41,7 +75,13 @@
       })  
   %>
   
-  <%= f.input :twitter_search_terms, 
+  <%= f.input :twitter_search_terms,
+      input_html: {
+        'data-key': {
+          type_requirement: 'String#csv',
+          validate_url: 'foobar.com'
+        }.to_json
+      }, 
       label: label_template({
         expand: true,
         display_text: 'Twitter search terms',
@@ -53,7 +93,13 @@
           }
       })  
   %>
-  <%= f.input :instagram_id, 
+  <%= f.input :instagram_id,
+      input_html: {
+        'data-key': {
+          type_requirement: 'Number',
+          validate_url: 'foobar.com'
+        }.to_json
+      }, 
       label: label_template({
         expand: true,
         display_text: 'Instagram Username',
@@ -66,7 +112,13 @@
       })  
   %>
  
-  <%= f.input :display_name, 
+  <%= f.input :instagram_search_tags,
+      input_html: {
+        'data-key': {
+          type_requirement: 'String#csv',
+          validate_url: 'foobar.com'
+        }.to_json
+      }, 
       label: label_template({
         expand: true,
         display_text: 'Instagram search terms',
