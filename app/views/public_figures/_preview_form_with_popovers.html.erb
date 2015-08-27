@@ -2,53 +2,160 @@
 
 <%= simple_form_for pf do |f| %>
 
-  
-  <%= wrap_with_popover({
-      title: 'Enter the Display Name of the entity you want to query.',
-      placement: 'bottom',
-      simple_form: ( f.input :display_name, label: label_template('Display Name') ),
-      pop_content: 'Enter the human-readable name of your search entity here.'
-    })
+  <%= f.input :display_name, 
+      label: label_template({
+        expand: false,
+        display_text: 'Display Name',
+        q_n_a: 
+          {
+            title: 'Enter the Display Name of the entity you want to query.',
+            placement: 'right',
+            content: 'Enter the human-readable name of your search entity here.'
+          }
+      })  
   %>
 
-  <%= wrap_with_popover({
-      title: 'Facebook timeline query',
-      placement: 'bottom',
+  <%= f.input :display_name, 
+      label: label_template({
+        expand: 
+          {
+            title: 'Click to remove this from your search.',
+            placement: 'bottom',
+            content: ''
+          },
+        display_text: 'Facebook Page ID',
+        q_n_a: 
+          {
+            title: 'Facebook timeline query',
+            placement: 'bottom',
+            content: 'We need to find your chosen page by Facebook ID number. If you don\'t know what your number is, we can search for it. Just type the page name in this field, and click \'Get Page ID\''
+          }
+      })  
+  %>
+
+  <!-- < %= wrap_with_popover({
+      title: 
+      placement: ,
       simple_form: ( f.input :facebook_id, label: id_check_label('Facebook Page ID', 'facebook') ),
-      pop_content: 'We need to find your chosen page by Facebook ID number. If you don\'t know what your number is, we can search for it. Just type the page name in this field, and click \'Get Page ID\''
+      pop_content: 
     })
   %>
 
-  <%= wrap_with_popover({
+  <%= f.input :display_name, 
+      label: label_template({
+        expand: 
+          {
+            title: 'Enter the Display Name of the entity you want to query.',
+            placement: 'bottom',
+            content: 'Enter the human-readable name of your search entity here.'
+          },
+        display_text: 'Display Name',
+        q_n_a: 
+          {
+            title: 'Enter the Display Name of the entity you want to query.',
+            placement: 'right',
+            content: 'Enter the human-readable name of your search entity here.'
+          }
+      })  
+  %>
+  < %= wrap_with_popover({
       title: 'Twitter handle help',
       placement: 'bottom',
       simple_form: ( f.input :twitter_handle, label: label_template('Twitter Handle') ),
       pop_content: 'Enter the twitter username or handle that you\'d like to search.'
     })
   %>
+  <%= f.input :display_name, 
+      label: label_template({
+        expand: 
+          {
+            title: 'Enter the Display Name of the entity you want to query.',
+            placement: 'bottom',
+            content: 'Enter the human-readable name of your search entity here.'
+          },
+        display_text: 'Display Name',
+        q_n_a: 
+          {
+            title: 'Enter the Display Name of the entity you want to query.',
+            placement: 'right',
+            content: 'Enter the human-readable name of your search entity here.'
+          }
+      })  
+  %>
 
-  <%= wrap_with_popover({
+  < %= wrap_with_popover({
       title: 'Twitter search terms',
       placement: 'bottom',
       simple_form: ( f.input :twitter_search_terms, label: label_template('Twitter search terms')  ),
       pop_content: 'Want to search for specific phrases on Twitter? Enter each search term separated by a comma.'
     })
   %>
+  <%= f.input :display_name, 
+      label: label_template({
+        expand: 
+          {
+            title: 'Enter the Display Name of the entity you want to query.',
+            placement: 'bottom',
+            content: 'Enter the human-readable name of your search entity here.'
+          },
+        display_text: 'Display Name',
+        q_n_a: 
+          {
+            title: 'Enter the Display Name of the entity you want to query.',
+            placement: 'right',
+            content: 'Enter the human-readable name of your search entity here.'
+          }
+      })  
+  %>
 
-  <%= wrap_with_popover({
+  < %= wrap_with_popover({
       title: 'Instagram Username',
       placement: 'bottom',
       simple_form: ( f.input :instagram_id, label: id_check_label('Instagram Username', 'insta') ),
       pop_content: 'Some Instagram usernames aren\'t what you expect. Want to test a username before a search? Enter the text here and press \'Get Instagram ID\''
     })
   %>
+  <%= f.input :display_name, 
+      label: label_template({
+        expand: 
+          {
+            title: 'Enter the Display Name of the entity you want to query.',
+            placement: 'bottom',
+            content: 'Enter the human-readable name of your search entity here.'
+          },
+        display_text: 'Display Name',
+        q_n_a: 
+          {
+            title: 'Enter the Display Name of the entity you want to query.',
+            placement: 'right',
+            content: 'Enter the human-readable name of your search entity here.'
+          }
+      })  
+  %>
 
-  <%= wrap_with_popover({
+  < %= wrap_with_popover({
       title: 'Instagram search terms',
       placement: 'top',
       simple_form: ( f.input :instagram_search_tags, label: label_template('Instagram search terms') ),
       pop_content: 'Want to search for Instagrams tagged with specific hashtags? Enter each tag separated by a comma.'
     })
+  %> -->
+  <%= f.input :display_name, 
+      label: label_template({
+        expand: 
+          {
+            title: 'Enter the Display Name of the entity you want to query.',
+            placement: 'bottom',
+            content: 'Enter the human-readable name of your search entity here.'
+          },
+        display_text: 'Display Name',
+        q_n_a: 
+          {
+            title: 'Enter the Display Name of the entity you want to query.',
+            placement: 'right',
+            content: 'Enter the human-readable name of your search entity here.'
+          }
+      })  
   %>
 
   <div class='btn btn-primary' data='preview'>Preview</div>

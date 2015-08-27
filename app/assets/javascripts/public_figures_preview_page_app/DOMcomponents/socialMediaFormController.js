@@ -122,7 +122,7 @@ var SocialMediaFormController = function(MASTER){
     MASTER.hideThumbs();
     animateFormRedraw();
   };
-
+  // proceed w preview should actually be a public function, triggered from master after checking against freebie count
   function proceedWPreview(){
     var newQuery = _queryModel.getActiveFields(),
       weAlreadyQueriedThis = _.find(_pastQueries, function(old){
