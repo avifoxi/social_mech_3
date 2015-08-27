@@ -13,13 +13,19 @@ var SocialMediaFormController = function(MASTER){
     _aggregate_service = new MyService(MASTER),
     _queryModel = new MyQueryModel();
 
+  // Add Listeners on text input, focus out, and action button hits
+
   $inputs.keyup(function(e){
     _queryModel.update({
       name: $(e.target).attr('name'), 
       value: $(e.target).val() 
     });
+    // console.log( _queryModel.getActiveFields()['public_figure[facebook_id]'].getValue() );
   });
-
+  $inputs.focusout(function(e){
+    $(e.target).attr('name')
+    console.log( e.target.value )
+  });
   $actionButtons.click(function(e){
     e.preventDefault();
     switch( $(e.target).attr('data') ) {

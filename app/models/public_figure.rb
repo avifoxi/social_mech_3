@@ -1,5 +1,7 @@
 class PublicFigure < ActiveRecord::Base
 
+  attr_accessor :validation_keys
+
   def update_media(media_hash)
     new_media_to_return = {
       'tweets': [],

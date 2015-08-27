@@ -2,7 +2,7 @@
 
 <%= simple_form_for pf do |f| %>
 
-  <%= f.input :display_name, 
+  <!-- < %= f.input :display_name, 
       label: label_template({
         expand: false,
         display_text: 'Display Name',
@@ -13,16 +13,11 @@
             content: 'Enter the human-readable name of your search entity here.'
           }
       })  
-  %>
-
-  <%= f.input :display_name, 
+  %> -->
+  <%= f.input :validation_keys, as: :hidden, input_html: {script: 'foo my bar'} %>
+  <%= f.input :facebook_id, 
       label: label_template({
-        expand: 
-          {
-            title: 'Click to remove this from your search.',
-            placement: 'bottom',
-            content: ''
-          },
+        expand: true,
         display_text: 'Facebook Page ID',
         q_n_a: 
           {
@@ -32,128 +27,54 @@
           }
       })  
   %>
-
-  <!-- < %= wrap_with_popover({
-      title: 
-      placement: ,
-      simple_form: ( f.input :facebook_id, label: id_check_label('Facebook Page ID', 'facebook') ),
-      pop_content: 
-    })
-  %>
-
-  <%= f.input :display_name, 
+ 
+  <%= f.input :twitter_handle, 
       label: label_template({
-        expand: 
-          {
-            title: 'Enter the Display Name of the entity you want to query.',
-            placement: 'bottom',
-            content: 'Enter the human-readable name of your search entity here.'
-          },
-        display_text: 'Display Name',
+        expand: true,
+        display_text: 'Twitter Handle',
         q_n_a: 
           {
-            title: 'Enter the Display Name of the entity you want to query.',
-            placement: 'right',
-            content: 'Enter the human-readable name of your search entity here.'
+            title: 'Twitter handle help',
+            placement: 'bottom',
+            content: 'Enter the twitter username or handle that you\'d like to search.'
           }
       })  
   %>
-  < %= wrap_with_popover({
-      title: 'Twitter handle help',
-      placement: 'bottom',
-      simple_form: ( f.input :twitter_handle, label: label_template('Twitter Handle') ),
-      pop_content: 'Enter the twitter username or handle that you\'d like to search.'
-    })
-  %>
-  <%= f.input :display_name, 
+  
+  <%= f.input :twitter_search_terms, 
       label: label_template({
-        expand: 
-          {
-            title: 'Enter the Display Name of the entity you want to query.',
-            placement: 'bottom',
-            content: 'Enter the human-readable name of your search entity here.'
-          },
-        display_text: 'Display Name',
+        expand: true,
+        display_text: 'Twitter search terms',
         q_n_a: 
           {
-            title: 'Enter the Display Name of the entity you want to query.',
-            placement: 'right',
-            content: 'Enter the human-readable name of your search entity here.'
+            title: 'Twitter search terms',
+            placement: 'bottom',
+            content: 'Want to search for specific phrases on Twitter? Enter each search term separated by a comma.'
           }
       })  
   %>
-
-  < %= wrap_with_popover({
-      title: 'Twitter search terms',
-      placement: 'bottom',
-      simple_form: ( f.input :twitter_search_terms, label: label_template('Twitter search terms')  ),
-      pop_content: 'Want to search for specific phrases on Twitter? Enter each search term separated by a comma.'
-    })
-  %>
-  <%= f.input :display_name, 
+  <%= f.input :instagram_id, 
       label: label_template({
-        expand: 
-          {
-            title: 'Enter the Display Name of the entity you want to query.',
-            placement: 'bottom',
-            content: 'Enter the human-readable name of your search entity here.'
-          },
-        display_text: 'Display Name',
+        expand: true,
+        display_text: 'Instagram Username',
         q_n_a: 
           {
-            title: 'Enter the Display Name of the entity you want to query.',
-            placement: 'right',
-            content: 'Enter the human-readable name of your search entity here.'
+            title: 'Instagram Username',
+            placement: 'bottom',
+            content: 'Some Instagram usernames aren\'t what you expect. Want to test a username before a search? Enter the text here and press \'Get Instagram ID\''
           }
       })  
   %>
-
-  < %= wrap_with_popover({
-      title: 'Instagram Username',
-      placement: 'bottom',
-      simple_form: ( f.input :instagram_id, label: id_check_label('Instagram Username', 'insta') ),
-      pop_content: 'Some Instagram usernames aren\'t what you expect. Want to test a username before a search? Enter the text here and press \'Get Instagram ID\''
-    })
-  %>
+ 
   <%= f.input :display_name, 
       label: label_template({
-        expand: 
-          {
-            title: 'Enter the Display Name of the entity you want to query.',
-            placement: 'bottom',
-            content: 'Enter the human-readable name of your search entity here.'
-          },
-        display_text: 'Display Name',
+        expand: true,
+        display_text: 'Instagram search terms',
         q_n_a: 
           {
-            title: 'Enter the Display Name of the entity you want to query.',
-            placement: 'right',
-            content: 'Enter the human-readable name of your search entity here.'
-          }
-      })  
-  %>
-
-  < %= wrap_with_popover({
-      title: 'Instagram search terms',
-      placement: 'top',
-      simple_form: ( f.input :instagram_search_tags, label: label_template('Instagram search terms') ),
-      pop_content: 'Want to search for Instagrams tagged with specific hashtags? Enter each tag separated by a comma.'
-    })
-  %> -->
-  <%= f.input :display_name, 
-      label: label_template({
-        expand: 
-          {
-            title: 'Enter the Display Name of the entity you want to query.',
-            placement: 'bottom',
-            content: 'Enter the human-readable name of your search entity here.'
-          },
-        display_text: 'Display Name',
-        q_n_a: 
-          {
-            title: 'Enter the Display Name of the entity you want to query.',
-            placement: 'right',
-            content: 'Enter the human-readable name of your search entity here.'
+            title: 'Instagram search terms',
+            placement: 'top',
+            content: 'Want to search for Instagrams tagged with specific hashtags? Enter each tag separated by a comma.'
           }
       })  
   %>

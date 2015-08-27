@@ -1,11 +1,17 @@
 'use strict';
 
+var InputField = require('./inputField.js');
+
 var PublicFigureQuery = function () {
   var _activeFields = {},
     _inactiveFields = {};
 
   this.update = function( nameVal ){
-    _activeFields[ nameVal.name ] = nameVal.value;
+    if ( !_activeFields[ nameVal.name ] ){
+      _activeFields[ nameVal.name ] = new InputField(nameVal);
+    } else {
+      _activeFields[ nameVal.name ].updateValue( nameVal.value );
+    }
   };
   this.removeFromActive = function( name ){
     if ( _activeFields[ name ] ) {
