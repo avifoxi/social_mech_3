@@ -43,7 +43,10 @@ var RealTimeValidator = function( $inputs, MASTER ) {
 
   // PRIVATE FUNCS
   function errorMessage( input, expected ){
-    
+    return 'user input of "' + 
+      input.getValue() +
+      '" is not a ' + 
+      expected;
   }
   function stringEvaluatesToNum( string ){
     var inputLength = string.length,
