@@ -31,12 +31,11 @@ var InputField = function(args){
       return _state;
     }
   }
-  this.setValidity = function( boolean ){
-    _state = boolean ? STATES[1] : STATES[2]
+  this.setValidity = function( boolean, reason ){
+    _state = boolean ? STATES[1] : STATES[2];
+    if ( !boolean && reason )
+      _reasonForInvalidation = reason;
   };
-  this.setReasonForInvalidation = function( reason ){
-    _reasonForInvalidation = reason;
-  }
 }
 
 module.exports = InputField;

@@ -27,21 +27,22 @@ var RealTimeValidator = function( $inputs, MASTER ) {
       dataKey = _dataKeys[ name ],
       expected = parseExpectation( dataKey.type_requirement ),
       value = ( expected === 'number' ) ? stringEvaluatesToNum( input.getValue() ) : input.getValue(),
-      url = dataKey.validate_url;
-    
+      url = dataKey.validate_url,
+      reason = undefined;
+
     if ( typeof value !== expected ){
-      input.setValidity( false )
-      callback( input );
-      return reasonForInvalidation( input, expected );
-    } else ( url ){
+      reason = errorMessage( input, expected );
+      input.setValidity( false, reason );
+    } else if ( url ) {
       MASTER.requestTwoStepValidation( input, url );
+    } else {
+      input.setValidity( true );
     }
-    input.setValidity( true );
-    callback( input )
+    callback();
   };
 
   // PRIVATE FUNCS
-  function reasonForInvalidation( input, expected ){
+  function errorMessage( input, expected ){
     
   }
   function stringEvaluatesToNum( string ){

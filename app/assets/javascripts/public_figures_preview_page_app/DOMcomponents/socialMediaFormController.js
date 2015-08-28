@@ -26,8 +26,11 @@ var SocialMediaFormController = function(MASTER){
 
   $inputs.focusout(function(e){
     var key = $(e.target).attr('name'),
-      input = _queryModel.getInputField( key );
-    _validator.check( input );      
+      input = _queryModel.getInputField( key ),
+      callback = function(){
+        handleValidStatusOf( input );
+      };
+    _validator.check( input, callback );      
   });
 
   $actionButtons.click(function(e){
@@ -53,7 +56,7 @@ var SocialMediaFormController = function(MASTER){
   // Public Functions -- explicitly triggerable by Master Controller
 
   this.awaitingResponseOn = function( input ){
-    debugger;
+
   };
 
   this.handleUsernameSelect = function( data ){
@@ -87,6 +90,12 @@ var SocialMediaFormController = function(MASTER){
   };
 
   // Internal Component Events -- triggered by Form UI
+
+  function handleValidStatusOf( input ){
+    console.log( this );
+    console.log( 'input status post validation' );
+    console.log( input.getValidState())
+  }
 
   function handleToggleActive(e){
     var $target = $(e.target),

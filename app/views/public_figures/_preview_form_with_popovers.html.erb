@@ -78,8 +78,7 @@
   <%= f.input :twitter_search_terms,
       input_html: {
         'data-key': {
-          type_requirement: 'string#csv',
-          validate_url: 'foobar.com'
+          type_requirement: 'string#csv'
         }.to_json
       }, 
       label: label_template({
@@ -115,8 +114,7 @@
   <%= f.input :instagram_search_tags,
       input_html: {
         'data-key': {
-          type_requirement: 'string#csv',
-          validate_url: 'foobar.com'
+          type_requirement: 'string#csv'
         }.to_json
       }, 
       label: label_template({
