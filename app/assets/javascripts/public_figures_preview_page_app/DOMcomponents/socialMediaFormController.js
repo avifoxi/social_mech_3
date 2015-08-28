@@ -18,18 +18,11 @@ var SocialMediaFormController = function(MASTER){
   // Add Listeners on text input, focus out, and action button hits
 
   $inputs.keyup(function(e){
-    updateQueryModel(e)
+    updateQueryModel(e);
   });
   $inputs.focusin(function(e){
-    updateQueryModel(e)
+    updateQueryModel(e);
   }); 
-  function updateQueryModel(e){
-    _queryModel.update({
-      name: $(e.target).attr('name'), 
-      value: $(e.target).val() 
-    });
-  }
-
   $inputs.focusout(function(e){
     var key = $(e.target).attr('name'),
       input = _queryModel.getInputField( key ),
@@ -100,9 +93,17 @@ var SocialMediaFormController = function(MASTER){
   function handleValidStatusOf( input ){
     console.log( this );
     console.log( 'input status post validation' );
-    console.log( input.getValidState())
+    console.log( input.getValidState());
+    $inputs;
+    debugger;
+    _.find($inputs, function(ip){ return $(ip).attr('name') === input.name()})
   }
-
+  function updateQueryModel(e){
+    _queryModel.update({
+      name: $(e.target).attr('name'), 
+      value: $(e.target).val() 
+    });
+  }
   function handleToggleActive(e){
     var $target = $(e.target),
       inputId = $target.closest('label').attr('for'),
