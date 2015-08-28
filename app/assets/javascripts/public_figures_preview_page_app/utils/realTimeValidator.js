@@ -1,6 +1,15 @@
+/*
+  
+  DEV NOTES:
+  real time validator is getting data-keys from the dom 
+  these are embedded in the form being delivererd, as json field within form input html
+  source is at app/views/public_figures/_preview_form_with_popovers
+
+*/
+
 'use strict';
 
-var RealTimeValidator = function( $inputs ) {
+var RealTimeValidator = function( $inputs, MASTER ) {
   var _dataKeys = _.reduce( $inputs, function( collector, ip, n){ // n is iterator -- function doesn't work unless this value is in the args 
       var dataKey =  $(ip).attr('data-key') ;
       if ( dataKey ){
@@ -12,28 +21,34 @@ var RealTimeValidator = function( $inputs ) {
       return collector; 
     }, {});
   
-
-  this.check = function( input ){
+  // EXPOSES 1 PUBLIC FUNCTION 
+  this.check = function( input, callback ){
     var name = input.name(),
+      dataKey = _dataKeys[ name ],
       expected = parseExpectation( dataKey.type_requirement ),
       value = ( expected === 'number' ) ? stringEvaluatesToNum( input.getValue() ) : input.getValue(),
-      dataKey = _dataKeys[ name ],
       url = dataKey.validate_url;
-    debugger;
+    
     if ( typeof value !== expected ){
       input.setValidity( false )
-      return;
-    }
-    if ( url ){
-
+      callback( input );
+      return reasonForInvalidation( input, expected );
+    } else ( url ){
+      MASTER.requestTwoStepValidation( input, url );
     }
     input.setValidity( true );
+    callback( input )
   };
+
+  // PRIVATE FUNCS
+  function reasonForInvalidation( input, expected ){
+    
+  }
   function stringEvaluatesToNum( string ){
     var inputLength = string.length,
       coercedNum = +string;
 
-    if ( coercedNum.valueOf === NaN ){
+    if ( isNaN( coercedNum ) ){
       return false;
     }
     if ( new String( coercedNum ).length !== inputLength ){
@@ -42,7 +57,7 @@ var RealTimeValidator = function( $inputs ) {
     return coercedNum;
   }
   function parseExpectation( exp ){
-    // currently, some of the expectations are in form:
+    // currently, some of the form-embedded expectations are formatted:
     // type#detail 
     // ala string#csv
     // right now, we're not gonna worry about second value... though perhaps later we will

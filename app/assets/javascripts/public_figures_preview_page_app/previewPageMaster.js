@@ -121,6 +121,10 @@ var PreviewPageMaster = function(PATHS){
   this.usernameSelected = function( data ){
     _FormCtrl.handleUsernameSelect( data );
   };
+  this.requestTwoStepValidation = function( input, url ){
+    // _usernamePotentials.getUsernameList( testFor, value );
+    _FormCtrl.awaitingResponseOn( input );
+  }
   /*
   *   PRIVATE METHODS
   *

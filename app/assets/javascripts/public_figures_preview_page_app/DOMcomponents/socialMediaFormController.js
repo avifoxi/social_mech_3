@@ -11,9 +11,9 @@ var SocialMediaFormController = function(MASTER){
     $actionButtons = $('form#new_public_figure [data]'),
     $collapsed = $('#collapsed-form'),
     _pastQueries = [], 
-    _aggregate_service = new MyService(MASTER),
+    _aggregate_service = new MyService( MASTER ),
     _queryModel = new MyQueryModel(), 
-    _validator = new Validator($inputs);
+    _validator = new Validator( $inputs, MASTER );
 
   // Add Listeners on text input, focus out, and action button hits
 
@@ -27,7 +27,6 @@ var SocialMediaFormController = function(MASTER){
   $inputs.focusout(function(e){
     var key = $(e.target).attr('name'),
       input = _queryModel.getInputField( key );
-
     _validator.check( input );      
   });
 
@@ -52,6 +51,10 @@ var SocialMediaFormController = function(MASTER){
   });
 
   // Public Functions -- explicitly triggerable by Master Controller
+
+  this.awaitingResponseOn = function( input ){
+    debugger;
+  };
 
   this.handleUsernameSelect = function( data ){
     var $input = ( data.type === 'insta' ) ? $('#public_figure_instagram_id') : $('#public_figure_facebook_id');
