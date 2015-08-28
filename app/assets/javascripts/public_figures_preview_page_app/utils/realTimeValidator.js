@@ -15,11 +15,11 @@ var RealTimeValidator = function( $inputs ) {
 
   this.check = function( input ){
     var name = input.name(),
-      value = input.getValue(),
-      dataKey = _dataKeys[ name ],
       expected = parseExpectation( dataKey.type_requirement ),
+      value = ( expected === 'number' ) ? stringEvaluatesToNum( input.getValue() ) : input.getValue(),
+      dataKey = _dataKeys[ name ],
       url = dataKey.validate_url;
-    
+    debugger;
     if ( typeof value !== expected ){
       input.setValidity( false )
       return;
@@ -29,15 +29,24 @@ var RealTimeValidator = function( $inputs ) {
     }
     input.setValidity( true );
   };
-  function numFromString( string ){
-    
+  function stringEvaluatesToNum( string ){
+    var inputLength = string.length,
+      coercedNum = +string;
+
+    if ( coercedNum.valueOf === NaN ){
+      return false;
+    }
+    if ( new String( coercedNum ).length !== inputLength ){
+      return false;
+    }
+    return coercedNum;
   }
   function parseExpectation( exp ){
     // currently, some of the expectations are in form:
     // type#detail 
     // ala string#csv
     // right now, we're not gonna worry about second value... though perhaps later we will
-    // anyhoo -- right now just return string, first value of split on #
+    // anyhoo -- right now just return string, first value of split on '#'
     return exp.split('#')[0];
   }
 }
