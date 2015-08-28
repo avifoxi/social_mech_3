@@ -28,12 +28,15 @@ var RealTimeValidator = function( $inputs, MASTER ) {
       expected = parseExpectation( dataKey.type_requirement ),
       value = ( expected === 'number' ) ? stringEvaluatesToNum( input.getValue() ) : input.getValue(),
       url = dataKey.validate_url,
+      valid = ( typeof value === expected ),
       reason = undefined;
 
-    if ( typeof value !== expected ){
+    if ( value === '' ){
+      // do nothing. input is still unvalidated bc nothing to validate
+    } else if ( !valid && !url ){
       reason = errorMessage( input, expected );
       input.setValidity( false, reason );
-    } else if ( url ) {
+    } else if ( !valid && url ) {
       MASTER.requestTwoStepValidation( input, url );
     } else {
       input.setValidity( true );

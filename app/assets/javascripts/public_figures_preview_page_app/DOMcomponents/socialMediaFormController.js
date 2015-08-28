@@ -18,11 +18,17 @@ var SocialMediaFormController = function(MASTER){
   // Add Listeners on text input, focus out, and action button hits
 
   $inputs.keyup(function(e){
+    updateQueryModel(e)
+  });
+  $inputs.focusin(function(e){
+    updateQueryModel(e)
+  }); 
+  function updateQueryModel(e){
     _queryModel.update({
       name: $(e.target).attr('name'), 
       value: $(e.target).val() 
     });
-  });
+  }
 
   $inputs.focusout(function(e){
     var key = $(e.target).attr('name'),
