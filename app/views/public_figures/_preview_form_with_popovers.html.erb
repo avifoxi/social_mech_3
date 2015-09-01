@@ -35,99 +35,148 @@
       })  
   %> -->
 
+  <table>
+    <tr>
+      <!-- TODO -- REFACTOR THE TABLE WRAPPER TO ANOTHER HELPER METHOD -->
+      <td class="col-md-3">
+        <%= f.input :facebook_id,
+            input_html: {
+              'data-key': {
+                type_requirement: 'number',
+                validate_url: 'foobar.com'
+              }.to_json
+            }, 
+            label: label_template({
+              expand: true,
+              display_text: 'Facebook Page ID',
+              q_n_a: 
+                {
+                  title: 'Facebook timeline query',
+                  placement: 'bottom',
+                  content: 'We need to find your chosen page by Facebook ID number. If you don\'t know what your number is, we can search for it. Just type the page name in this field, and click \'Get Page ID\''
+                }
+            })  
+        %>
+      </td>
+      <td class="col-md-1">
+        insert icon        
+      </td>
+    </tr>
+    <tr>
+      <td class="col-md-3">
+        <%= f.input :twitter_handle,
+            input_html: {
+              'data-key': {
+                type_requirement: 'string',
+                validate_url: 'foobar.com'
+              }.to_json
+            }, 
+            label: label_template({
+              expand: true,
+              display_text: 'Twitter Handle',
+              q_n_a: 
+                {
+                  title: 'Twitter handle help',
+                  placement: 'bottom',
+                  content: 'Enter the twitter username or handle that you\'d like to search.'
+                }
+            })  
+        %>
+      </td>
+      <td class="col-md-1">
+        
+      </td>
+    </tr>
+    <tr>
+      <td class="col-md-3">
+        <%= f.input :twitter_search_terms,
+            input_html: {
+              'data-key': {
+                type_requirement: 'string#csv'
+              }.to_json
+            }, 
+            label: label_template({
+              expand: true,
+              display_text: 'Twitter search terms',
+              q_n_a: 
+                {
+                  title: 'Twitter search terms',
+                  placement: 'bottom',
+                  content: 'Want to search for specific phrases on Twitter? Enter each search term separated by a comma.'
+                }
+            })  
+        %>
+      </td>
+      <td class="col-md-1">
+        
+      </td>
+    </tr>
+    <tr>
+      <td class="col-md-3">
+        <%= f.input :instagram_id,
+            input_html: {
+              'data-key': {
+                type_requirement: 'number',
+                validate_url: 'foobar.com'
+              }.to_json
+            }, 
+            label: label_template({
+              expand: true,
+              display_text: 'Instagram Username',
+              q_n_a: 
+                {
+                  title: 'Instagram Username',
+                  placement: 'bottom',
+                  content: 'Some Instagram usernames aren\'t what you expect. Want to test a username before a search? Enter the text here and press \'Get Instagram ID\''
+                }
+            })  
+        %>
+      </td>
+      <td class="col-md-1">
+        
+      </td>
+    </tr>
+    <tr>
+      <td class="col-md-3">
+        <%= f.input :instagram_search_tags,
+            input_html: {
+              'data-key': {
+                type_requirement: 'string#csv'
+              }.to_json
+            }, 
+            label: label_template({
+              expand: true,
+              display_text: 'Instagram search terms',
+              q_n_a: 
+                {
+                  title: 'Instagram search terms',
+                  placement: 'top',
+                  content: 'Want to search for Instagrams tagged with specific hashtags? Enter each tag separated by a comma.'
+                }
+            })  
+        %>
+      </td>
+      <td class="col-md-1">
+        
+      </td>
+    </tr>
 
+  </table>
 
-  <%= f.input :facebook_id,
-      input_html: {
-        'data-key': {
-          type_requirement: 'number',
-          validate_url: 'foobar.com'
-        }.to_json
-      }, 
-      label: label_template({
-        expand: true,
-        display_text: 'Facebook Page ID',
-        q_n_a: 
-          {
-            title: 'Facebook timeline query',
-            placement: 'bottom',
-            content: 'We need to find your chosen page by Facebook ID number. If you don\'t know what your number is, we can search for it. Just type the page name in this field, and click \'Get Page ID\''
-          }
-      })  
-  %>
- 
-  <%= f.input :twitter_handle,
-      input_html: {
-        'data-key': {
-          type_requirement: 'string',
-          validate_url: 'foobar.com'
-        }.to_json
-      }, 
-      label: label_template({
-        expand: true,
-        display_text: 'Twitter Handle',
-        q_n_a: 
-          {
-            title: 'Twitter handle help',
-            placement: 'bottom',
-            content: 'Enter the twitter username or handle that you\'d like to search.'
-          }
-      })  
-  %>
   
-  <%= f.input :twitter_search_terms,
-      input_html: {
-        'data-key': {
-          type_requirement: 'string#csv'
-        }.to_json
-      }, 
-      label: label_template({
-        expand: true,
-        display_text: 'Twitter search terms',
-        q_n_a: 
-          {
-            title: 'Twitter search terms',
-            placement: 'bottom',
-            content: 'Want to search for specific phrases on Twitter? Enter each search term separated by a comma.'
-          }
-      })  
-  %>
-  <%= f.input :instagram_id,
-      input_html: {
-        'data-key': {
-          type_requirement: 'number',
-          validate_url: 'foobar.com'
-        }.to_json
-      }, 
-      label: label_template({
-        expand: true,
-        display_text: 'Instagram Username',
-        q_n_a: 
-          {
-            title: 'Instagram Username',
-            placement: 'bottom',
-            content: 'Some Instagram usernames aren\'t what you expect. Want to test a username before a search? Enter the text here and press \'Get Instagram ID\''
-          }
-      })  
-  %>
+
+
+
+
+
+
  
-  <%= f.input :instagram_search_tags,
-      input_html: {
-        'data-key': {
-          type_requirement: 'string#csv'
-        }.to_json
-      }, 
-      label: label_template({
-        expand: true,
-        display_text: 'Instagram search terms',
-        q_n_a: 
-          {
-            title: 'Instagram search terms',
-            placement: 'top',
-            content: 'Want to search for Instagrams tagged with specific hashtags? Enter each tag separated by a comma.'
-          }
-      })  
-  %>
+  
+  
+  
+  
+ 
+  
 
   <div class='btn btn-primary' data='preview'>Preview</div>
   
