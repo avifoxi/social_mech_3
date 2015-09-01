@@ -123,7 +123,7 @@ var PreviewPageMaster = function(PATHS){
   };
   this.requestTwoStepValidation = function( input, url ){
     // _usernamePotentials.getUsernameList( testFor, value );
-    _FormCtrl.awaitingResponseOn( input );
+    // _FormCtrl.awaitingResponseOn( input );
   }
   /*
   *   PRIVATE METHODS

@@ -23,6 +23,7 @@ var RealTimeValidator = function( $inputs, MASTER ) {
   
   // EXPOSES 1 PUBLIC FUNCTION 
   this.check = function( input, callback ){
+    debugger;
     var name = input.name(),
       dataKey = _dataKeys[ name ],
       expected = parseExpectation( dataKey.type_requirement ),
@@ -37,6 +38,8 @@ var RealTimeValidator = function( $inputs, MASTER ) {
       reason = errorMessage( input, expected );
       input.setValidity( false, reason );
     } else if ( !valid && url ) {
+      reason = 'waiting';
+      input.setValidity( false, reason );
       MASTER.requestTwoStepValidation( input, url );
     } else {
       input.setValidity( true );

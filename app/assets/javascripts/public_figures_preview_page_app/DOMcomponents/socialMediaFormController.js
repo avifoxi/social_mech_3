@@ -2,7 +2,8 @@
 
 var MyService = require('../services/publicFigureMediaAggregate.js'),
   MyQueryModel = require('../models/publicFigureQuery.js'),
-  Validator = require('../utils/realTimeValidator.js');
+  Validator = require('../utils/realTimeValidator.js'),
+  iconHelper = require('./form_helpers/formStatusIconHelper.js');
 
 var SocialMediaFormController = function(MASTER){
   
@@ -13,8 +14,10 @@ var SocialMediaFormController = function(MASTER){
     _pastQueries = [], 
     _aggregate_service = new MyService( MASTER ),
     _queryModel = new MyQueryModel(), 
-    _validator = new Validator( $inputs, MASTER );
+    _validator = new Validator( $inputs, MASTER ),
+    _iconHelper = new iconHelper();
 
+  window.CHEAT_HELP = _iconHelper;
   // Add Listeners on text input, focus out, and action button hits
 
   $inputs.keyup(function(e){
@@ -29,7 +32,8 @@ var SocialMediaFormController = function(MASTER){
       callback = function(){
         handleValidStatusOf( input );
       };
-    _validator.check( input, callback );      
+    _validator.check( input, callback );  
+    debugger;    
   });
 
   $actionButtons.click(function(e){
@@ -94,9 +98,12 @@ var SocialMediaFormController = function(MASTER){
     console.log( this );
     console.log( 'input status post validation' );
     console.log( input.getValidState());
-    $inputs;
-    debugger;
-    _.find($inputs, function(ip){ return $(ip).attr('name') === input.name()})
+    var icon = _iconHelper( input );
+    
+    var myIp =  _.find($inputs, function(ip){ return $(ip).attr('name') === input.name()})
+    
+    $(myIp).closest('td').siblings().html( $( icon).fadeIn(1000)  );
+   
   }
   function updateQueryModel(e){
     _queryModel.update({
