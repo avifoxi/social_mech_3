@@ -128,7 +128,7 @@ var PreviewPageMaster = function(PATHS){
   };
   this.showUserNameOptions = function( input ){
     var list = _usernamePotentials.getCachedList( input.name(), input.getValue() ); 
-    _ModalCtrl.show('username#check', {html: list});
+    _ModalCtrl.show('username#check', {html: list, testFor: input.name() });
   };
   /*
   *   PRIVATE METHODS

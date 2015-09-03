@@ -62,6 +62,7 @@ function SocialMediaModalCtrl(MASTER){
     $footer.html('');
     // currently no custom options!
     $modal.modal(_options);
+    debugger;
     attachUsernameListener( data.testFor );
   };
   function attachUsernameListener( testFor ) {

@@ -62,11 +62,13 @@ var SocialMediaFormController = function(MASTER){
   };
 
   this.handleUsernameSelect = function( data ){
-    var $input = ( data.type === 'insta' ) ? $('#public_figure_instagram_id') : $('#public_figure_facebook_id');
+    var $input = $inputs.filter(function(index, ip){ 
+      return $( ip ).attr('name') === data.type;
+    });
     $input.val('Your selected id is ' + data.id);
     $input.prop('disabled', true);
     _queryModel.update({
-      name: ( data.type === 'insta' ) ? 'public_figure[instagram_id]' : 'public_figure[facebook_id]' ,
+      name: data.type,
       value: data.id
     });
   };
