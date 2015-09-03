@@ -34,8 +34,8 @@ var InputField = function(args){
   this.setValidity = function( boolean, reason ){
     _state = boolean ? STATES[1] : STATES[2];
     if ( !boolean && reason )
-      _reasonForInvalidation = reason; // if reason is 'WAITING', or user input problem
-  };
+      _reasonForInvalidation = reason; // if reason is 'waiting' or 'select' we're not done yet, or user input problem
+  }; 
 }
 
 module.exports = InputField;

@@ -32,8 +32,7 @@ var SocialMediaFormController = function(MASTER){
       callback = function(){
         handleValidStatusOf( input );
       };
-    _validator.check( input, callback );  
-    debugger;    
+    _validator.check( input, callback );    
   });
 
   $actionButtons.click(function(e){
@@ -73,37 +72,48 @@ var SocialMediaFormController = function(MASTER){
   };
 
   this.enableUserIdChanges = function( data ) {
-    var type = data.testFor;
-    var littleButt = $('[data="test-username"][type="' + type + '"]');
-    var $clone = $( $.clone(littleButt[0]) )
-      .attr('data', null)
-      .data('revealUsernameList', {[type]: data.value})
-      .text('Choose another match for ' + data.value );
-    littleButt
-      .after( $clone )
-      .data('changeQueryName', true)
-      .text('Redo search with another name ');
+    var input = _queryModel.getInputField( data.testFor );
     
-    // and attach listener to new button
-    $clone.click(function(e){
-      e.preventDefault();
-      var data = $(this).data( 'revealUsernameList' );
-      MASTER.revealUsernameList( data )
-    });
+    input.setValidity(false, 'select');
+    handleValidStatusOf( input )
+
+    // var type = data.testFor;
+    // debugger;
+    // var littleButt = $('[data="test-username"][type="' + type + '"]');
+    // var $clone = $( $.clone(littleButt[0]) )
+    //   .attr('data', null)
+    //   .data('revealUsernameList', {[type]: data.value})
+    //   .text('Choose another match for ' + data.value );
+    // littleButt
+    //   .after( $clone )
+    //   .data('changeQueryName', true)
+    //   .text('Redo search with another name ');
+    
+    // // and attach listener to new button
+    // $clone.click(function(e){
+    //   e.preventDefault();
+    //   var data = $(this).data( 'revealUsernameList' );
+    //   MASTER.revealUsernameList( data )
+    // });
   };
 
   // Internal Component Events -- triggered by Form UI
 
   function handleValidStatusOf( input ){
-    console.log( this );
-    console.log( 'input status post validation' );
-    console.log( input.getValidState());
-    var icon = _iconHelper( input );
-    
-    var myIp =  _.find($inputs, function(ip){ return $(ip).attr('name') === input.name()})
+    var icon = _iconHelper( input ),
+      myIp =  _.find($inputs, function(ip){ 
+        return $(ip).attr('name') === input.name();
+      });
     
     $(myIp).closest('td').siblings().html( $( icon).fadeIn(1000)  );
-   
+    
+    if ( input.getValidState()['INVALID'] === 'select' ) {
+      // attach listener to select expand icon click
+      $( icon ).click(function(e){
+        e.preventDefault();
+        MASTER.showUserNameOptions( input );
+      });
+    }
   }
   function updateQueryModel(e){
     _queryModel.update({

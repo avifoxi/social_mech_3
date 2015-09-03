@@ -11,16 +11,26 @@ var FormStatusIconHelper = function () {
       }
     });
 
+  function handleInvalid( invalid ){
+    switch ( invalid ){
+      case 'waiting':
+      case 'select':
+        return _iconMap[ invalid ]; // string will be either 'waiting' or 'select'
+        break;
+      default: 
+        return _iconMap[ 'invalid' ]; 
+    }
+  }
+
   return function( input ){
     var status = input.getValidState(),
       icon;
     if ( typeof status === 'string' ){
       icon = _iconMap[ status.toLowerCase() ];
-    } else if ( status[ 'INVALID' ] === 'waiting' ) {
-      icon = _iconMap[ 'waiting' ];
     } else {
-      icon = _iconMap[ 'invalid' ];
+      icon = handleInvalid( status[ 'INVALID' ]);
     }
+
     return $.clone( icon );
   };
 }

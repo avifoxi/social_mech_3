@@ -23,7 +23,6 @@ var RealTimeValidator = function( $inputs, MASTER ) {
   
   // EXPOSES 1 PUBLIC FUNCTION 
   this.check = function( input, callback ){
-    debugger;
     var name = input.name(),
       dataKey = _dataKeys[ name ],
       expected = parseExpectation( dataKey.type_requirement ),

@@ -8,7 +8,7 @@ var PublicFigureMediaAggregate = function (MASTER) {
  
   this.getAggregateFeeds = function( data ){
     MASTER.callingServer();
-    debugger;
+
     $.ajax({
       type: "POST",
       url: _path,

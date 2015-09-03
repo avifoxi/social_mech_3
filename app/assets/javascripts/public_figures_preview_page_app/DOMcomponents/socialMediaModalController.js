@@ -72,7 +72,7 @@ function SocialMediaModalCtrl(MASTER){
         type: testFor,
         html: $(e.target).parent()
       }
-      debugger;
+      // debugger;
       MASTER.usernameSelected( data );
       $modal.modal('hide');
     });

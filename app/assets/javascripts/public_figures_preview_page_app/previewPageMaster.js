@@ -124,7 +124,12 @@ var PreviewPageMaster = function(PATHS){
   this.requestTwoStepValidation = function( input, url ){
     // _usernamePotentials.getUsernameList( testFor, value );
     // _FormCtrl.awaitingResponseOn( input );
-  }
+    _usernamePotentials.getUsernameList( input.name(), input.getValue() );
+  };
+  this.showUserNameOptions = function( input ){
+    var list = _usernamePotentials.getCachedList( input.name(), input.getValue() ); 
+    _ModalCtrl.show('username#check', {html: list});
+  };
   /*
   *   PRIVATE METHODS
   *
