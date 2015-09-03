@@ -17,7 +17,6 @@ var SocialMediaFormController = function(MASTER){
     _validator = new Validator( $inputs, MASTER ),
     _iconHelper = new iconHelper();
 
-  window.CHEAT_HELP = _iconHelper;
   // Add Listeners on text input, focus out, and action button hits
 
   $inputs.keyup(function(e){
@@ -33,6 +32,10 @@ var SocialMediaFormController = function(MASTER){
         handleValidStatusOf( input );
       };
     _validator.check( input, callback );    
+  });
+
+  $('.form-group').click(function(e){
+    handleInputClick(e);
   });
 
   $actionButtons.click(function(e){
@@ -57,10 +60,6 @@ var SocialMediaFormController = function(MASTER){
 
   // Public Functions -- explicitly triggerable by Master Controller
 
-  this.awaitingResponseOn = function( input ){
-
-  };
-
   this.handleUsernameSelect = function( data ){
     var $input = $inputs.filter(function(index, ip){ 
       return $( ip ).attr('name') === data.type;
@@ -78,25 +77,6 @@ var SocialMediaFormController = function(MASTER){
     
     input.setValidity(false, 'select');
     handleValidStatusOf( input )
-
-    // var type = data.testFor;
-    // debugger;
-    // var littleButt = $('[data="test-username"][type="' + type + '"]');
-    // var $clone = $( $.clone(littleButt[0]) )
-    //   .attr('data', null)
-    //   .data('revealUsernameList', {[type]: data.value})
-    //   .text('Choose another match for ' + data.value );
-    // littleButt
-    //   .after( $clone )
-    //   .data('changeQueryName', true)
-    //   .text('Redo search with another name ');
-    
-    // // and attach listener to new button
-    // $clone.click(function(e){
-    //   e.preventDefault();
-    //   var data = $(this).data( 'revealUsernameList' );
-    //   MASTER.revealUsernameList( data )
-    // });
   };
 
   // Internal Component Events -- triggered by Form UI
@@ -117,6 +97,13 @@ var SocialMediaFormController = function(MASTER){
       });
     }
   }
+  function handleInputClick(e){
+    var $t = $( e.target )
+    if ( $t.prop('disabled') === true ){
+      $t.prop('disabled', false);
+      $t.val('');
+    }     
+  };
   function updateQueryModel(e){
     _queryModel.update({
       name: $(e.target).attr('name'), 
