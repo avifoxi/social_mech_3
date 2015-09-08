@@ -26,7 +26,12 @@ var PublicFigureQuery = function () {
     }
   };
   this.getActiveFields = function(){
-    return _activeFields;
+    var postData = {};
+    _.forEach(_activeFields, function(input, name){
+      if ( input.getValue() !== '' ) 
+        postData[ name ] = input.getValue();
+    });
+    return postData;
   };
   this.getInputField = function( key ){
     return _activeFields[ key ];

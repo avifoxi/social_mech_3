@@ -49,6 +49,12 @@ class PublicFiguresController < ApplicationController
   end
 
   def preview
+    p '#'*80
+    p 'params check'
+    p "#{params.inspect}"
+    p '#'*80
+    p 'pf_params check'
+    p "#{pf_params.inspect}"
     @pf = PublicFigure.new(pf_params)
     agatha = Aggregator.new(@pf)
     render json: agatha.social_media.to_json

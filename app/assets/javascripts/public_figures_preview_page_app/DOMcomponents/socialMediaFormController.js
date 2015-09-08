@@ -125,8 +125,6 @@ var SocialMediaFormController = function(MASTER){
       name = $input.attr('name'),
       hidden = $input.data('hidden') ? $input.data('hidden') : false;
 
-          debugger
-
     $input.data('hidden', !hidden);
     
     if ( $input.data('hidden') ) {
@@ -142,6 +140,7 @@ var SocialMediaFormController = function(MASTER){
   
   function handlePreview(){
     var data = _queryModel.getActiveFields();
+    debugger;
     if ( !_.isEmpty( data ) ){
       MASTER.previewClicked( proceedWPreview ); 
     } else {
