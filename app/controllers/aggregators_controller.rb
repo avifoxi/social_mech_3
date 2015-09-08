@@ -10,11 +10,15 @@ class AggregatorsController < ApplicationController
     match = get_fb_id_from_page(ag_params['test_string'])
     if match
       pic = get_pic_from_id(match['id'])
+      render json: {
+        # page: match,
+        # pic: pic
+        html: (render_to_string partial: 'potential_facebook_match', locals: { match: match, pic: pic }, layout: false)
+      }
+      return
     end
     render json: {
-      # page: match,
-      # pic: pic
-      html: (render_to_string partial: 'potential_facebook_match', locals: { match: match, pic: pic }, layout: false)
+      error: 'no sir'
     }
   end
 

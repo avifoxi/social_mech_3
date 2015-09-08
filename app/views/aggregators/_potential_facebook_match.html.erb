@@ -1,0 +1,11 @@
+<ul class="media-list">
+  <li class="media" data-id="<%= match['id'] %>">
+    <div class="media-left">
+      <img class="media-object" src="<%= pic %>" alt="<%= match['name'] %> thumbnail"> 
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading"><%= match['name'] %></h4>
+      <button class="btn btn-default" value="<%= match['id'] %>" data="select-username">Select <%= match['name'] %> ? </button>
+    </div>
+  </li>
+</ul>
