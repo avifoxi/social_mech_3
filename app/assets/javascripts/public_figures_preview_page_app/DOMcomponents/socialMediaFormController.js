@@ -125,6 +125,8 @@ var SocialMediaFormController = function(MASTER){
       name = $input.attr('name'),
       hidden = $input.data('hidden') ? $input.data('hidden') : false;
 
+          debugger
+
     $input.data('hidden', !hidden);
     
     if ( $input.data('hidden') ) {

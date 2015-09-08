@@ -7,23 +7,22 @@ class AggregatorsController < ApplicationController
   layout 'react_browserify', only: :new
 
   def fb_id_from_string
+    html = ''
     match = get_fb_id_from_page(ag_params['test_string'])
     if match
       pic = get_pic_from_id(match['id'])
-      render json: {
-        # page: match,
-        # pic: pic
-        html: (render_to_string partial: 'potential_facebook_match', locals: { match: match, pic: pic }, layout: false)
-      }
-      return
+      html = (render_to_string partial: 'potential_facebook_match', locals: { match: match, pic: pic }, layout: false)
+    else
+      html = (render_to_string partial: 'fb_no_page_match')
     end
     render json: {
-      error: 'no sir'
+      html: html
     }
   end
 
   def insta_id_from_string
     @result = get_insta_potential_ids_from_username(ag_params['test_string'])
+    html = (render_to_string partial: 'potential_insta_users', locals: {potentials: @result}, layout: false)
     format_and_return(@result)
   end
 
