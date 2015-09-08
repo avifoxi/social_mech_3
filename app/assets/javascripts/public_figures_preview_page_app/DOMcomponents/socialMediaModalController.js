@@ -74,7 +74,7 @@ function SocialMediaModalCtrl(MASTER){
       }
       // debugger;
       MASTER.usernameSelected( data );
-      $modal.modal('hide');
+      dismissNClearModal();
     });
   };
   function prepareNewUserModal(modelAction){ 

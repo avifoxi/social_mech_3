@@ -21,8 +21,6 @@ var usernamePotentials = function( MASTER ) {
         }
       };
 
-    // MASTER.callingServer( _callback );
-    // debugger;
     $.post(path, data, function(res){
       if ( res.html )
         _cachedLists[ inputName ][ value ] = res.html;

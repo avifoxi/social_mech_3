@@ -31,7 +31,8 @@ var SocialMediaFormController = function(MASTER){
       callback = function(){
         handleValidStatusOf( input );
       };
-    _validator.check( input, callback );    
+    if ( input.getValue() !== '' )
+      _validator.check( input, callback );    
   });
 
   $('.form-group').click(function(e){
@@ -70,6 +71,13 @@ var SocialMediaFormController = function(MASTER){
       name: data.type,
       value: data.id
     });
+
+    var input = _queryModel.getInputField( data.type ),
+      callback = function(){
+        handleValidStatusOf( input );
+      };
+    if ( input.getValue() !== '' )
+      _validator.check( input, callback );
   };
 
   this.enableUserIdChanges = function( data ) {
