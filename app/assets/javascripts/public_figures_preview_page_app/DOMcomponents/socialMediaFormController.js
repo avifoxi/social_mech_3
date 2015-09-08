@@ -106,7 +106,7 @@ var SocialMediaFormController = function(MASTER){
     }
   }
   function handleInputClick(e){
-    var $t = $( e.target )
+    var $t = $( e.target );
     if ( $t.prop('disabled') === true ){
       $t.prop('disabled', false);
       $t.val('');

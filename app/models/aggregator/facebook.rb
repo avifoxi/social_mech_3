@@ -3,8 +3,17 @@ module Aggregator::Facebook
   def get_fb_id_from_page(title)
     begin 
       found = fb_graph_api.get_page(title)
-      return found['id']
+      return found
     rescue 
+      nil
+    end
+  end
+
+  def get_pic_from_id(id)
+    begin
+      pic = fb_graph_api.get_picture(id)
+      return pic
+    rescue
       nil
     end
   end

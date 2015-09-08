@@ -7,8 +7,15 @@ class AggregatorsController < ApplicationController
   layout 'react_browserify', only: :new
 
   def fb_id_from_string
-    result = get_fb_id_from_page(ag_params['test_string'])
-    format_and_return(result)
+    match = get_fb_id_from_page(ag_params['test_string'])
+    if match
+      pic = get_pic_from_id(match['id'])
+    end
+    render json: {
+      # page: match,
+      # pic: pic
+      html: (render_to_string partial: 'potential_facebook_match', locals: { match: match, pic: pic }, layout: false)
+    }
   end
 
   def insta_id_from_string

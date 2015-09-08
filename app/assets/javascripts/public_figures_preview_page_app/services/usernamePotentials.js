@@ -26,6 +26,7 @@ var usernamePotentials = function( MASTER ) {
         _cachedLists[ inputName ][ value ] = res.html;
 
       var data = _.assign(res, {testFor: inputName, value: value}); // better to manually include function above, move towards less global
+      debugger;
       MASTER.serverResponse(data, 'username#check');
     });
   };
