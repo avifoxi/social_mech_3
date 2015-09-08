@@ -42,19 +42,13 @@ var SocialMediaFormController = function(MASTER){
   $collapsed.click(function(e){
     e.preventDefault();
     handleUncollapse();
-  })
+  });
 
   $actionButtons.click(function(e){
     e.preventDefault();
     switch( $(e.target).attr('data') ) {
       case 'preview': 
         handlePreview();
-        break;
-      case 'test-username':
-        handleTestUsername(e);
-        break;
-      case 'unCollapse':
-        handleUncollapse();
         break;
       case 'toggle-active':
         handleToggleActive(e);
@@ -145,6 +139,7 @@ var SocialMediaFormController = function(MASTER){
   
   function handlePreview(){
     var data = _queryModel.getActiveFields();
+    debugger;
     if ( !_.isEmpty( data ) ){
       MASTER.previewClicked( proceedWPreview ); 
     } else {
@@ -152,21 +147,6 @@ var SocialMediaFormController = function(MASTER){
     }
   };
 
-  function handleTestUsername(e){
-    var $target = $(e.target),
-      testFor = $target.attr('type'),
-      labelForChildID = $target.parent().attr('for'),
-      $input = $('#' + labelForChildID);
-
-    if ( $target.data( 'changeQueryName' ) ){
-      $input.attr('disabled', false).val('');
-      $target.data('changeQueryName', null).text('Get User ID');
-      $target.siblings('button[type="' + testFor + '"]')
-        .remove();
-    } else {
-      MASTER.testUsernameClicked( testFor, $input.val() );
-    }
-  };
   function handleUncollapse(){
     MASTER.hideThumbs();
     animateFormRedraw();
@@ -181,7 +161,7 @@ var SocialMediaFormController = function(MASTER){
     if ( !weAlreadyQueriedThis ) {
       _pastQueries.push(newQuery)
       _aggregate_service.getAggregateFeeds( newQuery );
-      _queryModel = new MyQueryModel();
+      // _queryModel = new MyQueryModel();
     } else {
       console.log( 'TELL MASTER TO SHOW THE OLD QUERY' );
       console.log( weAlreadyQueriedThis );

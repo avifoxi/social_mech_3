@@ -15,6 +15,7 @@ var usernamePotentials = function( MASTER ) {
   this.getUsernameList = function( inputName, value ){
     if ( _cachedLists[ inputName ][ value ] ){
       formatAndHandoff( inputName, value, _cachedLists[ inputName ][ value ] );
+      return;
     }
     var path = MASTER.getPATHS( inputName ),
       data = {
