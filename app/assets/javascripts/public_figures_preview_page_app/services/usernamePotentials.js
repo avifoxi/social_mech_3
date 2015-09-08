@@ -13,7 +13,9 @@ var usernamePotentials = function( MASTER ) {
   };
 
   this.getUsernameList = function( inputName, value ){
-    
+    if ( _cachedLists[ inputName ][ value ] ){
+      formatAndHandoff( inputName, value, _cachedLists[ inputName ][ value ] );
+    }
     var path = MASTER.getPATHS( inputName ),
       data = {
         aggregator: {
@@ -25,10 +27,19 @@ var usernamePotentials = function( MASTER ) {
       if ( res.html )
         _cachedLists[ inputName ][ value ] = res.html;
 
-      var data = _.assign(res, {testFor: inputName, value: value}); // better to manually include function above, move towards less global
-      MASTER.serverResponse(data, 'username#check');
+      formatAndHandoff( inputName, value, res.html );
     });
   };
+
+  function formatAndHandoff( inputName, value, html ){
+    var data = _.assign({
+      html: html
+    }, {
+      testFor: inputName, 
+      value: value
+    }); 
+    MASTER.serverResponse(data, 'username#check');
+  }
 }
 
 module.exports = usernamePotentials;

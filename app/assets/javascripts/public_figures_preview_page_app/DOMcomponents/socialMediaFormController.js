@@ -39,6 +39,11 @@ var SocialMediaFormController = function(MASTER){
     handleInputClick(e);
   });
 
+  $collapsed.click(function(e){
+    e.preventDefault();
+    handleUncollapse();
+  })
+
   $actionButtons.click(function(e){
     e.preventDefault();
     switch( $(e.target).attr('data') ) {
@@ -140,7 +145,6 @@ var SocialMediaFormController = function(MASTER){
   
   function handlePreview(){
     var data = _queryModel.getActiveFields();
-    debugger;
     if ( !_.isEmpty( data ) ){
       MASTER.previewClicked( proceedWPreview ); 
     } else {
